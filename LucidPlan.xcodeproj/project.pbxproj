@@ -1,0 +1,354 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C102602B2F9000556FA /* LucidPlanApp.swift */; };
+		DB881C132602B2F9000556FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C122602B2F9000556FA /* ContentView.swift */; };
+		DB881C152602B2FE000556FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB881C142602B2FE000556FA /* Assets.xcassets */; };
+		DB881C182602B2FE000556FA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB881C172602B2FE000556FA /* Preview Assets.xcassets */; };
+		DB881C1A2602B2FE000556FA /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C192602B2FE000556FA /* Persistence.swift */; };
+		DB881C1D2602B2FE000556FA /* LucidPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB881C1B2602B2FE000556FA /* LucidPlan.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DB881C0D2602B2F9000556FA /* LucidPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LucidPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB881C102602B2F9000556FA /* LucidPlanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LucidPlanApp.swift; sourceTree = "<group>"; };
+		DB881C122602B2F9000556FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DB881C142602B2FE000556FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DB881C172602B2FE000556FA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DB881C192602B2FE000556FA /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		DB881C1C2602B2FE000556FA /* LucidPlan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LucidPlan.xcdatamodel; sourceTree = "<group>"; };
+		DB881C1E2602B2FE000556FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DB881C0A2602B2F9000556FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DB881C042602B2F8000556FA = {
+			isa = PBXGroup;
+			children = (
+				DB881C0F2602B2F9000556FA /* LucidPlan */,
+				DB881C0E2602B2F9000556FA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DB881C0E2602B2F9000556FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB881C0D2602B2F9000556FA /* LucidPlan.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DB881C0F2602B2F9000556FA /* LucidPlan */ = {
+			isa = PBXGroup;
+			children = (
+				DB881C102602B2F9000556FA /* LucidPlanApp.swift */,
+				DB881C122602B2F9000556FA /* ContentView.swift */,
+				DB881C142602B2FE000556FA /* Assets.xcassets */,
+				DB881C192602B2FE000556FA /* Persistence.swift */,
+				DB881C1E2602B2FE000556FA /* Info.plist */,
+				DB881C1B2602B2FE000556FA /* LucidPlan.xcdatamodeld */,
+				DB881C162602B2FE000556FA /* Preview Content */,
+			);
+			path = LucidPlan;
+			sourceTree = "<group>";
+		};
+		DB881C162602B2FE000556FA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				DB881C172602B2FE000556FA /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DB881C0C2602B2F9000556FA /* LucidPlan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB881C212602B2FE000556FA /* Build configuration list for PBXNativeTarget "LucidPlan" */;
+			buildPhases = (
+				DB881C092602B2F9000556FA /* Sources */,
+				DB881C0A2602B2F9000556FA /* Frameworks */,
+				DB881C0B2602B2F9000556FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LucidPlan;
+			productName = LucidPlan;
+			productReference = DB881C0D2602B2F9000556FA /* LucidPlan.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DB881C052602B2F8000556FA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1230;
+				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					DB881C0C2602B2F9000556FA = {
+						CreatedOnToolsVersion = 12.3;
+					};
+				};
+			};
+			buildConfigurationList = DB881C082602B2F8000556FA /* Build configuration list for PBXProject "LucidPlan" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DB881C042602B2F8000556FA;
+			productRefGroup = DB881C0E2602B2F9000556FA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DB881C0C2602B2F9000556FA /* LucidPlan */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DB881C0B2602B2F9000556FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB881C182602B2FE000556FA /* Preview Assets.xcassets in Resources */,
+				DB881C152602B2FE000556FA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DB881C092602B2F9000556FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB881C1A2602B2FE000556FA /* Persistence.swift in Sources */,
+				DB881C132602B2F9000556FA /* ContentView.swift in Sources */,
+				DB881C1D2602B2FE000556FA /* LucidPlan.xcdatamodeld in Sources */,
+				DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DB881C1F2602B2FE000556FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DB881C202602B2FE000556FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DB881C222602B2FE000556FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"LucidPlan/Preview Content\"";
+				DEVELOPMENT_TEAM = 57N35P6574;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = LucidPlan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.hse.cs.se.LucidPlan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DB881C232602B2FE000556FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"LucidPlan/Preview Content\"";
+				DEVELOPMENT_TEAM = 57N35P6574;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = LucidPlan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.hse.cs.se.LucidPlan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DB881C082602B2F8000556FA /* Build configuration list for PBXProject "LucidPlan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB881C1F2602B2FE000556FA /* Debug */,
+				DB881C202602B2FE000556FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB881C212602B2FE000556FA /* Build configuration list for PBXNativeTarget "LucidPlan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB881C222602B2FE000556FA /* Debug */,
+				DB881C232602B2FE000556FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DB881C1B2602B2FE000556FA /* LucidPlan.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DB881C1C2602B2FE000556FA /* LucidPlan.xcdatamodel */,
+			);
+			currentVersion = DB881C1C2602B2FE000556FA /* LucidPlan.xcdatamodel */;
+			path = LucidPlan.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = DB881C052602B2F8000556FA /* Project object */;
+}
