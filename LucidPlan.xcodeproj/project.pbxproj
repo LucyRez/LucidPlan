@@ -3,27 +3,57 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB2E5D89260BD88700280AB0 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D88260BD88700280AB0 /* TaskViewModel.swift */; };
+		DB2E5D8F260BDA4F00280AB0 /* LucidPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D8D260BDA4F00280AB0 /* LucidPlan.xcdatamodeld */; };
+		DB2E5D93260BDCBB00280AB0 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */; };
+		DB2E5D94260BDCBB00280AB0 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */; };
 		DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C102602B2F9000556FA /* LucidPlanApp.swift */; };
 		DB881C132602B2F9000556FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C122602B2F9000556FA /* ContentView.swift */; };
 		DB881C152602B2FE000556FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB881C142602B2FE000556FA /* Assets.xcassets */; };
 		DB881C182602B2FE000556FA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB881C172602B2FE000556FA /* Preview Assets.xcassets */; };
 		DB881C1A2602B2FE000556FA /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C192602B2FE000556FA /* Persistence.swift */; };
-		DB881C1D2602B2FE000556FA /* LucidPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB881C1B2602B2FE000556FA /* LucidPlan.xcdatamodeld */; };
+		DB881C272602B3B4000556FA /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C262602B3B4000556FA /* TasksView.swift */; };
+		DB881C322603E352000556FA /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C312603E352000556FA /* ToDoView.swift */; };
+		DB881C352603EF01000556FA /* DeadlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C342603EF01000556FA /* DeadlineView.swift */; };
+		DBC88BB62610ED4000F53820 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BB52610ED4000F53820 /* AddTaskView.swift */; };
+		DBC88BBA2611B14500F53820 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BB92611B14500F53820 /* LoginView.swift */; };
+		DBC88BBE2611D5F700F53820 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BBD2611D5F700F53820 /* Tag.swift */; };
+		DBC88BC22611EB2C00F53820 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BC12611EB2C00F53820 /* ChatScreen.swift */; };
+		DBC88BC52611EB7900F53820 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BC42611EB7900F53820 /* SocketIOManager.swift */; };
+		DBC88BCC2611ED0B00F53820 /* SingleMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */; };
+		DBC88BCF2611ED5B00F53820 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BCE2611ED5B00F53820 /* MessageModel.swift */; };
+		E0CF5780FD6E6B3384051AF6 /* Pods_LucidPlan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1312FF1ABA8BFC8D46C18EA /* Pods_LucidPlan.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E03C46BF09AD8DAFBEB7546 /* Pods-LucidPlan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LucidPlan.debug.xcconfig"; path = "Target Support Files/Pods-LucidPlan/Pods-LucidPlan.debug.xcconfig"; sourceTree = "<group>"; };
+		9D0556EA0D427223D7500349 /* Pods-LucidPlan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LucidPlan.release.xcconfig"; path = "Target Support Files/Pods-LucidPlan/Pods-LucidPlan.release.xcconfig"; sourceTree = "<group>"; };
+		DB2E5D88260BD88700280AB0 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		DB2E5D8E260BDA4F00280AB0 /* LucidPlan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LucidPlan.xcdatamodel; sourceTree = "<group>"; };
+		DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DB881C0D2602B2F9000556FA /* LucidPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LucidPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB881C102602B2F9000556FA /* LucidPlanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LucidPlanApp.swift; sourceTree = "<group>"; };
 		DB881C122602B2F9000556FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DB881C142602B2FE000556FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB881C172602B2FE000556FA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DB881C192602B2FE000556FA /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		DB881C1C2602B2FE000556FA /* LucidPlan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LucidPlan.xcdatamodel; sourceTree = "<group>"; };
 		DB881C1E2602B2FE000556FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB881C262602B3B4000556FA /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
+		DB881C312603E352000556FA /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
+		DB881C342603EF01000556FA /* DeadlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineView.swift; sourceTree = "<group>"; };
+		DBC88BB52610ED4000F53820 /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
+		DBC88BB92611B14500F53820 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		DBC88BBD2611D5F700F53820 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		DBC88BC12611EB2C00F53820 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
+		DBC88BC42611EB7900F53820 /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMessageView.swift; sourceTree = "<group>"; };
+		DBC88BCE2611ED5B00F53820 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		E1312FF1ABA8BFC8D46C18EA /* Pods_LucidPlan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LucidPlan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +61,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0CF5780FD6E6B3384051AF6 /* Pods_LucidPlan.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C01A92A4B67F80F2ADE2063 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E1312FF1ABA8BFC8D46C18EA /* Pods_LucidPlan.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB2E5D87260BD82500280AB0 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				DB2E5D88260BD88700280AB0 /* TaskViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		DB881C042602B2F8000556FA = {
 			isa = PBXGroup;
 			children = (
 				DB881C0F2602B2F9000556FA /* LucidPlan */,
 				DB881C0E2602B2F9000556FA /* Products */,
+				E2970DF523B2691447B8AB26 /* Pods */,
+				1C01A92A4B67F80F2ADE2063 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,13 +105,19 @@
 		DB881C0F2602B2F9000556FA /* LucidPlan */ = {
 			isa = PBXGroup;
 			children = (
+				DBC88BBC2611D5DD00F53820 /* Models */,
+				DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */,
+				DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */,
+				DB2E5D87260BD82500280AB0 /* ViewModels */,
+				DB881C252602B361000556FA /* Views */,
 				DB881C102602B2F9000556FA /* LucidPlanApp.swift */,
+				DB2E5D8D260BDA4F00280AB0 /* LucidPlan.xcdatamodeld */,
 				DB881C122602B2F9000556FA /* ContentView.swift */,
 				DB881C142602B2FE000556FA /* Assets.xcassets */,
 				DB881C192602B2FE000556FA /* Persistence.swift */,
 				DB881C1E2602B2FE000556FA /* Info.plist */,
-				DB881C1B2602B2FE000556FA /* LucidPlan.xcdatamodeld */,
 				DB881C162602B2FE000556FA /* Preview Content */,
+				DBC88BC42611EB7900F53820 /* SocketIOManager.swift */,
 			);
 			path = LucidPlan;
 			sourceTree = "<group>";
@@ -75,6 +130,38 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		DB881C252602B361000556FA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DB881C262602B3B4000556FA /* TasksView.swift */,
+				DB881C312603E352000556FA /* ToDoView.swift */,
+				DB881C342603EF01000556FA /* DeadlineView.swift */,
+				DBC88BB52610ED4000F53820 /* AddTaskView.swift */,
+				DBC88BB92611B14500F53820 /* LoginView.swift */,
+				DBC88BC12611EB2C00F53820 /* ChatScreen.swift */,
+				DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DBC88BBC2611D5DD00F53820 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DBC88BCE2611ED5B00F53820 /* MessageModel.swift */,
+				DBC88BBD2611D5F700F53820 /* Tag.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E2970DF523B2691447B8AB26 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0E03C46BF09AD8DAFBEB7546 /* Pods-LucidPlan.debug.xcconfig */,
+				9D0556EA0D427223D7500349 /* Pods-LucidPlan.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,9 +169,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB881C212602B2FE000556FA /* Build configuration list for PBXNativeTarget "LucidPlan" */;
 			buildPhases = (
+				50F0419E6681699D1E21EE8F /* [CP] Check Pods Manifest.lock */,
 				DB881C092602B2F9000556FA /* Sources */,
 				DB881C0A2602B2F9000556FA /* Frameworks */,
 				DB881C0B2602B2F9000556FA /* Resources */,
+				91F84E7D9131E2CAB58B76A0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -139,15 +228,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		50F0419E6681699D1E21EE8F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LucidPlan-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		91F84E7D9131E2CAB58B76A0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LucidPlan/Pods-LucidPlan-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LucidPlan/Pods-LucidPlan-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LucidPlan/Pods-LucidPlan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DB881C092602B2F9000556FA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				DB881C1A2602B2FE000556FA /* Persistence.swift in Sources */,
+				DBC88BC52611EB7900F53820 /* SocketIOManager.swift in Sources */,
+				DB2E5D93260BDCBB00280AB0 /* Task+CoreDataClass.swift in Sources */,
 				DB881C132602B2F9000556FA /* ContentView.swift in Sources */,
-				DB881C1D2602B2FE000556FA /* LucidPlan.xcdatamodeld in Sources */,
+				DBC88BCC2611ED0B00F53820 /* SingleMessageView.swift in Sources */,
+				DBC88BB62610ED4000F53820 /* AddTaskView.swift in Sources */,
+				DB2E5D8F260BDA4F00280AB0 /* LucidPlan.xcdatamodeld in Sources */,
 				DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */,
+				DBC88BBA2611B14500F53820 /* LoginView.swift in Sources */,
+				DB881C322603E352000556FA /* ToDoView.swift in Sources */,
+				DBC88BCF2611ED5B00F53820 /* MessageModel.swift in Sources */,
+				DB2E5D89260BD88700280AB0 /* TaskViewModel.swift in Sources */,
+				DB881C352603EF01000556FA /* DeadlineView.swift in Sources */,
+				DB2E5D94260BDCBB00280AB0 /* Task+CoreDataProperties.swift in Sources */,
+				DB881C272602B3B4000556FA /* TasksView.swift in Sources */,
+				DBC88BBE2611D5F700F53820 /* Tag.swift in Sources */,
+				DBC88BC22611EB2C00F53820 /* ChatScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +416,7 @@
 		};
 		DB881C222602B2FE000556FA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E03C46BF09AD8DAFBEB7546 /* Pods-LucidPlan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -294,6 +439,7 @@
 		};
 		DB881C232602B2FE000556FA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D0556EA0D427223D7500349 /* Pods-LucidPlan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -338,12 +484,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		DB881C1B2602B2FE000556FA /* LucidPlan.xcdatamodeld */ = {
+		DB2E5D8D260BDA4F00280AB0 /* LucidPlan.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				DB881C1C2602B2FE000556FA /* LucidPlan.xcdatamodel */,
+				DB2E5D8E260BDA4F00280AB0 /* LucidPlan.xcdatamodel */,
 			);
-			currentVersion = DB881C1C2602B2FE000556FA /* LucidPlan.xcdatamodel */;
+			currentVersion = DB2E5D8E260BDA4F00280AB0 /* LucidPlan.xcdatamodel */;
 			path = LucidPlan.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

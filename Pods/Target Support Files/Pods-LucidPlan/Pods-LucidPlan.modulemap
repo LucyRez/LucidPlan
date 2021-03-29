@@ -1,0 +1,6 @@
+framework module Pods_LucidPlan {
+  umbrella header "Pods-LucidPlan-umbrella.h"
+
+  export *
+  module * { export * }
+}
