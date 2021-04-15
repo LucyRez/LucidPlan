@@ -118,12 +118,12 @@ struct AddTaskView: View {
             
         }
         .padding()
-        .background(Color.black.opacity(0.01)).ignoresSafeArea(.all, edges: .bottom)
         .onDisappear(perform: {
             task.task = nil
             task.note = ""
             task.title = ""
         })
+        
         
     }
     
@@ -174,11 +174,11 @@ struct DateButton: View{
 }
 
 struct AddTagView: View{
-    var task : TaskViewModel
+    var task : TaskManager
     @State var tagString : String = ""
     @State var addedTags : [String] = []
     
-    init(model: TaskViewModel){
+    init(model: TaskManager){
         task = model
     }
     

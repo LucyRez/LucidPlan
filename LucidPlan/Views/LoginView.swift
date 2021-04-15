@@ -14,11 +14,11 @@ struct LoginView: View {
     @State var saved : String?
     
     func saveNickname(){
-        UserDefaults.standard.set(nickname, forKey: "nickname")
+        UserDefaults.standard.set(nickname, forKey: "nickname3")
     }
     
     init() {
-        self.nickname = UserDefaults.standard.object(forKey: "nickname") as? String ?? ""
+        self.nickname = UserDefaults.standard.object(forKey: "nickname3") as? String ?? ""
         self.saved = self.nickname
     }
     
@@ -75,12 +75,15 @@ struct LoginView: View {
                 Spacer()
                 
             }
+           
+         
         }
         .onAppear(perform: {
             self.nickname = UserDefaults.standard.object(forKey: "nickname") as? String ?? ""
             self.saved = nickname
         })
     }
+    
 }
 
 struct LoginView_Previews: PreviewProvider {

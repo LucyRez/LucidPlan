@@ -261,7 +261,7 @@ struct SingleTaskView: View{
 
 
 struct TopTaskView: View{
-    @StateObject var model : TaskViewModel
+    @ObservedObject var model : TaskViewModel
     @Environment(\.managedObjectContext) var context
     
     var body: some View{

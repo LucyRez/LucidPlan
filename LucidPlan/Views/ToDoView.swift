@@ -8,34 +8,65 @@
 import SwiftUI
 
 struct ToDoView: View {
+    @StateObject var todoManager = ToDoManager()
     var body: some View {
         VStack{
             TopToDoView().padding(.horizontal)
             
             HStack{
-                Spacer()
-                Button(action: {
-                    // TODO экран настроек
-                },
-                label: {
-                    Text("Filter")
-                        .font(.system(size: 30))
+                
+                Button(action: {todoManager.active.toggle()}, label: {
+                    Text("Add")
+                        .font(.system(size: 25))
+                })
+                .sheet(isPresented: $todoManager.active, content: {
+                    AddToDo(todo: todoManager)
                 })
                 .padding()
                 
-            }
-            
-            List{
-                SingleToDoView(text: "Полить цветы 🌿")
-                SingleToDoView(text: "Пойти в магазин")
-                SingleToDoView(text: "Не забыть взять с собой маску")
+                Spacer()
+                
+                Button(action: {
+                    
+                },
+                label: {
+                    Text("Filter")
+                        .font(.system(size: 25))
+                })
+                .padding()
+                
+                
                 
             }
+            
+            ToDoContainer(filter: "")
             
             Spacer()
             
         }
         
+    }
+}
+
+struct ToDoContainer: View{
+    
+    var fetchRequest : FetchRequest<ToDo>
+    
+    var todos : FetchedResults<ToDo>{
+        fetchRequest.wrappedValue
+    }
+    
+    
+    init(filter: String){
+        fetchRequest = FetchRequest(entity: ToDo.entity(), sortDescriptors: [])
+    }
+    
+    var body: some View{
+        List{
+            ForEach(todos){todo in
+                SingleToDoView(text: todo.title ?? "")
+            }
+        }
     }
 }
 

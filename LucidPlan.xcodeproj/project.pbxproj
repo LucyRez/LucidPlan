@@ -19,6 +19,8 @@
 		DB881C272602B3B4000556FA /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C262602B3B4000556FA /* TasksView.swift */; };
 		DB881C322603E352000556FA /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C312603E352000556FA /* ToDoView.swift */; };
 		DB881C352603EF01000556FA /* DeadlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C342603EF01000556FA /* DeadlineView.swift */; };
+		DB8F584826288D5800A94434 /* ToDo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8F584626288D5800A94434 /* ToDo+CoreDataClass.swift */; };
+		DB8F584926288D5800A94434 /* ToDo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8F584726288D5800A94434 /* ToDo+CoreDataProperties.swift */; };
 		DBC88BB62610ED4000F53820 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BB52610ED4000F53820 /* AddTaskView.swift */; };
 		DBC88BBA2611B14500F53820 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BB92611B14500F53820 /* LoginView.swift */; };
 		DBC88BBE2611D5F700F53820 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BBD2611D5F700F53820 /* Tag.swift */; };
@@ -26,6 +28,9 @@
 		DBC88BC52611EB7900F53820 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BC42611EB7900F53820 /* SocketIOManager.swift */; };
 		DBC88BCC2611ED0B00F53820 /* SingleMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */; };
 		DBC88BCF2611ED5B00F53820 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BCE2611ED5B00F53820 /* MessageModel.swift */; };
+		DBD07B7226289FB100E2B2B8 /* AddToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD07B7126289FB100E2B2B8 /* AddToDo.swift */; };
+		DBD07B752628A7C000E2B2B8 /* ToDoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD07B742628A7C000E2B2B8 /* ToDoManager.swift */; };
+		DBD07B7C2628AA8B00E2B2B8 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD07B7B2628AA8B00E2B2B8 /* TaskManager.swift */; };
 		E0CF5780FD6E6B3384051AF6 /* Pods_LucidPlan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1312FF1ABA8BFC8D46C18EA /* Pods_LucidPlan.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,8 +39,8 @@
 		9D0556EA0D427223D7500349 /* Pods-LucidPlan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LucidPlan.release.xcconfig"; path = "Target Support Files/Pods-LucidPlan/Pods-LucidPlan.release.xcconfig"; sourceTree = "<group>"; };
 		DB2E5D88260BD88700280AB0 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		DB2E5D8E260BDA4F00280AB0 /* LucidPlan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LucidPlan.xcdatamodel; sourceTree = "<group>"; };
-		DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Task+CoreDataClass.swift"; path = "LucidPlan/Models/Task+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Task+CoreDataProperties.swift"; path = "LucidPlan/Models/Task+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DB881C0D2602B2F9000556FA /* LucidPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LucidPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB881C102602B2F9000556FA /* LucidPlanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LucidPlanApp.swift; sourceTree = "<group>"; };
 		DB881C122602B2F9000556FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,6 +51,8 @@
 		DB881C262602B3B4000556FA /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
 		DB881C312603E352000556FA /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
 		DB881C342603EF01000556FA /* DeadlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineView.swift; sourceTree = "<group>"; };
+		DB8F584626288D5800A94434 /* ToDo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ToDo+CoreDataClass.swift"; path = "LucidPlan/Models/ToDo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		DB8F584726288D5800A94434 /* ToDo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ToDo+CoreDataProperties.swift"; path = "LucidPlan/Models/ToDo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DBC88BB52610ED4000F53820 /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 		DBC88BB92611B14500F53820 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		DBC88BBD2611D5F700F53820 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -53,6 +60,9 @@
 		DBC88BC42611EB7900F53820 /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMessageView.swift; sourceTree = "<group>"; };
 		DBC88BCE2611ED5B00F53820 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		DBD07B7126289FB100E2B2B8 /* AddToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDo.swift; sourceTree = "<group>"; };
+		DBD07B742628A7C000E2B2B8 /* ToDoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManager.swift; sourceTree = "<group>"; };
+		DBD07B7B2628AA8B00E2B2B8 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		E1312FF1ABA8BFC8D46C18EA /* Pods_LucidPlan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LucidPlan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -80,6 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				DB2E5D88260BD88700280AB0 /* TaskViewModel.swift */,
+				DBD07B742628A7C000E2B2B8 /* ToDoManager.swift */,
+				DBD07B7B2628AA8B00E2B2B8 /* TaskManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -105,9 +117,8 @@
 		DB881C0F2602B2F9000556FA /* LucidPlan */ = {
 			isa = PBXGroup;
 			children = (
+				DB8F584426288C8C00A94434 /* Managers */,
 				DBC88BBC2611D5DD00F53820 /* Models */,
-				DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */,
-				DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */,
 				DB2E5D87260BD82500280AB0 /* ViewModels */,
 				DB881C252602B361000556FA /* Views */,
 				DB881C102602B2F9000556FA /* LucidPlanApp.swift */,
@@ -117,7 +128,6 @@
 				DB881C192602B2FE000556FA /* Persistence.swift */,
 				DB881C1E2602B2FE000556FA /* Info.plist */,
 				DB881C162602B2FE000556FA /* Preview Content */,
-				DBC88BC42611EB7900F53820 /* SocketIOManager.swift */,
 			);
 			path = LucidPlan;
 			sourceTree = "<group>";
@@ -140,13 +150,26 @@
 				DBC88BB92611B14500F53820 /* LoginView.swift */,
 				DBC88BC12611EB2C00F53820 /* ChatScreen.swift */,
 				DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */,
+				DBD07B7126289FB100E2B2B8 /* AddToDo.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		DB8F584426288C8C00A94434 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				DBC88BC42611EB7900F53820 /* SocketIOManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		DBC88BBC2611D5DD00F53820 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DB8F584626288D5800A94434 /* ToDo+CoreDataClass.swift */,
+				DB8F584726288D5800A94434 /* ToDo+CoreDataProperties.swift */,
+				DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */,
+				DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */,
 				DBC88BCE2611ED5B00F53820 /* MessageModel.swift */,
 				DBC88BBD2611D5F700F53820 /* Tag.swift */,
 			);
@@ -275,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB8F584926288D5800A94434 /* ToDo+CoreDataProperties.swift in Sources */,
 				DB881C1A2602B2FE000556FA /* Persistence.swift in Sources */,
 				DBC88BC52611EB7900F53820 /* SocketIOManager.swift in Sources */,
 				DB2E5D93260BDCBB00280AB0 /* Task+CoreDataClass.swift in Sources */,
@@ -288,10 +312,14 @@
 				DBC88BCF2611ED5B00F53820 /* MessageModel.swift in Sources */,
 				DB2E5D89260BD88700280AB0 /* TaskViewModel.swift in Sources */,
 				DB881C352603EF01000556FA /* DeadlineView.swift in Sources */,
+				DBD07B7C2628AA8B00E2B2B8 /* TaskManager.swift in Sources */,
 				DB2E5D94260BDCBB00280AB0 /* Task+CoreDataProperties.swift in Sources */,
 				DB881C272602B3B4000556FA /* TasksView.swift in Sources */,
+				DBD07B752628A7C000E2B2B8 /* ToDoManager.swift in Sources */,
 				DBC88BBE2611D5F700F53820 /* Tag.swift in Sources */,
 				DBC88BC22611EB2C00F53820 /* ChatScreen.swift in Sources */,
+				DB8F584826288D5800A94434 /* ToDo+CoreDataClass.swift in Sources */,
+				DBD07B7226289FB100E2B2B8 /* AddToDo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

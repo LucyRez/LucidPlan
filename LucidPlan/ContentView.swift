@@ -36,6 +36,9 @@ struct ContentView: View {
 //        }
     
          LoginView()
+            .background(
+                LinearGradient(gradient: .init(colors: [Color(red: 121/255, green: 220/255, blue: 199/255), Color(red: 168/255, green: 226/255, blue: 201/255)]), startPoint: .leading, endPoint: .trailing)
+                    .ignoresSafeArea())
     }
     
 }

@@ -8,9 +8,9 @@
 import Foundation
 import CoreData
 
-class TaskViewModel : ObservableObject{
+class TaskViewModel : ObservableObject, TaskManager{
     
-    @Published var task : Task! // Current task if edited.
+    @Published var task : Task! // Current task.
     @Published var active : Bool = false
     
     @Published var title : String = ""
@@ -22,7 +22,6 @@ class TaskViewModel : ObservableObject{
     @Published var date : Date = Date()
     
     func writeData(context: NSManagedObjectContext){
-        
         // If task is edited.
         if task != nil {
             // Change all the properties of object according to input.
