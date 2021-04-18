@@ -12,9 +12,10 @@
         <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="tags" optional="YES" attributeType="Transformable"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
         <element name="Task" positionX="-63" positionY="-9" width="128" height="119"/>
-        <element name="ToDo" positionX="-63" positionY="36" width="128" height="74"/>
+        <element name="ToDo" positionX="-63" positionY="36" width="128" height="89"/>
     </elements>
 </model>

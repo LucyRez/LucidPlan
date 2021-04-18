@@ -35,6 +35,11 @@ struct AddToDo: View {
             Divider()
                 .padding(.horizontal)
             
+            HStack{
+                TypeToDoButton(text: "Day", manager: todoManager)
+                TypeToDoButton(text: "Week", manager: todoManager)
+                TypeToDoButton(text: "Month", manager: todoManager)
+            }
             
             Button(action: {
                 todoManager.writeData(context: context)
@@ -72,6 +77,48 @@ struct AddToDo: View {
         
     }
     
+}
+
+struct TypeToDoButton: View{
+    @ObservedObject var toDoManager : ToDoManager
+    var text : String
+    
+    init(text: String, manager: ToDoManager){
+        self.text = text
+        toDoManager = manager
+    }
+    
+    
+    func getType()->Int{
+        switch(text){
+        case "Day":
+            return 0
+        case "Week":
+            return 1
+        case "Month":
+            return 2
+        default:
+            return 0
+        }
+    }
+    
+    var body: some View{
+        Button(action: {
+            toDoManager.type = getType()
+        }
+        , label: {
+            Text(text)
+                .bold()
+                .foregroundColor(getType() == toDoManager.type ? .white : .gray)
+                .padding()
+                .background(
+                    getType() == toDoManager.type ?
+                        LinearGradient(gradient: .init(colors: [Color(red: 121/255, green: 220/255, blue: 199/255), Color(red: 168/255, green: 226/255, blue: 201/255)]), startPoint: .leading, endPoint: .trailing)
+                        :  LinearGradient(gradient: .init(colors: [Color(.white)]), startPoint: .leading, endPoint: .trailing)
+                )
+                .cornerRadius(6)
+        })
+    }
 }
 
 struct AddToDo_Previews: PreviewProvider {

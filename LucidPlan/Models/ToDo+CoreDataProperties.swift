@@ -19,6 +19,7 @@ extension ToDo {
     @NSManaged public var title: String?
     @NSManaged public var isCompleted: Bool
     @NSManaged public var tags: [String]?
+    @NSManaged public var type: Int
 
 }
 

@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ToDoView: View {
     @StateObject var todoManager = ToDoManager()
+    
     var body: some View {
         VStack{
-            TopToDoView().padding(.horizontal)
+            TopToDoView(manager: todoManager).padding(.horizontal)
             
             HStack{
                 
@@ -39,7 +40,7 @@ struct ToDoView: View {
                 
             }
             
-            ToDoContainer(filter: "")
+            ToDoContainer(filter: todoManager.filter, manager: todoManager)
             
             Spacer()
             
@@ -49,6 +50,8 @@ struct ToDoView: View {
 }
 
 struct ToDoContainer: View{
+    @Environment(\.managedObjectContext) var context
+    @ObservedObject var todoManager : ToDoManager
     
     var fetchRequest : FetchRequest<ToDo>
     
@@ -57,20 +60,48 @@ struct ToDoContainer: View{
     }
     
     
-    init(filter: String){
-        fetchRequest = FetchRequest(entity: ToDo.entity(), sortDescriptors: [])
+    init(filter: Int, manager: ToDoManager){
+        todoManager = manager
+        fetchRequest = FetchRequest(entity: ToDo.entity(), sortDescriptors: [], predicate:  NSPredicate(format: "type == %i", filter))
     }
     
     var body: some View{
-        List{
-            ForEach(todos){todo in
-                SingleToDoView(text: todo.title ?? "")
+        NavigationView{
+            List{
+                ForEach(todos){todo in
+                    HStack{
+                        SingleToDoView(todo: todo, manager: todoManager)
+                        Spacer()
+                    }
+                }
+                .onDelete(perform: { indexSet in
+                    for index in indexSet{
+                        let todo = todos[index]
+                        todoManager.delete(context: context, todo: todo)
+                    }
+                    
+                })
+                
+                
             }
+            .toolbar(content: {
+                EditButton()
+            })
         }
+        .sheet(isPresented: $todoManager.active, content: {
+            AddToDo(todo: todoManager)
+        })
+        
     }
 }
 
 struct TopToDoView: View{
+    @ObservedObject var todoManager : ToDoManager
+    
+    init(manager: ToDoManager){
+        todoManager = manager
+    }
+    
     var body: some View{
         HStack(alignment:.bottom){
             Button(action: {
@@ -88,7 +119,7 @@ struct TopToDoView: View{
             HStack(spacing: -10){
                 
                 Button(action: {
-                    // TODO экран с отображением на неделю
+                    todoManager.filter = 0
                 },
                 label: {
                     Text(" День ")
@@ -103,7 +134,7 @@ struct TopToDoView: View{
                 }).zIndex(1)
                 
                 Button(action: {
-                    // TODO экран с отображением на неделю
+                    todoManager.filter = 1
                 },
                 label: {
                     Text("Неделя")
@@ -117,7 +148,7 @@ struct TopToDoView: View{
                 
                 
                 Button(action: {
-                    // TODO с отображением на месяц
+                    todoManager.filter = 2
                 },
                 label: {
                     Text("Месяц")
@@ -138,24 +169,35 @@ struct TopToDoView: View{
 }
 
 struct SingleToDoView: View{
-    var text : String
-    @State var isDone : Bool = false
+    var todo: ToDo
+    var text : String?
+    @ObservedObject var todoManager : ToDoManager
+    @Environment(\.managedObjectContext) var context
     
-    init(text: String){
-        self.text = text
+    init(todo: ToDo, manager: ToDoManager){
+        todoManager = manager
+        self.todo = todo
     }
     
     var body: some View{
         HStack(spacing:20){
-            Button(action: {isDone.toggle()}, label: {
-                Image(systemName: "checkmark.circle.fill")
-            })
-            Text(text)
+            Image(systemName: "checkmark.circle.fill")
+            
+            Text(todo.title ?? "")
                 .font(.system(size: 22))
-                .strikethrough(isDone, color: /*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
+                .strikethrough(todo.isCompleted , color: Color.black)
+            Spacer()
         }
         .padding(.trailing)
         .padding(.vertical)
+        .contentShape(Rectangle())
+        .onTapGesture(perform: {
+            todo.isCompleted.toggle()
+            todoManager.updateState(todo: todo, context: context)
+        })
+        .onLongPressGesture(perform: {
+            todoManager.editData(todo: todo)
+        })
     }
 }
 
