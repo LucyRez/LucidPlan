@@ -14,8 +14,8 @@
             filePath = "LucidPlan/ViewModels/TaskViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "TaskViewModel"
             landmarkType = "3">
          </BreakpointContent>
@@ -30,10 +30,10 @@
             filePath = "LucidPlan/Views/TasksView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "ScheduleView"
-            landmarkType = "14">
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "updateDateArray()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

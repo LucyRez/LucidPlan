@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB0B54E0262CBF100068C66C /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B54DF262CBF100068C66C /* TabBar.swift */; };
+		DB0B54E5262CBFBA0068C66C /* SingleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B54E4262CBFBA0068C66C /* SingleTask.swift */; };
+		DB0B54E8262CC0410068C66C /* MainTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B54E7262CC0410068C66C /* MainTasksView.swift */; };
+		DB0B54EC262CC57F0068C66C /* ToDoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B54EB262CC57F0068C66C /* ToDoContainerView.swift */; };
+		DB0B54F0262CC5CC0068C66C /* SingleToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B54EF262CC5CC0068C66C /* SingleToDoView.swift */; };
 		DB2E5D89260BD88700280AB0 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D88260BD88700280AB0 /* TaskViewModel.swift */; };
 		DB2E5D8F260BDA4F00280AB0 /* LucidPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D8D260BDA4F00280AB0 /* LucidPlan.xcdatamodeld */; };
 		DB2E5D93260BDCBB00280AB0 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */; };
@@ -37,6 +42,11 @@
 /* Begin PBXFileReference section */
 		0E03C46BF09AD8DAFBEB7546 /* Pods-LucidPlan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LucidPlan.debug.xcconfig"; path = "Target Support Files/Pods-LucidPlan/Pods-LucidPlan.debug.xcconfig"; sourceTree = "<group>"; };
 		9D0556EA0D427223D7500349 /* Pods-LucidPlan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LucidPlan.release.xcconfig"; path = "Target Support Files/Pods-LucidPlan/Pods-LucidPlan.release.xcconfig"; sourceTree = "<group>"; };
+		DB0B54DF262CBF100068C66C /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		DB0B54E4262CBFBA0068C66C /* SingleTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTask.swift; sourceTree = "<group>"; };
+		DB0B54E7262CC0410068C66C /* MainTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTasksView.swift; sourceTree = "<group>"; };
+		DB0B54EB262CC57F0068C66C /* ToDoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoContainerView.swift; sourceTree = "<group>"; };
+		DB0B54EF262CC5CC0068C66C /* SingleToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleToDoView.swift; sourceTree = "<group>"; };
 		DB2E5D88260BD88700280AB0 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		DB2E5D8E260BDA4F00280AB0 /* LucidPlan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LucidPlan.xcdatamodel; sourceTree = "<group>"; };
 		DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Task+CoreDataClass.swift"; path = "LucidPlan/Models/Task+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -86,6 +96,37 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DB0B54DC262CBB230068C66C /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				DBC88BB52610ED4000F53820 /* AddTaskView.swift */,
+				DB881C262602B3B4000556FA /* TasksView.swift */,
+				DB0B54E4262CBFBA0068C66C /* SingleTask.swift */,
+				DB0B54E7262CC0410068C66C /* MainTasksView.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		DB0B54DE262CBEBA0068C66C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				DBC88BB92611B14500F53820 /* LoginView.swift */,
+				DB0B54DF262CBF100068C66C /* TabBar.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		DB0B54EA262CC53F0068C66C /* ToDo */ = {
+			isa = PBXGroup;
+			children = (
+				DBD07B7126289FB100E2B2B8 /* AddToDo.swift */,
+				DB881C312603E352000556FA /* ToDoView.swift */,
+				DB0B54EB262CC57F0068C66C /* ToDoContainerView.swift */,
+				DB0B54EF262CC5CC0068C66C /* SingleToDoView.swift */,
+			);
+			path = ToDo;
+			sourceTree = "<group>";
+		};
 		DB2E5D87260BD82500280AB0 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,7 +162,6 @@
 				DBC88BBC2611D5DD00F53820 /* Models */,
 				DB2E5D87260BD82500280AB0 /* ViewModels */,
 				DB881C252602B361000556FA /* Views */,
-				DB881C102602B2F9000556FA /* LucidPlanApp.swift */,
 				DB2E5D8D260BDA4F00280AB0 /* LucidPlan.xcdatamodeld */,
 				DB881C122602B2F9000556FA /* ContentView.swift */,
 				DB881C142602B2FE000556FA /* Assets.xcassets */,
@@ -143,14 +183,13 @@
 		DB881C252602B361000556FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DB881C262602B3B4000556FA /* TasksView.swift */,
-				DB881C312603E352000556FA /* ToDoView.swift */,
+				DB0B54EA262CC53F0068C66C /* ToDo */,
+				DB0B54DE262CBEBA0068C66C /* Login */,
+				DB0B54DC262CBB230068C66C /* Tasks */,
 				DB881C342603EF01000556FA /* DeadlineView.swift */,
-				DBC88BB52610ED4000F53820 /* AddTaskView.swift */,
-				DBC88BB92611B14500F53820 /* LoginView.swift */,
 				DBC88BC12611EB2C00F53820 /* ChatScreen.swift */,
 				DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */,
-				DBD07B7126289FB100E2B2B8 /* AddToDo.swift */,
+				DB881C102602B2F9000556FA /* LucidPlanApp.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -306,6 +345,7 @@
 				DBC88BCC2611ED0B00F53820 /* SingleMessageView.swift in Sources */,
 				DBC88BB62610ED4000F53820 /* AddTaskView.swift in Sources */,
 				DB2E5D8F260BDA4F00280AB0 /* LucidPlan.xcdatamodeld in Sources */,
+				DB0B54E5262CBFBA0068C66C /* SingleTask.swift in Sources */,
 				DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */,
 				DBC88BBA2611B14500F53820 /* LoginView.swift in Sources */,
 				DB881C322603E352000556FA /* ToDoView.swift in Sources */,
@@ -313,13 +353,17 @@
 				DB2E5D89260BD88700280AB0 /* TaskViewModel.swift in Sources */,
 				DB881C352603EF01000556FA /* DeadlineView.swift in Sources */,
 				DBD07B7C2628AA8B00E2B2B8 /* TaskManager.swift in Sources */,
+				DB0B54EC262CC57F0068C66C /* ToDoContainerView.swift in Sources */,
 				DB2E5D94260BDCBB00280AB0 /* Task+CoreDataProperties.swift in Sources */,
 				DB881C272602B3B4000556FA /* TasksView.swift in Sources */,
 				DBD07B752628A7C000E2B2B8 /* ToDoManager.swift in Sources */,
+				DB0B54E8262CC0410068C66C /* MainTasksView.swift in Sources */,
 				DBC88BBE2611D5F700F53820 /* Tag.swift in Sources */,
 				DBC88BC22611EB2C00F53820 /* ChatScreen.swift in Sources */,
 				DB8F584826288D5800A94434 /* ToDo+CoreDataClass.swift in Sources */,
 				DBD07B7226289FB100E2B2B8 /* AddToDo.swift in Sources */,
+				DB0B54E0262CBF100068C66C /* TabBar.swift in Sources */,
+				DB0B54F0262CC5CC0068C66C /* SingleToDoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

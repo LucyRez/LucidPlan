@@ -8,10 +8,18 @@
 import Foundation
 import CoreData
 
+/**
+ This is task view manager
+
+ # What It Does: #
+ 1. Saves tasks in CoreData
+ 2. Can be used to add new tasks or edit tasks
+ 
+ */
 class TaskViewModel : ObservableObject, TaskManager{
     
-    @Published var task : Task! // Current task.
-    @Published var active : Bool = false
+    @Published var task : Task! // Current task
+    @Published var active : Bool = false // Shows if screen for creating/editing tasks can be shown
     
     @Published var title : String = ""
     @Published var note : String = ""
@@ -19,8 +27,8 @@ class TaskViewModel : ObservableObject, TaskManager{
     @Published var endDate : Date = Date() + 60*60
     @Published var status : String = ""
     @Published var tags : [String] = []
-    @Published var date : Date = Date()
     
+    // Function for writing data to CoreData
     func writeData(context: NSManagedObjectContext){
         // If task is edited.
         if task != nil {
@@ -71,7 +79,7 @@ class TaskViewModel : ObservableObject, TaskManager{
         return
     }
     
-    
+    // Function for editing existing task
     func editData(task: Task){
         
         // If we want to edit task, update all the fields of view with its parameters.
@@ -87,6 +95,7 @@ class TaskViewModel : ObservableObject, TaskManager{
         active = true // Edit view will be called.
     }
     
+    // Function for adding tags to task which is edited
     func addTag(tag: String){
         tags.append(tag)
     }
