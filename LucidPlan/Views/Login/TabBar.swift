@@ -24,7 +24,8 @@ struct TabBarView: View{
                 case 2:
                     ToDoView()
                 default:
-                    ChatScreen(socketManager: socketManager)
+                    //ChatScreen(socketManager: socketManager)
+                    HabitsView()
                 }
                 
             }
