@@ -10,6 +10,7 @@ import SwiftUI
 struct SingleHabitView: View {
     @ObservedObject var habitManager : HabitManager
     @Environment(\.managedObjectContext) var context
+    @State var isEdited = false
     
     var habit : Habit
     
@@ -22,17 +23,41 @@ struct SingleHabitView: View {
         HStack{
             
             HStack{
-                Text(habit.title ?? "")
-                    .font(.system(size: 20))
-                
-                Text(" \(habit.points)")
+                if !isEdited{
+                    Text(habit.title ?? "")
+                        .font(.system(size: 20))
+                    
+                    Text(" \(habit.points)")
+                    
+                }else{
+                    TextField(habit.title ?? "", text: $habitManager.title)
+                        .font(.system(size: 20))
+                    
+                    Button(action: {
+                        habitManager.writeData(context: context)
+                        isEdited.toggle()
+                    }, label: {
+                        Text("Save")
+                        
+                    })
+                    
+                    Button(action: {
+                        isEdited.toggle()
+                    }, label: {
+                        Text("Cancel")
+                    })
+                }
                 
                 Spacer()
                 
             }
             .contentShape(RoundedRectangle(cornerRadius: 5))
             .contextMenu(ContextMenu(menuItems: {
-                Button(action: {}, label: {
+                Button(action: {
+                    habitManager.editData(habit: habit)
+                    isEdited.toggle()
+                    
+                }, label: {
                     Text("Edit")
                 })
                 
@@ -59,6 +84,7 @@ struct SingleHabitView: View {
                         .foregroundColor(.white)
                 }
             })
+            .disabled(isEdited)
             
             Button(action: {habitManager.addPoints(context: context, habit: habit, numberOfPoints: -5)
                 
@@ -77,6 +103,7 @@ struct SingleHabitView: View {
                     
                 }
             })
+            .disabled(isEdited)
         }
         
         

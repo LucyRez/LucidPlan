@@ -21,6 +21,7 @@ class HabitManager : ObservableObject{
     @Published var habit : Habit! // Current habit.
     
     @Published var title : String = ""
+    @Published var titleForBinding = ""
     @Published var points : Int64 = 0
     
     
@@ -44,7 +45,7 @@ class HabitManager : ObservableObject{
         
         // If new habit is created we are getting all the values from input.
         let newHabit = Habit(context: context)
-        newHabit.title = title
+        newHabit.title = titleForBinding
         newHabit.points = points
         
         try! context.save() // Trying to save current context.
@@ -52,6 +53,7 @@ class HabitManager : ObservableObject{
         // Go back to default parameters.
         habit = nil
         title = ""
+        titleForBinding = ""
         points = 0
         
         return
