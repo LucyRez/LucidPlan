@@ -28,6 +28,7 @@ struct DeadlineView: View {
                 label: {
                     Text("...")
                         .bold()
+                        .foregroundColor(.white)
                         .font(.system(size: 50))
                 })
                 .padding(.leading)
@@ -35,8 +36,7 @@ struct DeadlineView: View {
                 Spacer()
             }
             
-            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                .fill(Color.white)
+            CharacterView()
             
             HStack{
                 Button(action: {
@@ -45,6 +45,7 @@ struct DeadlineView: View {
                 label: {
                     Text("Filter")
                         .font(.system(size: 30))
+                        .foregroundColor(.white)
                 })
                 .padding()
                 
@@ -56,23 +57,34 @@ struct DeadlineView: View {
                 label: {
                     Text("Add")
                         .font(.system(size: 30))
+                        .foregroundColor(.white)
                 })
                 .padding()
                 
             }
             
-            ScrollView{
+            ZStack{
+                Rectangle()
+                    .cornerRadius(radius: 25.0, corners: [.topLeft, .topRight])
+                    .foregroundColor(.white)
+                    .zIndex(0)
                 
-                VStack{
-                    ForEach(tasks){task in
-                        SingleDeadlineView(task: task)
+                ScrollView{
+                    VStack{
+                        ForEach(tasks){task in
+                            SingleDeadlineView(task: task)
+                        }
+                        
                     }
-                  
-                }
+                    
+                }.zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                 
             }
             
         }
+        .background(Color.purple.opacity(0.85))
+        .ignoresSafeArea()
+        
     }
 }
 
@@ -81,7 +93,7 @@ struct SingleDeadlineView: View{
     var endTime : String
     var endDate : String
     var title : String
-  
+    
     
     init(task: Task){
         let endTime = Calendar.current.dateComponents([.hour, .minute], from: task.endDate!)
@@ -92,7 +104,7 @@ struct SingleDeadlineView: View{
         self.endTime = end
         self.endDate = day
         self.title = task.title!
-
+        
     }
     var body: some View{
         HStack(alignment:.top, spacing:30){
