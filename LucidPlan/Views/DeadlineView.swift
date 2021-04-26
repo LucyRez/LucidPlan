@@ -9,13 +9,15 @@ import SwiftUI
 
 struct DeadlineView: View {
     
+    @ObservedObject var characterManager : CharacterManager
     var fetchRequest : FetchRequest<Task>
     
     var tasks : FetchedResults<Task>{
         fetchRequest.wrappedValue
     }
     
-    init(){
+    init(characterManager: CharacterManager){
+        self.characterManager = characterManager
         fetchRequest = FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "endDate", ascending: false)])
     }
     
@@ -36,7 +38,7 @@ struct DeadlineView: View {
                 Spacer()
             }
             
-            CharacterView()
+            CharacterView(manager: characterManager)
             
             HStack{
                 Button(action: {
@@ -156,6 +158,6 @@ struct SingleDeadlineView: View{
 
 struct DeadlineView_Previews: PreviewProvider {
     static var previews: some View {
-        DeadlineView()
+        DeadlineView(characterManager: CharacterManager())
     }
 }

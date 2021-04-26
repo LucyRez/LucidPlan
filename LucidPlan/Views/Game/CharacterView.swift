@@ -9,10 +9,13 @@ import SwiftUI
 
 struct CharacterView: View {
     
-    var health: Int64 = 70
+    @ObservedObject var characterManager: CharacterManager
     var maxHealth : Int64 = 100
     var maxExp : Int64 = 1000
-    var exp : Int64 = 300
+    
+    init(manager: CharacterManager){
+        characterManager = manager
+    }
     
     func calculateHeight(for value: Int64, maxValue: Int64, height: CGFloat) -> CGFloat{
         return (CGFloat(value)/CGFloat(maxValue)) * height
@@ -29,10 +32,19 @@ struct CharacterView: View {
             
             GeometryReader{geometry in
                 HStack(alignment:.bottom){
-                    RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                        .fill(Color.blue)
-                        .frame(height: calculateHeight(for: exp, maxValue: maxExp, height: geometry.frame(in: .global).height), alignment: .bottom)
-                    
+                    ZStack(alignment: .bottom){
+                        RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                            .fill(Color.blue)
+                            .frame(height: calculateHeight(for: characterManager.getExp(), maxValue: maxExp, height: geometry.frame(in: .global).height), alignment: .bottom)
+                            .zIndex(1)
+                        
+                      
+                            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                                .fill(Color.white)
+                                .frame(height: calculateHeight(for: maxHealth, maxValue: maxHealth, height: geometry.frame(in: .global).height), alignment: .bottom)
+                                .zIndex(0)
+                    }
+                
                     ZStack(alignment: .bottom){
                         RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                             .fill(Color.white)
@@ -41,7 +53,7 @@ struct CharacterView: View {
                         
                         RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                             .fill(Color.green)
-                            .frame(height: calculateHeight(for: health, maxValue: maxHealth, height: geometry.frame(in: .global).height), alignment: .bottom)
+                            .frame(height: calculateHeight(for: characterManager.getHealth(), maxValue: maxHealth, height: geometry.frame(in: .global).height), alignment: .bottom)
                             .zIndex(1)
                     }
                     
@@ -57,6 +69,6 @@ struct CharacterView: View {
 
 struct CharacterView_Previews: PreviewProvider {
     static var previews: some View {
-        CharacterView()
+        CharacterView(manager: CharacterManager())
     }
 }

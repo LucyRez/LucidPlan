@@ -10,7 +10,9 @@ import SwiftUI
 
 
 struct TabBarView: View{
+    @Environment(\.managedObjectContext) var context
     @StateObject var socketManager : SocketIOManager = SocketIOManager() // Создаём сокет-менеджер.
+    @StateObject var gameManager = GameManager()
     let tabBarImages : [String] = ["calendar","clock", "note.text", "person.2"]
     @State var viewIndex : Int = 0
     var body: some View{
@@ -20,12 +22,12 @@ struct TabBarView: View{
                 case 0:
                     ScheduleView()
                 case 1:
-                    DeadlineView()
+                    DeadlineView(characterManager: gameManager.characterManager)
                 case 2:
                     ToDoView()
                 default:
                     //ChatScreen(socketManager: socketManager)
-                    HabitsView()
+                    HabitsView(gameManager: gameManager)
                 }
                 
             }
@@ -46,5 +48,8 @@ struct TabBarView: View{
                 }
             }
         }
+        .onAppear(perform: {
+            gameManager.initializeGameManager(context: context)
+        })
     }
 }

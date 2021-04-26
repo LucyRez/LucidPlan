@@ -11,6 +11,7 @@ import CoreData
 
 struct HabitsContainer: View {
     @ObservedObject var manager : HabitManager
+    @ObservedObject var gameManager : GameManager
     @Environment(\.managedObjectContext) var context
     
     var fetchRequest : FetchRequest<Habit>
@@ -19,8 +20,9 @@ struct HabitsContainer: View {
     }
     
     
-    init(manager: HabitManager){
-        self.manager = manager
+    init(habitManager: HabitManager, gameManager: GameManager){
+        self.manager = habitManager
+        self.gameManager = gameManager
         fetchRequest = FetchRequest(entity: Habit.entity(), sortDescriptors: [])
     }
     
@@ -28,7 +30,7 @@ struct HabitsContainer: View {
         VStack{
             ScrollView{
                 ForEach(habits){habit in
-                    SingleHabitView(manager: manager, habit: habit)
+                    SingleHabitView(habitManager: manager, habit: habit, gameManager: gameManager)
                       
                 }
             }

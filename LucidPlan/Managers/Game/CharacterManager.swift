@@ -9,48 +9,86 @@ import Foundation
 import CoreData
 import SwiftUI
 
+/**
+ Class for managing playable character.
+
+ # Notes: #
+ 1. <#Notes if any#>
+ 
+ */
 class CharacterManager: ObservableObject{
-    @Environment(\.managedObjectContext) var context
-    var character : Character
+    var character : Character? // Current playable character.
     
-    init(){
-        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "character")
+    /**
+     Function to initialize character.
+     
+     - parameter context: Current CoreData context.
+   
+     # Notes: #
+     1. Creates character if it wasn't previously created.
+     2. Otherwise the field in the class is initialized with Character object from storage.
+     
+     */
+    func initializeCharacter(context: NSManagedObjectContext){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Character")
         
         do{
             let fetchRequest = try context.fetch(fetchRequest) as! [Character]
             
-            if fetchRequest.count == 0 {
-                let newCharacter = Character(context: context)
-                newCharacter.exp = 0
-                newCharacter.health = 100
-                newCharacter.image = UIImage(systemName: "sparkle")
-                try! context.save()
-                character = newCharacter
-            }else{
+            if fetchRequest.count != 0 {
                 character = fetchRequest.first!
+            }else{
+                let newCharacter = Character(context: context)
                 
+                // Default values for character
+                newCharacter.exp = 1
+                newCharacter.health = 100
+                newCharacter.level = 1
+                newCharacter.image = UIImage(systemName: "sparkle")
+                
+                character = newCharacter
             }
+             
         }catch {
             fatalError("Failed to fetch categories: \(error)")
         }
     }
     
-    func addToHealth(healthPoints: Int64){
-        character.health+=healthPoints
+    /**
+     Function for adding/taking  away health points.
+     
+     - parameter healthPoints: Number of health points being added/taken.
+     
+     # Notes: #
+     1. If the points are being added the number must be positive, otherwise negative.
+     
+     */
+    func addToHealth(healthPoints: Int64, context: NSManagedObjectContext){
+        character!.health+=healthPoints
         try! context.save()
     }
     
-    func addToExp(expPoints: Int64){
-        character.exp += expPoints
+    /**
+     Function for adding/taking  away exp  points.
+     
+     - parameter expPoints: Number of exp points being added/taken.
+
+     # Notes: #
+     1. If the points are being added the number must be positive, otherwise negative.
+     
+     */
+    func addToExp(expPoints: Int64, context: NSManagedObjectContext){
+        character!.exp += expPoints
         try! context.save()
     }
     
+    // Function returns current amount of exp points
     func getExp() -> Int64{
-        return character.exp
+        return character!.exp
     }
     
+    // Function returns current amount of health points
     func getHealth() -> Int64{
-        return character.health
+        return character!.health
     }
 }

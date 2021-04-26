@@ -9,13 +9,15 @@ import SwiftUI
 
 struct SingleHabitView: View {
     @ObservedObject var habitManager : HabitManager
+    @ObservedObject var gameManager : GameManager
     @Environment(\.managedObjectContext) var context
     @State var isEdited = false
     
     var habit : Habit
     
-    init(manager : HabitManager, habit: Habit){
-        habitManager = manager
+    init(habitManager : HabitManager, habit: Habit, gameManager: GameManager){
+        self.habitManager = habitManager
+        self.gameManager = gameManager
         self.habit = habit
     }
     
@@ -70,6 +72,7 @@ struct SingleHabitView: View {
             
             Button(action: {
                 habitManager.addPoints(context: context , habit: habit, numberOfPoints: 5)
+                gameManager.characterManager.addToExp(expPoints: 50, context: context)
             }, label: {
                 ZStack{
                     RoundedRectangle(cornerRadius: 8)
@@ -86,7 +89,9 @@ struct SingleHabitView: View {
             })
             .disabled(isEdited)
             
-            Button(action: {habitManager.addPoints(context: context, habit: habit, numberOfPoints: -5)
+            Button(action: {
+                habitManager.addPoints(context: context, habit: habit, numberOfPoints: -5)
+                gameManager.characterManager.addToHealth(healthPoints: -10, context: context)
                 
             }, label: {
                 ZStack{

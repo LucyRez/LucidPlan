@@ -9,7 +9,12 @@ import SwiftUI
 
 struct HabitsView: View {
     @StateObject var habitManager = HabitManager()
+    @ObservedObject var gameManager : GameManager
     @Environment(\.managedObjectContext) var context
+    
+    init(gameManager: GameManager){
+        self.gameManager = gameManager
+    }
     
     var body: some View {
         VStack(alignment: .leading){
@@ -32,7 +37,7 @@ struct HabitsView: View {
                 .bold()
                 .padding(20)
             
-            HabitsContainer(manager: habitManager)
+            HabitsContainer(habitManager: habitManager, gameManager: gameManager)
                 .padding()
             
             HStack{
@@ -64,6 +69,6 @@ struct HabitsView: View {
 
 struct HabitsView_Previews: PreviewProvider {
     static var previews: some View {
-        HabitsView()
+        HabitsView(gameManager: GameManager())
     }
 }
