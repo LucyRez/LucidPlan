@@ -24,7 +24,7 @@ struct TabBarView: View{
                 case 1:
                     DeadlineView(characterManager: gameManager.characterManager)
                 case 2:
-                    ToDoView()
+                    ToDoView(gameManager: gameManager)
                 default:
                     //ChatScreen(socketManager: socketManager)
                     HabitsView(gameManager: gameManager)

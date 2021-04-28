@@ -28,6 +28,10 @@
 		DB4DE9F226331221005F47D0 /* CharacterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DE9F126331221005F47D0 /* CharacterManager.swift */; };
 		DB4DE9F6263441F3005F47D0 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DE9F5263441F3005F47D0 /* CharacterView.swift */; };
 		DB4DE9FA26349388005F47D0 /* CustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DE9F926349388005F47D0 /* CustomShape.swift */; };
+		DB4DE9FD26398F9B005F47D0 /* FightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DE9FC26398F9B005F47D0 /* FightView.swift */; };
+		DB4DEA002639EE29005F47D0 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DE9FF2639EE29005F47D0 /* ShopView.swift */; };
+		DB4DEA032639F700005F47D0 /* InventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DEA022639F700005F47D0 /* InventoryView.swift */; };
+		DB4DEA062639FFE7005F47D0 /* EnemyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DEA052639FFE7005F47D0 /* EnemyView.swift */; };
 		DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C102602B2F9000556FA /* LucidPlanApp.swift */; };
 		DB881C132602B2F9000556FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C122602B2F9000556FA /* ContentView.swift */; };
 		DB881C152602B2FE000556FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB881C142602B2FE000556FA /* Assets.xcassets */; };
@@ -75,6 +79,10 @@
 		DB4DE9F126331221005F47D0 /* CharacterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterManager.swift; sourceTree = "<group>"; };
 		DB4DE9F5263441F3005F47D0 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 		DB4DE9F926349388005F47D0 /* CustomShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShape.swift; sourceTree = "<group>"; };
+		DB4DE9FC26398F9B005F47D0 /* FightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightView.swift; sourceTree = "<group>"; };
+		DB4DE9FF2639EE29005F47D0 /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
+		DB4DEA022639F700005F47D0 /* InventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryView.swift; sourceTree = "<group>"; };
+		DB4DEA052639FFE7005F47D0 /* EnemyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyView.swift; sourceTree = "<group>"; };
 		DB881C0D2602B2F9000556FA /* LucidPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LucidPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB881C102602B2F9000556FA /* LucidPlanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LucidPlanApp.swift; sourceTree = "<group>"; };
 		DB881C122602B2F9000556FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -223,6 +231,10 @@
 			isa = PBXGroup;
 			children = (
 				DB4DE9F5263441F3005F47D0 /* CharacterView.swift */,
+				DB4DE9FC26398F9B005F47D0 /* FightView.swift */,
+				DB4DE9FF2639EE29005F47D0 /* ShopView.swift */,
+				DB4DEA022639F700005F47D0 /* InventoryView.swift */,
+				DB4DEA052639FFE7005F47D0 /* EnemyView.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -424,6 +436,7 @@
 				DB8F584926288D5800A94434 /* ToDo+CoreDataProperties.swift in Sources */,
 				DB4DE9EF2633120F005F47D0 /* GameManager.swift in Sources */,
 				DB415C3D2633106F006DE469 /* Character+CoreDataClass.swift in Sources */,
+				DB4DEA062639FFE7005F47D0 /* EnemyView.swift in Sources */,
 				DB881C1A2602B2FE000556FA /* Persistence.swift in Sources */,
 				DB4DE9F6263441F3005F47D0 /* CharacterView.swift in Sources */,
 				DB4DE9F226331221005F47D0 /* CharacterManager.swift in Sources */,
@@ -444,6 +457,7 @@
 				DBC88BCF2611ED5B00F53820 /* MessageModel.swift in Sources */,
 				DB2E5D89260BD88700280AB0 /* TaskViewModel.swift in Sources */,
 				DB881C352603EF01000556FA /* DeadlineView.swift in Sources */,
+				DB4DEA002639EE29005F47D0 /* ShopView.swift in Sources */,
 				DBD07B7C2628AA8B00E2B2B8 /* TaskManager.swift in Sources */,
 				DB0B54EC262CC57F0068C66C /* ToDoContainerView.swift in Sources */,
 				DB2E5D94260BDCBB00280AB0 /* Task+CoreDataProperties.swift in Sources */,
@@ -452,12 +466,14 @@
 				DBD07B752628A7C000E2B2B8 /* ToDoManager.swift in Sources */,
 				DB0B54E8262CC0410068C66C /* MainTasksView.swift in Sources */,
 				DBC88BBE2611D5F700F53820 /* Tag.swift in Sources */,
+				DB4DE9FD26398F9B005F47D0 /* FightView.swift in Sources */,
 				DB415C2F26317DA7006DE469 /* SingleHabitView.swift in Sources */,
 				DB0B54FB262E1D580068C66C /* HabitManager.swift in Sources */,
 				DBC88BC22611EB2C00F53820 /* ChatScreen.swift in Sources */,
 				DB8F584826288D5800A94434 /* ToDo+CoreDataClass.swift in Sources */,
 				DBD07B7226289FB100E2B2B8 /* AddToDo.swift in Sources */,
 				DB0B54E0262CBF100068C66C /* TabBar.swift in Sources */,
+				DB4DEA032639F700005F47D0 /* InventoryView.swift in Sources */,
 				DB0B54F0262CC5CC0068C66C /* SingleToDoView.swift in Sources */,
 				DB4DE9FA26349388005F47D0 /* CustomShape.swift in Sources */,
 			);

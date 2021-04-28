@@ -9,6 +9,11 @@ import SwiftUI
 
 struct ToDoView: View {
     @StateObject var todoManager = ToDoManager()
+    @ObservedObject var gameManager : GameManager
+    
+    init(gameManager: GameManager){
+        self.gameManager = gameManager
+    }
     
     var body: some View {
         VStack{
@@ -40,7 +45,7 @@ struct ToDoView: View {
                 
             }
             
-            ToDoContainer(filter: todoManager.filter, manager: todoManager)
+            ToDoContainer(filter: todoManager.filter, todoManager: todoManager, gameManager: gameManager)
             
             Spacer()
             
@@ -126,6 +131,6 @@ struct TopToDoView: View{
 
 struct ToDoView_Previews: PreviewProvider {
     static var previews: some View {
-        ToDoView()
+        ToDoView(gameManager: GameManager())
     }
 }

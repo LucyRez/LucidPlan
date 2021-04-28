@@ -64,7 +64,14 @@ class CharacterManager: ObservableObject{
      
      */
     func addToHealth(healthPoints: Int64, context: NSManagedObjectContext){
-        character!.health+=healthPoints
+        if healthPoints > 0 {
+            character!.health+=healthPoints
+        }else{
+            if character!.health > 10 {
+                character!.health+=healthPoints
+            }
+        }
+      
         try! context.save()
     }
     
@@ -78,7 +85,13 @@ class CharacterManager: ObservableObject{
      
      */
     func addToExp(expPoints: Int64, context: NSManagedObjectContext){
-        character!.exp += expPoints
+        if character!.exp + expPoints > 1000 {
+            character!.level+=1
+            character!.exp = (character!.exp + expPoints) - 1000
+        }else{
+            character!.exp += expPoints
+            
+        }
         try! context.save()
     }
     

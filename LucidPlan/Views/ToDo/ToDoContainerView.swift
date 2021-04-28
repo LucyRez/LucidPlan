@@ -12,6 +12,7 @@ import SwiftUI
 struct ToDoContainer: View{
     @Environment(\.managedObjectContext) var context
     @ObservedObject var todoManager : ToDoManager
+    @ObservedObject var gameManager : GameManager
     
     var fetchRequest : FetchRequest<ToDo>
     
@@ -20,8 +21,9 @@ struct ToDoContainer: View{
     }
     
     
-    init(filter: Int, manager: ToDoManager){
-        todoManager = manager
+    init(filter: Int, todoManager: ToDoManager, gameManager: GameManager){
+        self.todoManager = todoManager
+        self.gameManager = gameManager
         fetchRequest = FetchRequest(entity: ToDo.entity(), sortDescriptors: [], predicate:  NSPredicate(format: "type == %i", filter))
     }
     
@@ -30,7 +32,7 @@ struct ToDoContainer: View{
             List{
                 ForEach(todos){todo in
                     HStack{
-                        SingleToDoView(todo: todo, manager: todoManager)
+                        SingleToDoView(todo: todo, todoManager: todoManager, gameManager: gameManager)
                         Spacer()
                     }
                 }

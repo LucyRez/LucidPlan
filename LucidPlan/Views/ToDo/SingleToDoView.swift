@@ -12,16 +12,19 @@ struct SingleToDoView: View{
     var todo: ToDo
     var text : String?
     @ObservedObject var todoManager : ToDoManager
+    @ObservedObject var gameManager : GameManager
     @Environment(\.managedObjectContext) var context
     
-    init(todo: ToDo, manager: ToDoManager){
-        todoManager = manager
+    init(todo: ToDo, todoManager: ToDoManager, gameManager: GameManager){
+        self.todoManager = todoManager
+        self.gameManager = gameManager
         self.todo = todo
     }
     
+
     var body: some View{
         HStack(spacing:20){
-            Image(systemName: "checkmark.circle.fill")
+            Image(systemName: todo.isCompleted ? "checkmark.circle.fill" : "circle")
             
             Text(todo.title ?? "")
                 .font(.system(size: 22))
@@ -34,9 +37,18 @@ struct SingleToDoView: View{
         .onTapGesture(perform: {
             todo.isCompleted.toggle()
             todoManager.updateState(todo: todo, context: context)
+            updateGameStats()
         })
         .onLongPressGesture(perform: {
             todoManager.editData(todo: todo)
         })
+    }
+    
+    func updateGameStats(){
+        if todo.isCompleted {
+            gameManager.characterManager.addToExp(expPoints: 50, context: context)
+        }else{
+            gameManager.characterManager.addToExp(expPoints: -50, context: context)
+        }
     }
 }
