@@ -47,9 +47,11 @@ struct TabBarView: View{
                     
                 }
             }
+            .padding(.bottom)
         }
         .onAppear(perform: {
             gameManager.initializeGameManager(context: context)
         })
     }
 }
+

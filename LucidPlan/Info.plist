@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSContactsUsageDescription</key>
+	<string>Is needed for correct work.</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>Reminders on device will be used in app. For synchronization purpose.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>For synchronization purpose.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

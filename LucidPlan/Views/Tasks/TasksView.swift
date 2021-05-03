@@ -76,8 +76,8 @@ struct TopTaskView: View{
                 model.active.toggle()
             },
             label: {
-                Image(systemName: "plus.circle.fill").accentColor(Color(red: 49/255, green:  245/255, blue: 238/255))
-                    .font(.system(size: 45))
+                Image(systemName: "plus.circle.fill").accentColor(Color( red: 17/255, green: 141/255, blue: 211/255))
+                    .font(.system(size: 40))
             })
             .sheet(isPresented: $model.active, content: {
                 AddTaskView(task: model)
@@ -97,24 +97,37 @@ struct TopTaskView: View{
 struct DateView: View{
     
     let date : Date
+    let isSelected : Bool
+    
+    init(date: Date, isSelected: Bool){
+        self.date = date
+        self.isSelected = isSelected
+    }
+    
+    func numberOfDays(between startDay: Date, and endDate: Date) -> Int{
+        
+        let number = Calendar.current.dateComponents([.day], from: startDay, to: endDate)
+        
+        return number.day!
+    }
     
     // Function gets name of the day of the week by its order number
     func getNameOfDay(numberOfDay: Int) -> String{
         switch numberOfDay {
         case 1:
-            return "Sun"
+            return "Вс"
         case 2:
-            return "Mon"
+            return "Пн"
         case 3:
-            return "Tue"
+            return "Вт"
         case 4:
-            return "Wed"
+            return "Ср"
         case 5:
-            return "Thur"
+            return "Чт"
         case 6:
-            return "Fri"
+            return "Пт"
         case 7:
-            return "Sat"
+            return "Сб"
         default:
             return ""
         }
@@ -122,19 +135,37 @@ struct DateView: View{
     
     var body: some View{
         ZStack{
+            
+            if (numberOfDays(between: Calendar.current.startOfDay(for: date), and: Calendar.current.startOfDay(for: Date()))==0) && !isSelected{
             RoundedRectangle(cornerRadius: 20.0)
-                .fill(Color(red: 52/255, green: 235/255, blue: 137/255))
-        
+                .stroke(Color(red: 26/255, green: 231/255, blue: 202/255), lineWidth: 3)
+                .padding(1)
+                
+            }else if isSelected{
+                RoundedRectangle(cornerRadius: 20.0)
+                .fill(Color(red: 26/255, green: 231/255, blue: 202/255))
+            }else{
+                RoundedRectangle(cornerRadius: 20.0)
+                    .fill(Color.white)
+            }
+                
             VStack(alignment:.center, spacing: 10){
                 Text("\(getNameOfDay(numberOfDay: (Calendar.current.component(.weekday, from: date))))")
+                    .font(.system(size: 24))
                     .bold()
+                    .foregroundColor(isSelected ? .white : .black)
+                    .opacity(isSelected ? 1 : 0.3)
                 
                 Text("\(Calendar.current.component(.day, from: date))")
                     .font(.system(size: 25))
                     .bold()
+                    .foregroundColor(isSelected ? .white : .black)
+                   
             }
+            
+           
         }
-        .foregroundColor(.white)
+       
     }
 }
 

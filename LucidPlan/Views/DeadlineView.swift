@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DeadlineView: View {
-    
+    @State var showSettings : Bool = false
     @ObservedObject var characterManager : CharacterManager
     var fetchRequest : FetchRequest<Task>
     
@@ -22,70 +22,85 @@ struct DeadlineView: View {
     }
     
     var body: some View {
-        VStack{
-            HStack{
-                Button(action: {
-                    // TODO экран настроек
-                },
-                label: {
-                    Text("...")
-                        .bold()
-                        .foregroundColor(.white)
-                        .font(.system(size: 50))
-                })
-                .padding(.leading)
-                
-                Spacer()
-            }
-            
-            CharacterView(manager: characterManager)
-            
-            HStack{
-                Button(action: {
+        ZStack(alignment:.leading){
+            VStack{
+                HStack{
+                    Button(action: {
+                        withAnimation(.default){
+                            showSettings.toggle()
+                            
+                        }
+                    },
+                    label: {
+                        Text("...")
+                            .bold()
+                            .foregroundColor(.white)
+                            .font(.system(size: 50))
+                    })
+                    .padding(.leading)
                     
-                },
-                label: {
-                    Text("Filter")
-                        .font(.system(size: 30))
-                        .foregroundColor(.white)
-                })
-                .padding()
+                    Spacer()
+                }
                 
-                Spacer()
+                CharacterView(manager: characterManager)
                 
-                Button(action: {
+                HStack{
+                    Button(action: {
+                        
+                    },
+                    label: {
+                        Text("Filter")
+                            .font(.system(size: 30))
+                            .foregroundColor(.white)
+                    })
+                    .padding()
                     
-                },
-                label: {
-                    Text("Add")
-                        .font(.system(size: 30))
+                    Spacer()
+                    
+                    Button(action: {
+                        
+                    },
+                    label: {
+                        Text("Add")
+                            .font(.system(size: 30))
+                            .foregroundColor(.white)
+                    })
+                    .padding()
+                    
+                }
+                
+                ZStack{
+                    Rectangle()
+                        .cornerRadius(radius: 25.0, corners: [.topLeft, .topRight])
                         .foregroundColor(.white)
-                })
-                .padding()
-                
-            }
-            
-            ZStack{
-                Rectangle()
-                    .cornerRadius(radius: 25.0, corners: [.topLeft, .topRight])
-                    .foregroundColor(.white)
-                    .zIndex(0)
-                
-                ScrollView{
-                    VStack{
-                        ForEach(tasks){task in
-                            SingleDeadlineView(task: task)
+                        .zIndex(0)
+                    
+                    ScrollView{
+                        VStack{
+                            ForEach(tasks){task in
+                                SingleDeadlineView(task: task)
+                            }
+                            
                         }
                         
-                    }
+                    }.zIndex(0.5)
                     
-                }.zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
+                }
                 
             }
+            .background(Color.purple.opacity(0.85))
+            .ignoresSafeArea()
             
         }
-        .background(Color.purple.opacity(0.85))
-        .ignoresSafeArea()
+        
+        HStack{
+            SettingsMenuView(settingsShow: $showSettings)
+                .offset(x: self.showSettings ? 0 : -UIScreen.main.bounds.width/1.5)
+                
+            
+            Spacer()
+        }
+        .zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
         
     }
 }

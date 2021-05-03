@@ -50,7 +50,7 @@ struct SingleTaskView: View{
             
             ZStack(alignment:.topLeading){
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color( red: 16/255, green: 230/255, blue: 162/255))
+                    .fill(Color( red: 77/255, green: 197/255, blue: 145/255))
                     .frame(width: .infinity, height: 150)
                 
                 VStack{
@@ -62,22 +62,34 @@ struct SingleTaskView: View{
                         
                         Spacer()
                         
-                        Text(":")
-                            .bold()
-                            .font(.system(size: 40))
-                            .padding(.trailing)
-                            .contextMenu(ContextMenu(menuItems: {
-                                Button(action: {self.model.editData(task: task)}, label: {
-                                    Text("Edit")
-                                })
-                                Button(action: {
-                                    context.delete(task)
-                                    try! context.save() //TODO: MOVE THIS TO THE MANAGER
-                                    
-                                }, label: {
-                                    Text("Delete")
-                                })
-                            }))
+                        Menu{
+                            
+                            Button(action: {self.model.editData(task: task)},
+                                   label: {
+                                    HStack{
+                                        Image(systemName: "square.and.pencil")
+                                        Text("Редактировать")
+                                    }
+                                   
+                                   })
+                            
+                            Button(action: {
+                                context.delete(task)
+                                try! context.save() //TODO: MOVE THIS TO THE MANAGER
+                                
+                            }, label: {
+                                HStack{
+                                    Image(systemName: "trash")
+                                    Text("Удалить")
+                                }
+                            })
+                        }
+                        label: {
+                            Text(":")
+                                .bold()
+                                .font(.system(size: 40))
+                                .padding(.trailing)
+                        }
                     }
                     .foregroundColor(.white)
                     

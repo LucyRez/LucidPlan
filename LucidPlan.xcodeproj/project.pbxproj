@@ -32,6 +32,11 @@
 		DB4DEA002639EE29005F47D0 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DE9FF2639EE29005F47D0 /* ShopView.swift */; };
 		DB4DEA032639F700005F47D0 /* InventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DEA022639F700005F47D0 /* InventoryView.swift */; };
 		DB4DEA062639FFE7005F47D0 /* EnemyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DEA052639FFE7005F47D0 /* EnemyView.swift */; };
+		DB4DEA0A263A0373005F47D0 /* ShopItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DEA08263A0373005F47D0 /* ShopItem+CoreDataClass.swift */; };
+		DB4DEA0B263A0373005F47D0 /* ShopItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DEA09263A0373005F47D0 /* ShopItem+CoreDataProperties.swift */; };
+		DB4DEA18263ADFAE005F47D0 /* Enemy+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DEA16263ADFAE005F47D0 /* Enemy+CoreDataClass.swift */; };
+		DB4DEA19263ADFAE005F47D0 /* Enemy+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DEA17263ADFAE005F47D0 /* Enemy+CoreDataProperties.swift */; };
+		DB7DB18B263DF8E2001F540F /* SettingsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7DB18A263DF8E2001F540F /* SettingsMenuView.swift */; };
 		DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C102602B2F9000556FA /* LucidPlanApp.swift */; };
 		DB881C132602B2F9000556FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C122602B2F9000556FA /* ContentView.swift */; };
 		DB881C152602B2FE000556FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB881C142602B2FE000556FA /* Assets.xcassets */; };
@@ -83,6 +88,11 @@
 		DB4DE9FF2639EE29005F47D0 /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
 		DB4DEA022639F700005F47D0 /* InventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryView.swift; sourceTree = "<group>"; };
 		DB4DEA052639FFE7005F47D0 /* EnemyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyView.swift; sourceTree = "<group>"; };
+		DB4DEA08263A0373005F47D0 /* ShopItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ShopItem+CoreDataClass.swift"; path = "LucidPlan/Models/Game/ShopItem+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		DB4DEA09263A0373005F47D0 /* ShopItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ShopItem+CoreDataProperties.swift"; path = "LucidPlan/Models/Game/ShopItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		DB4DEA16263ADFAE005F47D0 /* Enemy+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Enemy+CoreDataClass.swift"; path = "LucidPlan/Models/Game/Enemy+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		DB4DEA17263ADFAE005F47D0 /* Enemy+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Enemy+CoreDataProperties.swift"; path = "LucidPlan/Models/Game/Enemy+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		DB7DB18A263DF8E2001F540F /* SettingsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuView.swift; sourceTree = "<group>"; };
 		DB881C0D2602B2F9000556FA /* LucidPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LucidPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB881C102602B2F9000556FA /* LucidPlanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LucidPlanApp.swift; sourceTree = "<group>"; };
 		DB881C122602B2F9000556FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -212,6 +222,10 @@
 		DB415C3526330F50006DE469 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				DB4DEA16263ADFAE005F47D0 /* Enemy+CoreDataClass.swift */,
+				DB4DEA17263ADFAE005F47D0 /* Enemy+CoreDataProperties.swift */,
+				DB4DEA08263A0373005F47D0 /* ShopItem+CoreDataClass.swift */,
+				DB4DEA09263A0373005F47D0 /* ShopItem+CoreDataProperties.swift */,
 				DB415C3B2633106F006DE469 /* Character+CoreDataClass.swift */,
 				DB415C3C2633106F006DE469 /* Character+CoreDataProperties.swift */,
 			);
@@ -294,6 +308,7 @@
 				DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */,
 				DB881C102602B2F9000556FA /* LucidPlanApp.swift */,
 				DB4DE9F926349388005F47D0 /* CustomShape.swift */,
+				DB7DB18A263DF8E2001F540F /* SettingsMenuView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -449,14 +464,18 @@
 				DB2E5D8F260BDA4F00280AB0 /* LucidPlan.xcdatamodeld in Sources */,
 				DB0B54F5262E1D2E0068C66C /* Habit+CoreDataClass.swift in Sources */,
 				DB0B54E5262CBFBA0068C66C /* SingleTask.swift in Sources */,
+				DB4DEA18263ADFAE005F47D0 /* Enemy+CoreDataClass.swift in Sources */,
 				DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */,
+				DB7DB18B263DF8E2001F540F /* SettingsMenuView.swift in Sources */,
 				DBC88BBA2611B14500F53820 /* LoginView.swift in Sources */,
 				DB415C3E2633106F006DE469 /* Character+CoreDataProperties.swift in Sources */,
 				DB881C322603E352000556FA /* ToDoView.swift in Sources */,
 				DB415C2C26317BE8006DE469 /* HabitsContainer.swift in Sources */,
 				DBC88BCF2611ED5B00F53820 /* MessageModel.swift in Sources */,
+				DB4DEA19263ADFAE005F47D0 /* Enemy+CoreDataProperties.swift in Sources */,
 				DB2E5D89260BD88700280AB0 /* TaskViewModel.swift in Sources */,
 				DB881C352603EF01000556FA /* DeadlineView.swift in Sources */,
+				DB4DEA0B263A0373005F47D0 /* ShopItem+CoreDataProperties.swift in Sources */,
 				DB4DEA002639EE29005F47D0 /* ShopView.swift in Sources */,
 				DBD07B7C2628AA8B00E2B2B8 /* TaskManager.swift in Sources */,
 				DB0B54EC262CC57F0068C66C /* ToDoContainerView.swift in Sources */,
@@ -465,6 +484,7 @@
 				DB881C272602B3B4000556FA /* TasksView.swift in Sources */,
 				DBD07B752628A7C000E2B2B8 /* ToDoManager.swift in Sources */,
 				DB0B54E8262CC0410068C66C /* MainTasksView.swift in Sources */,
+				DB4DEA0A263A0373005F47D0 /* ShopItem+CoreDataClass.swift in Sources */,
 				DBC88BBE2611D5F700F53820 /* Tag.swift in Sources */,
 				DB4DE9FD26398F9B005F47D0 /* FightView.swift in Sources */,
 				DB415C2F26317DA7006DE469 /* SingleHabitView.swift in Sources */,

@@ -15,7 +15,10 @@ struct FightView: View {
     var image : UIImage = UIImage(systemName: "sparkle") ?? UIImage()
     
     var body: some View {
+        HStack{
+            Spacer()
         VStack{
+            Spacer()
             VStack(spacing:-40){
                 ZStack{
                     RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
@@ -52,7 +55,7 @@ struct FightView: View {
             ZStack{
                 Rectangle()
                     .cornerRadius(radius: 20, corners: [.bottomLeft, .topRight, .topLeft])
-                    .frame(width: 300, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width: UIScreen.main.bounds.width/1.1, height: UIScreen.main.bounds.height/3.4, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color(red: 120/255, green: 127/255, blue: 246/255))
                 VStack(alignment:.leading){
                     Text("Lvl. \(level)")
@@ -66,12 +69,16 @@ struct FightView: View {
             }
             .padding()
             
-            BottomButtons()
             
+            BottomButtons()
+            Spacer()
+             
             
         }
+            Spacer()
+        }
         .background(Color.blue.opacity(0.1))
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         
     }
     
@@ -81,7 +88,7 @@ struct BottomButtons: View{
     var body: some View{
         HStack(spacing:20){
             Button(action: {
-                // TODO:: INVENTORY VIEW
+                
             },
             label: {
                 Image(systemName: "sparkle")
