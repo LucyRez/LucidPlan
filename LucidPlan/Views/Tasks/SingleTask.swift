@@ -34,7 +34,7 @@ struct SingleTaskView: View{
         startDate = start
         endDate = end
         self.title = task.title!
-        self.notes = task.note!
+        self.notes = task.note ?? ""
         self.tags = task.tags!
         self.status = task.status!
     }

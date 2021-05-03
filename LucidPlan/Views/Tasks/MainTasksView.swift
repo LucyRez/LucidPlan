@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import EventKit
+
 
 /**
  Main view for showing tasks.
@@ -38,19 +38,7 @@ struct ScheduleView: View{
         dateArray = dates
     }
     
-    func getCalendarTypes(){
-       
-        let store = EKEventStore()
-        store.requestAccess(to: .event){granted, error in
-            
-        }
-        
-        let calendars = store.calendars(for: .event)
-        for cal in calendars{
-            print(cal.title)
-        }
-        
-    }
+   
     
     var body: some View{
         
@@ -111,7 +99,6 @@ struct ScheduleView: View{
                             }
                         }
                         .onAppear(perform: updateDateArray) // We are updating the dates
-                        .onAppear(perform: getCalendarTypes) // We are updating the dates
                         .onAppear(perform: {
                             DispatchQueue.main.async {
                                 val.scrollTo(dateArray[(dateArray.endIndex)/2-1], anchor: .bottom) // Auto scroll to the middle

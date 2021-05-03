@@ -37,6 +37,7 @@
 		DB4DEA18263ADFAE005F47D0 /* Enemy+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DEA16263ADFAE005F47D0 /* Enemy+CoreDataClass.swift */; };
 		DB4DEA19263ADFAE005F47D0 /* Enemy+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4DEA17263ADFAE005F47D0 /* Enemy+CoreDataProperties.swift */; };
 		DB7DB18B263DF8E2001F540F /* SettingsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7DB18A263DF8E2001F540F /* SettingsMenuView.swift */; };
+		DB7DB18F26408052001F540F /* CalendarImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7DB18E26408052001F540F /* CalendarImportView.swift */; };
 		DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C102602B2F9000556FA /* LucidPlanApp.swift */; };
 		DB881C132602B2F9000556FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C122602B2F9000556FA /* ContentView.swift */; };
 		DB881C152602B2FE000556FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB881C142602B2FE000556FA /* Assets.xcassets */; };
@@ -93,6 +94,7 @@
 		DB4DEA16263ADFAE005F47D0 /* Enemy+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Enemy+CoreDataClass.swift"; path = "LucidPlan/Models/Game/Enemy+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		DB4DEA17263ADFAE005F47D0 /* Enemy+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Enemy+CoreDataProperties.swift"; path = "LucidPlan/Models/Game/Enemy+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DB7DB18A263DF8E2001F540F /* SettingsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenuView.swift; sourceTree = "<group>"; };
+		DB7DB18E26408052001F540F /* CalendarImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarImportView.swift; sourceTree = "<group>"; };
 		DB881C0D2602B2F9000556FA /* LucidPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LucidPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB881C102602B2F9000556FA /* LucidPlanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LucidPlanApp.swift; sourceTree = "<group>"; };
 		DB881C122602B2F9000556FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -253,6 +255,15 @@
 			path = Game;
 			sourceTree = "<group>";
 		};
+		DB7DB18D26408026001F540F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DB7DB18A263DF8E2001F540F /* SettingsMenuView.swift */,
+				DB7DB18E26408052001F540F /* CalendarImportView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		DB881C042602B2F8000556FA = {
 			isa = PBXGroup;
 			children = (
@@ -298,6 +309,7 @@
 		DB881C252602B361000556FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DB7DB18D26408026001F540F /* Settings */,
 				DB4DE9F4263441DB005F47D0 /* Game */,
 				DB0B54F2262E1CB10068C66C /* Habits */,
 				DB0B54EA262CC53F0068C66C /* ToDo */,
@@ -308,7 +320,6 @@
 				DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */,
 				DB881C102602B2F9000556FA /* LucidPlanApp.swift */,
 				DB4DE9F926349388005F47D0 /* CustomShape.swift */,
-				DB7DB18A263DF8E2001F540F /* SettingsMenuView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -494,6 +505,7 @@
 				DBD07B7226289FB100E2B2B8 /* AddToDo.swift in Sources */,
 				DB0B54E0262CBF100068C66C /* TabBar.swift in Sources */,
 				DB4DEA032639F700005F47D0 /* InventoryView.swift in Sources */,
+				DB7DB18F26408052001F540F /* CalendarImportView.swift in Sources */,
 				DB0B54F0262CC5CC0068C66C /* SingleToDoView.swift in Sources */,
 				DB4DE9FA26349388005F47D0 /* CustomShape.swift in Sources */,
 			);

@@ -17,91 +17,111 @@ struct DeadlineView: View {
     }
     
     init(characterManager: CharacterManager){
+        //        UINavigationBar.appearance().isTranslucent = false
+        //        UINavigationBar.appearance().barTintColor = UIColor(Color.purple.opacity(0.8))
+        //        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+        
         self.characterManager = characterManager
         fetchRequest = FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "endDate", ascending: false)])
     }
     
     var body: some View {
-        ZStack(alignment:.leading){
-            VStack{
-                HStack{
-                    Button(action: {
-                        withAnimation(.default){
-                            showSettings.toggle()
-                            
-                        }
-                    },
-                    label: {
-                        Text("...")
-                            .bold()
-                            .foregroundColor(.white)
-                            .font(.system(size: 50))
-                    })
-                    .padding(.leading)
-                    
-                    Spacer()
-                }
+        NavigationView{
+            ZStack{
+                Color.purple.ignoresSafeArea()
                 
-                CharacterView(manager: characterManager)
-                
-                HStack{
-                    Button(action: {
-                        
-                    },
-                    label: {
-                        Text("Filter")
-                            .font(.system(size: 30))
-                            .foregroundColor(.white)
-                    })
-                    .padding()
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        
-                    },
-                    label: {
-                        Text("Add")
-                            .font(.system(size: 30))
-                            .foregroundColor(.white)
-                    })
-                    .padding()
-                    
+                if showSettings{
+                    SettingsMenuView(settingsShow: $showSettings)
                 }
                 
                 ZStack{
-                    Rectangle()
-                        .cornerRadius(radius: 25.0, corners: [.topLeft, .topRight])
-                        .foregroundColor(.white)
-                        .zIndex(0)
-                    
-                    ScrollView{
-                        VStack{
-                            ForEach(tasks){task in
-                                SingleDeadlineView(task: task)
-                            }
+                   
+                    Color.purple.opacity(0.8).ignoresSafeArea()
+                    VStack{
+                        HStack{
+                            Button(action: {
+                                withAnimation(.spring()){
+                                    showSettings.toggle()
+                                }
+                            },
+                            label: {
+                                Image(systemName: "list.bullet")
+                                    .font(.system(size: 20))
+                                    .accentColor(.white)
+                                
+                            })
+                            .padding(.leading, 15)
+                            .padding(.top, 15)
+                            Spacer()
+                        }
+                        
+                        CharacterView(manager: characterManager)
+                            .padding(.top)
+                        
+                        HStack{
+                            Button(action: {
+                                // TODO: FILTER DEADLINES
+                            },
+                            label: {
+                                Text("Filter")
+                                    .font(.system(size: 30))
+                                    .foregroundColor(.white)
+                            })
+                            .padding()
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                // TODO: ADD DEADLINES
+                            },
+                            label: {
+                                Text("Add")
+                                    .font(.system(size: 30))
+                                    .foregroundColor(.white)
+                            })
+                            .padding()
                             
                         }
                         
-                    }.zIndex(0.5)
+                        ZStack{
+                            Rectangle()
+                                .cornerRadius(radius: 25.0, corners: [.topLeft, .topRight])
+                                .foregroundColor(.white)
+                                .zIndex(0)
+                            
+                            ScrollView{
+                                VStack{
+                                    ForEach(tasks){task in
+                                        SingleDeadlineView(task: task)
+                                    }
+                                    
+                                }
+                                
+                            }.zIndex(0.5)
+                            
+                        }
+                        
+                    }
                     
                 }
+                .cornerRadius(showSettings ? 20 : 0)
+                .offset(x: showSettings ? 300 : 0, y: showSettings ? 40 : 0)
+                .scaleEffect(showSettings ? 0.8 : 1)
+                .navigationBarHidden(true)
+                //                .navigationBarTitle("Мои Дедлайны")
+                //                .navigationBarTitleDisplayMode(.inline)
+                //                .navigationBarItems(leading: Button(action: {
+                //                    withAnimation(.spring()){
+                //                        showSettings.toggle()
+                //                    }
+                //                },
+                //                label: {
+                //                    Image(systemName: "list.bullet")
+                //                        .accentColor(.white)
+                //                }))
                 
             }
-            .background(Color.purple.opacity(0.85))
-            .ignoresSafeArea()
-            
         }
-        
-        HStack{
-            SettingsMenuView(settingsShow: $showSettings)
-                .offset(x: self.showSettings ? 0 : -UIScreen.main.bounds.width/1.5)
-                
-            
-            Spacer()
-        }
-        .zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
-        
     }
 }
 

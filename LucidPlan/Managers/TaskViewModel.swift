@@ -86,7 +86,7 @@ class TaskViewModel : ObservableObject, TaskManager{
 
         self.task = task
         self.title = task.title!
-        self.note = task.note!
+        self.note = task.note ?? ""
         self.startDate = task.startDate!
         self.endDate = task.endDate!
         self.status = task.status!
