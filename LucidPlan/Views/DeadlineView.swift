@@ -17,12 +17,8 @@ struct DeadlineView: View {
     }
     
     init(characterManager: CharacterManager){
-        //        UINavigationBar.appearance().isTranslucent = false
-        //        UINavigationBar.appearance().barTintColor = UIColor(Color.purple.opacity(0.8))
-        //        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
-        
         self.characterManager = characterManager
-        fetchRequest = FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "endDate", ascending: false)])
+        fetchRequest = FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "endDate", ascending: true)])
     }
     
     var body: some View {
@@ -108,17 +104,6 @@ struct DeadlineView: View {
                 .offset(x: showSettings ? 300 : 0, y: showSettings ? 40 : 0)
                 .scaleEffect(showSettings ? 0.8 : 1)
                 .navigationBarHidden(true)
-                //                .navigationBarTitle("Мои Дедлайны")
-                //                .navigationBarTitleDisplayMode(.inline)
-                //                .navigationBarItems(leading: Button(action: {
-                //                    withAnimation(.spring()){
-                //                        showSettings.toggle()
-                //                    }
-                //                },
-                //                label: {
-                //                    Image(systemName: "list.bullet")
-                //                        .accentColor(.white)
-                //                }))
                 
             }
         }

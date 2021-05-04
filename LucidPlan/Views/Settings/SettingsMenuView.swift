@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingsMenuView: View {
-    @Environment(\.managedObjectContext) var context // Current context
     @Binding var settingsShow : Bool
     var body: some View {
         ZStack(alignment: .topTrailing){
@@ -99,7 +98,7 @@ struct SettingsMenuView: View {
                
                 
                 NavigationLink(
-                    destination: CalendarImportView(context: context),
+                    destination: CalendarImportView(),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "icloud.and.arrow.down")
