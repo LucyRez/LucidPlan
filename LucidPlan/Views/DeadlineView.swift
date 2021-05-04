@@ -104,6 +104,11 @@ struct DeadlineView: View {
                 .offset(x: showSettings ? 300 : 0, y: showSettings ? 40 : 0)
                 .scaleEffect(showSettings ? 0.8 : 1)
                 .navigationBarHidden(true)
+                .onTapGesture {
+                    withAnimation(.spring()){
+                        showSettings = false
+                    }
+                }
                 
             }
         }

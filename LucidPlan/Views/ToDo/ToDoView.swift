@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ToDoView: View {
+    @State var showSettings : Bool = false
     @StateObject var todoManager = ToDoManager()
     @ObservedObject var gameManager : GameManager
     
@@ -16,39 +17,71 @@ struct ToDoView: View {
     }
     
     var body: some View {
-        VStack{
-            TopToDoView(manager: todoManager).padding(.horizontal)
+        
+        ZStack{
+            Color.white.ignoresSafeArea()
             
-            HStack{
+            if showSettings{
+                SettingsMenuView(settingsShow: $showSettings)
+            }
+            
+            
+            
+            VStack{
                 
-                Button(action: {todoManager.active.toggle()}, label: {
-                    Text("Add")
-                        .font(.system(size: 25))
-                })
-                .sheet(isPresented: $todoManager.active, content: {
-                    AddToDo(todo: todoManager)
-                })
-                .padding()
+                HStack{
+                    Button(action: {
+                        withAnimation(.spring()){
+                            showSettings.toggle()
+                            
+                        }
+                    },
+                    label: {
+                        Text("...")
+                            .bold()
+                            .font(.system(size: 50))
+                    })
+                    .padding(.horizontal)
+                    
+                    TopToDoView(manager: todoManager).padding(.horizontal)
+                }
+                
+                HStack{
+                    
+                    Button(action: {todoManager.active.toggle()}, label: {
+                        Text("Add")
+                            .font(.system(size: 25))
+                    })
+                    .sheet(isPresented: $todoManager.active, content: {
+                        AddToDo(todo: todoManager)
+                    })
+                    .padding()
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        
+                    },
+                    label: {
+                        Text("Filter")
+                            .font(.system(size: 25))
+                    })
+                    .padding()
+                    
+                    
+                    
+                }
+                
+                ToDoContainer(filter: todoManager.filter, todoManager: todoManager, gameManager: gameManager)
                 
                 Spacer()
                 
-                Button(action: {
-                    
-                },
-                label: {
-                    Text("Filter")
-                        .font(.system(size: 25))
-                })
-                .padding()
-                
-                
-                
             }
-            
-            ToDoContainer(filter: todoManager.filter, todoManager: todoManager, gameManager: gameManager)
-            
-            Spacer()
-            
+            .background(Color.white.ignoresSafeArea())
+            .cornerRadius(showSettings ? 20 : 0)
+            .offset(x: showSettings ? 300 : 0, y: showSettings ? 40 : 0)
+            .scaleEffect(showSettings ? 0.8 : 1)
+          
         }
         
     }
@@ -65,15 +98,6 @@ struct TopToDoView: View{
     
     var body: some View{
         HStack(alignment:.bottom){
-            Button(action: {
-                // TODO экран настроек
-            },
-            label: {
-                Text("...")
-                    .bold()
-                    .font(.system(size: 50))
-            })
-            
             
             Spacer()
             

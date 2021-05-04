@@ -26,10 +26,30 @@ struct SingleHabitView: View {
             
             HStack{
                 if !isEdited{
-                    Text(habit.title ?? "")
-                        .font(.system(size: 20))
-                    
-                    Text(" \(habit.points)")
+                    Menu{
+                        
+                        Button(action: {
+                            habitManager.editData(habit: habit)
+                            isEdited.toggle()
+                            
+                        }, label: {
+                            Text("Edit")
+                        })
+                        
+                        Button(action: {
+                            habitManager.delete(context: context, habit: habit)
+                        }, label: {
+                            Text("Delete")
+                        })
+                    }
+                    label: {
+                        Text(habit.title ?? "")
+                            .font(.system(size: 20))
+                        
+                        Text(" \(habit.points)")
+                    }
+                    .foregroundColor(.black)
+                   
                     
                 }else{
                     TextField(habit.title ?? "", text: $habitManager.title)
@@ -54,21 +74,21 @@ struct SingleHabitView: View {
                 
             }
             .contentShape(RoundedRectangle(cornerRadius: 5))
-            .contextMenu(ContextMenu(menuItems: {
-                Button(action: {
-                    habitManager.editData(habit: habit)
-                    isEdited.toggle()
-                    
-                }, label: {
-                    Text("Edit")
-                })
-                
-                Button(action: {
-                    habitManager.delete(context: context, habit: habit)
-                }, label: {
-                    Text("Delete")
-                })
-            }))
+//            .contextMenu(ContextMenu(menuItems: {
+//                Button(action: {
+//                    habitManager.editData(habit: habit)
+//                    isEdited.toggle()
+//
+//                }, label: {
+//                    Text("Edit")
+//                })
+//
+//                Button(action: {
+//                    habitManager.delete(context: context, habit: habit)
+//                }, label: {
+//                    Text("Delete")
+//                })
+//            }))
             
             Button(action: {
                 habitManager.addPoints(context: context , habit: habit, numberOfPoints: 5)

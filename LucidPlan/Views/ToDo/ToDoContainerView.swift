@@ -28,6 +28,7 @@ struct ToDoContainer: View{
     }
     
     var body: some View{
+       
         NavigationView{
             List{
                 ForEach(todos){todo in
@@ -49,10 +50,12 @@ struct ToDoContainer: View{
             .toolbar(content: {
                 EditButton()
             })
+           
         }
         .sheet(isPresented: $todoManager.active, content: {
             AddToDo(todo: todoManager)
         })
+        }
         
-    }
+    
 }
