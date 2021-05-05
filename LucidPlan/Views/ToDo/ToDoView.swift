@@ -25,8 +25,6 @@ struct ToDoView: View {
                 SettingsMenuView(settingsShow: $showSettings)
             }
             
-            
-            
             VStack{
                 
                 HStack{

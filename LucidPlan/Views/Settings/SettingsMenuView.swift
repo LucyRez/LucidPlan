@@ -31,13 +31,13 @@ struct SettingsMenuView: View {
                 SettingsTopView()
                 
                 NavigationLink(
-                    destination: Text("Game Statistics View"),
+                    destination: FightView(),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "gamecontroller")
                                 .frame(width: 24, height: 24)
                             
-                            Text("Игровая статистика")
+                            Text("Битва")
                                 .font(.system(size: 15, weight: .semibold))
                             
                             Spacer()
@@ -47,7 +47,7 @@ struct SettingsMenuView: View {
                     })
                 
                 NavigationLink(
-                    destination: Text("Team View"),
+                    destination: EnemyView(),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "person.3")
@@ -64,13 +64,13 @@ struct SettingsMenuView: View {
                 
                 
                 NavigationLink(
-                    destination: Text("Character Edit View"),
+                    destination: InventoryView(),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "person.fill.viewfinder")
                                 .frame(width: 24, height: 24)
                             
-                            Text("Редактирование персонажа")
+                            Text("Инвентарь")
                                 .font(.system(size: 15, weight: .semibold))
                             
                             Spacer()
@@ -81,7 +81,7 @@ struct SettingsMenuView: View {
                
                 
                 NavigationLink(
-                    destination: Text("Shop View"),
+                    destination: ShopView(),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "dollarsign.square")
