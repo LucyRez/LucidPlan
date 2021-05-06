@@ -44,7 +44,10 @@ class CharacterManager: ObservableObject{
                 newCharacter.exp = 1
                 newCharacter.health = 100
                 newCharacter.level = 1
-                newCharacter.image = UIImage(systemName: "sparkle")
+                newCharacter.damage = 5
+                newCharacter.name = "Default"
+                newCharacter.maxEnergy = 100
+                newCharacter.imageName = "sparkle"
                 
                 character = newCharacter
             }
@@ -103,5 +106,9 @@ class CharacterManager: ObservableObject{
     // Function returns current amount of health points
     func getHealth() -> Int64{
         return character!.health
+    }
+    
+    func getImageName()->String{
+        return character!.imageName ?? "sparkles"
     }
 }

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Character" representedClassName="Character" syncable="YES">
+        <attribute name="damage" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="exp" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="health" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="image" optional="YES" attributeType="Transformable"/>
+        <attribute name="imageName" optional="YES" attributeType="String"/>
         <attribute name="level" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="maxEnergy" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Enemy" representedClassName="Enemy" syncable="YES">
+        <attribute name="critPercent" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="damage" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="hp" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imageName" optional="YES" attributeType="String"/>
@@ -39,11 +43,11 @@
         <attribute name="type" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Character" positionX="-63" positionY="45" width="128" height="89"/>
+        <element name="Character" positionX="-63" positionY="45" width="128" height="134"/>
+        <element name="Enemy" positionX="-54" positionY="54" width="128" height="119"/>
         <element name="Habit" positionX="-63" positionY="45" width="128" height="74"/>
+        <element name="ShopItem" positionX="-63" positionY="45" width="128" height="89"/>
         <element name="Task" positionX="-63" positionY="-9" width="128" height="119"/>
         <element name="ToDo" positionX="-63" positionY="36" width="128" height="89"/>
-        <element name="ShopItem" positionX="-63" positionY="45" width="128" height="89"/>
-        <element name="Enemy" positionX="-54" positionY="54" width="128" height="104"/>
     </elements>
 </model>

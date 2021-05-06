@@ -2,7 +2,7 @@
 //  Enemy+CoreDataProperties.swift
 //  LucidPlan
 //
-//  Created by Ludmila Rezunic on 29.04.2021.
+//  Created by Ludmila Rezunic on 06.05.2021.
 //
 //
 
@@ -16,11 +16,12 @@ extension Enemy {
         return NSFetchRequest<Enemy>(entityName: "Enemy")
     }
 
-    @NSManaged public var hp: Int64
-    @NSManaged public var name: String?
     @NSManaged public var damage: Int64
-    @NSManaged public var type: String?
+    @NSManaged public var hp: Int64
     @NSManaged public var imageName: String?
+    @NSManaged public var name: String?
+    @NSManaged public var type: String?
+    @NSManaged public var critPercent: Int64
 
 }
 

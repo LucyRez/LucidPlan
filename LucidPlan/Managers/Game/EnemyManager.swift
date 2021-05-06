@@ -27,6 +27,7 @@ class EnemyManager: ObservableObject{
                 // Default values for character
                 newEnemy.hp = 100
                 newEnemy.damage = 10
+                newEnemy.critPercent = 2
                 newEnemy.name = enemyNames[randNumber].key
                 newEnemy.type = enemyNames[randNumber].value
                 newEnemy.imageName = ""

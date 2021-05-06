@@ -22,95 +22,92 @@ struct DeadlineView: View {
     }
     
     var body: some View {
-        NavigationView{
-            ZStack{
-                Color.purple.ignoresSafeArea()
+        ZStack{
+            Color.purple.ignoresSafeArea()
+            
+            if showSettings{
+                SettingsMenuView(settingsShow: $showSettings)
+            }
+            
+           
+            
+            VStack{
+                HStack{
+                    Button(action: {
+                        withAnimation(.spring()){
+                            showSettings.toggle()
+                        }
+                    },
+                    label: {
+                        Image(systemName: "list.bullet")
+                            .font(.system(size: 20))
+                            .accentColor(.white)
+                        
+                    })
+                    .padding(.leading, 15)
+                    .padding(.top, 15)
+                    Spacer()
+                }
                 
-                if showSettings{
-                    SettingsMenuView(settingsShow: $showSettings)
+                CharacterView(manager: characterManager)
+                    .padding(.top)
+                
+                HStack{
+                    Button(action: {
+                        // TODO: FILTER DEADLINES
+                    },
+                    label: {
+                        Text("Filter")
+                            .font(.system(size: 30))
+                            .foregroundColor(.white)
+                    })
+                    .padding()
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        // TODO: ADD DEADLINES
+                    },
+                    label: {
+                        Text("Add")
+                            .font(.system(size: 30))
+                            .foregroundColor(.white)
+                    })
+                    .padding()
+                    
                 }
                 
                 ZStack{
-                   
-                    Color.purple.opacity(0.8).ignoresSafeArea()
-                    VStack{
-                        HStack{
-                            Button(action: {
-                                withAnimation(.spring()){
-                                    showSettings.toggle()
-                                }
-                            },
-                            label: {
-                                Image(systemName: "list.bullet")
-                                    .font(.system(size: 20))
-                                    .accentColor(.white)
-                                
-                            })
-                            .padding(.leading, 15)
-                            .padding(.top, 15)
-                            Spacer()
-                        }
-                        
-                        CharacterView(manager: characterManager)
-                            .padding(.top)
-                        
-                        HStack{
-                            Button(action: {
-                                // TODO: FILTER DEADLINES
-                            },
-                            label: {
-                                Text("Filter")
-                                    .font(.system(size: 30))
-                                    .foregroundColor(.white)
-                            })
-                            .padding()
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                // TODO: ADD DEADLINES
-                            },
-                            label: {
-                                Text("Add")
-                                    .font(.system(size: 30))
-                                    .foregroundColor(.white)
-                            })
-                            .padding()
-                            
-                        }
-                        
-                        ZStack{
-                            Rectangle()
-                                .cornerRadius(radius: 25.0, corners: [.topLeft, .topRight])
-                                .foregroundColor(.white)
-                                .zIndex(0)
-                            
-                            ScrollView{
-                                VStack{
-                                    ForEach(tasks){task in
-                                        SingleDeadlineView(task: task)
-                                    }
-                                    
-                                }
-                                
-                            }.zIndex(0.5)
-                            
-                        }
-                        
-                    }
+                    Rectangle()
+                        .cornerRadius(radius: 25.0, corners: [.topLeft, .topRight])
+                        .foregroundColor(.white)
+                        .zIndex(0)
                     
-                }
-                .cornerRadius(showSettings ? 20 : 0)
-                .offset(x: showSettings ? 300 : 0, y: showSettings ? 40 : 0)
-                .scaleEffect(showSettings ? 0.8 : 1)
-                .navigationBarHidden(true)
-                .onTapGesture {
-                    withAnimation(.spring()){
-                        showSettings = false
-                    }
+                    ScrollView{
+                        VStack{
+                            ForEach(tasks){task in
+                                SingleDeadlineView(task: task)
+                            }
+                            
+                        }
+                        
+                    }.zIndex(0.5)
+                    
                 }
                 
             }
+            .background(Color.purple.ignoresSafeArea())
+            .cornerRadius(showSettings ? 20 : 0)
+            .offset(x: showSettings ? 300 : 0, y: showSettings ? 40 : 0)
+            .scaleEffect(showSettings ? 0.8 : 1)
+            .navigationBarHidden(true)
+            .onTapGesture {
+                withAnimation(.spring()){
+                    showSettings.toggle()
+                }
+            }
+            
+            
         }
     }
 }

@@ -7,40 +7,80 @@
 
 import SwiftUI
 
+/**
+ Fight view
+ */
 struct EnemyView: View {
-    @State var characterEnergy = 100
+    @State var characterEnergy : Int64 = 100
+    @State var characterHealth : Int64 = 100
+    @State var enemyHealth : Int64 = 100
+    
+    @State var showEndView : Bool = false
+    @State var playerWon : Bool = false
+    
+    var enemyDamage : Int64
+    var enemyCritPercent : Int64
+    
+    init(){
+        enemyDamage = Int64.random(in: 8...10)
+        enemyCritPercent = Int64.random(in: 2...4)
+    }
+    
+    func checkWinner() -> Bool{
+        if enemyHealth <= 0 && characterHealth > 0{
+            withAnimation(.easeOut){
+                showEndView = true
+                
+            }
+            return true
+        }else if characterHealth <= 0{
+            withAnimation(.easeOut){
+                showEndView = true
+                
+            }
+            return false
+        }
+        return false
+    }
     
     var body: some View {
         ZStack{
             Color.blue.opacity(0.2).ignoresSafeArea()
+            if showEndView{
+                EndGameView(win: playerWon)
+                    .zIndex(1.0)
+            }
+            
             VStack{
+                
+                // Here is enemy view
                 HStack(alignment:.top){
-                    Button(action: {
-                        // TODO: PAUSE
-                    },
-                    label: {
-                        Image(systemName: "pause.circle")
-                            .accentColor(Color(red: 120/255, green: 127/255, blue: 246/255))
-                            .font(.system(size: 40))
-                    })
-                    .padding(.horizontal)
-                    
                     Spacer()
-                    EnemyStats()
+                    EnemyStats(health: $enemyHealth, maxHealth:enemyHealth,imageName: "blitz")
                         .padding()
-                    
                 }
                 
-                CharacterStats()
+                CharacterStats(health: $characterHealth, maxHealth: characterHealth, energy: $characterEnergy,
+                               maxEnergy: characterEnergy)
                     .padding()
+                
                 Spacer()
                 
-                
+                // Here is game menu for choosing action
                 ZStack{
                     HStack{
                         Button(action: {
-                            characterEnergy-=10
-                            // TODO: ENEMY TAKES DAMAGE
+                            characterEnergy-=2
+                            enemyHealth-=5
+                            if enemyHealth > 0{
+                                let rand = Int.random(in: 0...100)
+                                if rand <= enemyCritPercent {
+                                    characterHealth -= enemyDamage*2
+                                }else{
+                                    characterHealth -= enemyDamage
+                                }
+                            }
+                            playerWon = checkWinner()
                         },
                         label: {
                             Image(systemName: "flame")
@@ -50,8 +90,17 @@ struct EnemyView: View {
                         .padding(25)
                         
                         Button(action: {
-                            characterEnergy -= 25
-                            // TODO: ENEMY TAKES EXTRA DAMAGE
+                            characterEnergy -= 5
+                            enemyHealth-=10
+                            if enemyHealth > 0{
+                                let rand = Int.random(in: 0...100)
+                                if rand <= enemyCritPercent {
+                                    characterHealth -= enemyDamage*2
+                                }else{
+                                    characterHealth -= enemyDamage
+                                }
+                            }
+                            playerWon = checkWinner()
                         },
                         label: {
                             Image(systemName: "sparkles")
@@ -77,46 +126,56 @@ struct EnemyView: View {
                         .zIndex(0)
                     
                 }
+                .padding()
+                
             }
+            .opacity(showEndView ? 0.1 : 1)
+            .background(showEndView ? Color.black : Color.clear)
+            .ignoresSafeArea()
         }
     }
 }
 
 
 struct EnemyStats:View{
-    var health : Int64 = 65
-    var maxHealth : Int64 = 100
+    let enemyNames : KeyValuePairs = ["Dreamon" : "Earth", "Blitz" : "Fire", "Frosty" : "Water", "Corvus" : "Air"]
     
+    @Binding var health : Int64
+    @State var maxHealth : Int64
+    @State var imageName : String
+    
+    // Function is used to calculate height of the health bar
     func calculateHeight(for value: Int64, maxValue: Int64, height: CGFloat) -> CGFloat{
         return (CGFloat(value)/CGFloat(maxValue)) * height
     }
     
+    
     var body: some View{
         
         VStack{
+            // Enemy's health bar
             ZStack(alignment:.trailing){
                 RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                     .fill(Color.white)
                     .frame(width:  UIScreen.main.bounds.width/2, height: 18, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .padding(.top, 15)
-                    .padding(.bottom,10)
                 
                 Rectangle()
                     .fill(Color.red)
-                    .frame(width:  calculateHeight(for: health, maxValue: maxHealth, height: UIScreen.main.bounds.width/2), height: 18, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width:  calculateHeight(for: health, maxValue: maxHealth, height: UIScreen.main.bounds.width/2), height: 18)
                     .cornerRadius(radius: 25, corners: [.bottomRight, .topRight])
-                    .padding(.top, 15)
-                    .padding(.bottom,10)
             }
+            .padding(.top, 15)
+            .padding(.bottom,10)
             
+            // Enemy's picture representation
             ZStack{
                 RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                     .fill(Color.white)
                     .frame(width: UIScreen.main.bounds.width/2 , height: UIScreen.main.bounds.width/2)
                 
-                Image(systemName: "sparkle")
+                Image(imageName)
                     .resizable()
-                    .foregroundColor(.yellow)
+                    .scaledToFit()
                     .frame(width: UIScreen.main.bounds.width/2-5, height: UIScreen.main.bounds.width/2-5)
                 
             }
@@ -126,12 +185,15 @@ struct EnemyStats:View{
 
 
 struct CharacterStats: View{
-    var health : Int64 = 65
-    var maxHealth : Int64 = 100
-    
+    @Binding var health : Int64
+    @State var maxHealth : Int64
+    @Binding var energy : Int64
+    @State var maxEnergy : Int64
+  
     func calculateHeight(for value: Int64, maxValue: Int64, height: CGFloat) -> CGFloat{
         return (CGFloat(value)/CGFloat(maxValue)) * height
     }
+    
     var body: some View{
         VStack{
             HStack(alignment: .bottom){
@@ -146,36 +208,38 @@ struct CharacterStats: View{
                         .frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.width/2)
                     
                 }
-           
+                
                 HStack(alignment:.bottom){
                     ZStack(alignment: .bottom){
                         RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                             .fill(Color.blue)
-                            .frame(width:20, height: calculateHeight(for: 75, maxValue: 100, height: UIScreen.main.bounds.width/2))
+                            .frame(width:20, height: calculateHeight(for: energy, maxValue: maxEnergy, height: UIScreen.main.bounds.width/2))
                             .zIndex(1)
                         
                         
                         RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                             .fill(Color.white)
-                            .frame(width:20, height: calculateHeight(for: maxHealth, maxValue: maxHealth, height: UIScreen.main.bounds.width/2))
+                            .frame(width:20, height: UIScreen.main.bounds.width/2)
                             .zIndex(0)
                     }
                     
                     ZStack(alignment: .bottom){
                         RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                             .fill(Color.white)
-                            .frame(width:20, height: calculateHeight(for: maxHealth, maxValue: maxHealth, height: UIScreen.main.bounds.width/2))
+                            .frame(width:20, height: UIScreen.main.bounds.width/2)
                             .zIndex(0)
                         
                         RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                             .fill(Color.green)
-                            .frame(width:20, height: calculateHeight(for: 85, maxValue: maxHealth, height: UIScreen.main.bounds.width/2))
+                            .frame(width:20, height: calculateHeight(for: health, maxValue: maxHealth, height: UIScreen.main.bounds.width/2))
                             .zIndex(1)
                     }                   
                 }
                 .padding(.horizontal)
                 
                 Spacer()
+                
+                
             }
         }
     }

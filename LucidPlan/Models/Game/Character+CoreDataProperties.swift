@@ -2,12 +2,11 @@
 //  Character+CoreDataProperties.swift
 //  LucidPlan
 //
-//  Created by Ludmila Rezunic on 23.04.2021.
+//  Created by Ludmila Rezunic on 06.05.2021.
 //
 //
 
 import Foundation
-import SwiftUI
 import CoreData
 
 
@@ -17,10 +16,13 @@ extension Character {
         return NSFetchRequest<Character>(entityName: "Character")
     }
 
-    @NSManaged public var health: Int64
     @NSManaged public var exp: Int64
+    @NSManaged public var health: Int64
+    @NSManaged public var imageName: String?
     @NSManaged public var level: Int64
-    @NSManaged public var image: UIImage?
+    @NSManaged public var maxEnergy: Int64
+    @NSManaged public var damage: Int64
+    @NSManaged public var name: String?
 
 }
 

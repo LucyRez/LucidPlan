@@ -2,7 +2,7 @@
 //  Character+CoreDataClass.swift
 //  LucidPlan
 //
-//  Created by Ludmila Rezunic on 23.04.2021.
+//  Created by Ludmila Rezunic on 06.05.2021.
 //
 //
 
