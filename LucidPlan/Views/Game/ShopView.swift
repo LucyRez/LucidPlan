@@ -8,47 +8,55 @@
 import SwiftUI
 
 struct ShopView: View {
-    let items : [Item] = [Item(title: "Восстановитель здоровья", description: "Красная жидкость похожая на кровь?", price: 100, imageName: "", type: "heal"), Item(title: "Повреждающее зелье", description: "Капля этого зелья способна ранить кого угодно", price: 100, imageName: "", type: "harm"), Item(title: "Восстановитель энергии", description: "Эх, что-то спать захотелось...", price: 100, imageName: "", type: "energy")]
+    let items : [Item] = [Item(title: "Восстановитель здоровья", description: "Красная жидкость похожая на кровь?", price: 100, imageName: "sparkle", type: "potion"), Item(title: "Повреждающее зелье", description: "Капля этого зелья способна ранить кого угодно", price: 100, imageName: "sparkle", type: "potion"), Item(title: "Восстановитель энергии", description: "Эх, что-то спать захотелось...", price: 100, imageName: "sparkle", type: "potion")]
     
-    var image : UIImage = UIImage(systemName: "sparkle") ?? UIImage()
+    @Environment(\.managedObjectContext) var context
+    @ObservedObject var shopManager = ShopManager()
     @State var chosen : Item?
-    
-    init(){
-        chosen = items[0]
-    }
     
     var body: some View {
         VStack{
             HStack(alignment:.top){
-            ZStack{
-                RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(.white)
-                    .frame(width: 150, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .padding()
-                
-                Image(systemName: "sparkle")
-                    .resizable()
-                    .frame(width: 150, height: 150)
-                    .foregroundColor(.yellow)
-            }
+                ZStack{
+                    RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(.white)
+                        .frame(width: 150, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .padding()
+                    
+                    Image(systemName: chosen?.imageName ?? items[0].imageName)
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                        .foregroundColor(.yellow)
+                }
                 Spacer()
                 
-                Text(chosen?.description ?? items[0].description)
-                    .font(.system(size: 18))
+                VStack{
+                    Text(chosen?.description ?? "Choose an item")
+                        .font(.system(size: 18))
+                    Spacer()
+                    Button(action:{
+                        shopManager.writeData(context: context, boughtItem: chosen!)
+                    },
+                    label: {
+                        Text("Buy")
+                    })
+                    .disabled(chosen == nil)
+                }
+                .frame(height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             }
             .padding()
             
             ScrollView{
-            ForEach(items, id: \.self){item in
-                SingleShopItem(price: item.price, title: item.title, type: item.type, description: item.description, imageName: item.imageName)
-                    .padding()
-                    .onTapGesture {
-                        chosen = item
-                    }
-            }
+                ForEach(items, id: \.self){item in
+                    SingleShopItem(price: item.price, title: item.title, type: item.type, description: item.description, imageName: item.imageName)
+                        .padding()
+                        .onTapGesture {
+                            chosen = item
+                        }
+                }
                 
             }
-           
+            
         }
     }
 }

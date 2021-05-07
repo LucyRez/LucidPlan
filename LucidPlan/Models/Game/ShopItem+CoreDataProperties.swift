@@ -18,7 +18,7 @@ extension ShopItem {
 
     @NSManaged public var title: String?
     @NSManaged public var cost: Int64
-    @NSManaged public var type: String?
+    @NSManaged public var type: String? // Potion, character
     @NSManaged public var imageName: String?
 
 }

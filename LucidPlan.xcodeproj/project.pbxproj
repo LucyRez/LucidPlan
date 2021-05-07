@@ -25,6 +25,8 @@
 		DB2E5D93260BDCBB00280AB0 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */; };
 		DB2E5D94260BDCBB00280AB0 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */; };
 		DB334D882644959E0048AC44 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB334D872644959E0048AC44 /* Item.swift */; };
+		DB334D8E264533500048AC44 /* InventoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB334D8D264533500048AC44 /* InventoryManager.swift */; };
+		DB334D92264533E50048AC44 /* ShopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB334D91264533E50048AC44 /* ShopManager.swift */; };
 		DB415C2926317747006DE469 /* HabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB415C2826317747006DE469 /* HabitsView.swift */; };
 		DB415C2C26317BE8006DE469 /* HabitsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB415C2B26317BE8006DE469 /* HabitsContainer.swift */; };
 		DB415C2F26317DA7006DE469 /* SingleHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB415C2E26317DA7006DE469 /* SingleHabitView.swift */; };
@@ -86,6 +88,8 @@
 		DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Task+CoreDataClass.swift"; path = "LucidPlan/Models/Task/Task+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Task+CoreDataProperties.swift"; path = "LucidPlan/Models/Task/Task+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DB334D872644959E0048AC44 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		DB334D8D264533500048AC44 /* InventoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryManager.swift; sourceTree = "<group>"; };
+		DB334D91264533E50048AC44 /* ShopManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopManager.swift; sourceTree = "<group>"; };
 		DB415C2826317747006DE469 /* HabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsView.swift; sourceTree = "<group>"; };
 		DB415C2B26317BE8006DE469 /* HabitsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsContainer.swift; sourceTree = "<group>"; };
 		DB415C2E26317DA7006DE469 /* SingleHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleHabitView.swift; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 				DB4DE9EE2633120F005F47D0 /* GameManager.swift */,
 				DB4DE9F126331221005F47D0 /* CharacterManager.swift */,
 				DB7DB19626428779001F540F /* EnemyManager.swift */,
+				DB334D8D264533500048AC44 /* InventoryManager.swift */,
+				DB334D91264533E50048AC44 /* ShopManager.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -511,12 +517,14 @@
 				DB881C322603E352000556FA /* ToDoView.swift in Sources */,
 				DB415C2C26317BE8006DE469 /* HabitsContainer.swift in Sources */,
 				DBC88BCF2611ED5B00F53820 /* MessageModel.swift in Sources */,
+				DB334D92264533E50048AC44 /* ShopManager.swift in Sources */,
 				DB074B6D2643F0E800141639 /* Character+CoreDataProperties.swift in Sources */,
 				DB2E5D89260BD88700280AB0 /* TaskViewModel.swift in Sources */,
 				DB7DB19326415552001F540F /* CalendarEventManager.swift in Sources */,
 				DB881C352603EF01000556FA /* DeadlineView.swift in Sources */,
 				DB4DEA0B263A0373005F47D0 /* ShopItem+CoreDataProperties.swift in Sources */,
 				DB4DEA002639EE29005F47D0 /* ShopView.swift in Sources */,
+				DB334D8E264533500048AC44 /* InventoryManager.swift in Sources */,
 				DBD07B7C2628AA8B00E2B2B8 /* TaskManager.swift in Sources */,
 				DB074B6C2643F0E800141639 /* Character+CoreDataClass.swift in Sources */,
 				DB0B54EC262CC57F0068C66C /* ToDoContainerView.swift in Sources */,
