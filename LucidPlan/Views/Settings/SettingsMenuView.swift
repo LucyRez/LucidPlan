@@ -50,7 +50,7 @@ struct SettingsMenuView: View {
                     })
                 
                 NavigationLink(
-                    destination: EnemyView(userManager: userManager),
+                    destination: TeamView( userManager: userManager),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "person.3")
@@ -116,21 +116,6 @@ struct SettingsMenuView: View {
                         .padding()
                     })
                 
-                NavigationLink(
-                    destination: CalendarImportView(),
-                    label: {
-                        HStack(spacing: 16){
-                            Image(systemName: "icloud.and.arrow.down")
-                                .frame(width: 24, height: 24)
-                            
-                            Text("Импорт календарей")
-                                .font(.system(size: 15, weight: .semibold))
-                            
-                            Spacer()
-                        }
-                        .foregroundColor(.white)
-                        .padding()
-                    })
                 
                 Spacer()
             }

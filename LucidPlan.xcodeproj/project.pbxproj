@@ -21,7 +21,6 @@
 		DB0B54F6262E1D2E0068C66C /* Habit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B54F4262E1D2E0068C66C /* Habit+CoreDataProperties.swift */; };
 		DB0B54FB262E1D580068C66C /* HabitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B54FA262E1D580068C66C /* HabitManager.swift */; };
 		DB2E5D89260BD88700280AB0 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D88260BD88700280AB0 /* TaskViewModel.swift */; };
-		DB2E5D8F260BDA4F00280AB0 /* LucidPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D8D260BDA4F00280AB0 /* LucidPlan.xcdatamodeld */; };
 		DB2E5D93260BDCBB00280AB0 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */; };
 		DB2E5D94260BDCBB00280AB0 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */; };
 		DB334D882644959E0048AC44 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB334D872644959E0048AC44 /* Item.swift */; };
@@ -47,6 +46,10 @@
 		DB7DB18F26408052001F540F /* CalendarImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7DB18E26408052001F540F /* CalendarImportView.swift */; };
 		DB7DB19326415552001F540F /* CalendarEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7DB19226415552001F540F /* CalendarEventManager.swift */; };
 		DB7DB1972642877A001F540F /* EnemyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7DB19626428779001F540F /* EnemyManager.swift */; };
+		DB7FCDF0264734EA00178EAA /* LucidPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCDEE264734EA00178EAA /* LucidPlan.xcdatamodeld */; };
+		DB7FCDF62647373000178EAA /* LucidPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCDF42647373000178EAA /* LucidPlan.xcdatamodeld */; };
+		DB7FCDF92647384600178EAA /* GameNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCDF82647384600178EAA /* GameNetworkManager.swift */; };
+		DB7FCDFD2647385C00178EAA /* TeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCDFC2647385C00178EAA /* TeamView.swift */; };
 		DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C102602B2F9000556FA /* LucidPlanApp.swift */; };
 		DB881C132602B2F9000556FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C122602B2F9000556FA /* ContentView.swift */; };
 		DB881C152602B2FE000556FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB881C142602B2FE000556FA /* Assets.xcassets */; };
@@ -64,6 +67,7 @@
 		DBC88BC52611EB7900F53820 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BC42611EB7900F53820 /* SocketIOManager.swift */; };
 		DBC88BCC2611ED0B00F53820 /* SingleMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */; };
 		DBC88BCF2611ED5B00F53820 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BCE2611ED5B00F53820 /* MessageModel.swift */; };
+		DBCF4644264732D1008F0C6D /* LucidPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBCF4642264732D1008F0C6D /* LucidPlan.xcdatamodeld */; };
 		DBD07B7226289FB100E2B2B8 /* AddToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD07B7126289FB100E2B2B8 /* AddToDo.swift */; };
 		DBD07B752628A7C000E2B2B8 /* ToDoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD07B742628A7C000E2B2B8 /* ToDoManager.swift */; };
 		DBD07B7C2628AA8B00E2B2B8 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD07B7B2628AA8B00E2B2B8 /* TaskManager.swift */; };
@@ -87,7 +91,6 @@
 		DB0B54F4262E1D2E0068C66C /* Habit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Habit+CoreDataProperties.swift"; path = "LucidPlan/Models/Habit/Habit+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DB0B54FA262E1D580068C66C /* HabitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitManager.swift; sourceTree = "<group>"; };
 		DB2E5D88260BD88700280AB0 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
-		DB2E5D8E260BDA4F00280AB0 /* LucidPlan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LucidPlan.xcdatamodel; sourceTree = "<group>"; };
 		DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Task+CoreDataClass.swift"; path = "LucidPlan/Models/Task/Task+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Task+CoreDataProperties.swift"; path = "LucidPlan/Models/Task/Task+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DB334D872644959E0048AC44 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -113,6 +116,10 @@
 		DB7DB18E26408052001F540F /* CalendarImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarImportView.swift; sourceTree = "<group>"; };
 		DB7DB19226415552001F540F /* CalendarEventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventManager.swift; sourceTree = "<group>"; };
 		DB7DB19626428779001F540F /* EnemyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyManager.swift; sourceTree = "<group>"; };
+		DB7FCDEF264734EA00178EAA /* LucidPlan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LucidPlan.xcdatamodel; sourceTree = "<group>"; };
+		DB7FCDF52647373000178EAA /* LucidPlan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LucidPlan.xcdatamodel; sourceTree = "<group>"; };
+		DB7FCDF82647384600178EAA /* GameNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameNetworkManager.swift; path = LucidPlan/Managers/Game/GameNetworkManager.swift; sourceTree = SOURCE_ROOT; };
+		DB7FCDFC2647385C00178EAA /* TeamView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamView.swift; sourceTree = "<group>"; };
 		DB881C0D2602B2F9000556FA /* LucidPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LucidPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB881C102602B2F9000556FA /* LucidPlanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LucidPlanApp.swift; sourceTree = "<group>"; };
 		DB881C122602B2F9000556FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -132,6 +139,7 @@
 		DBC88BC42611EB7900F53820 /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMessageView.swift; sourceTree = "<group>"; };
 		DBC88BCE2611ED5B00F53820 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		DBCF4643264732D1008F0C6D /* LucidPlan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LucidPlan.xcdatamodel; sourceTree = "<group>"; };
 		DBD07B7126289FB100E2B2B8 /* AddToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDo.swift; sourceTree = "<group>"; };
 		DBD07B742628A7C000E2B2B8 /* ToDoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManager.swift; sourceTree = "<group>"; };
 		DBD07B7B2628AA8B00E2B2B8 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
@@ -255,6 +263,8 @@
 			children = (
 				DB334D942645CE2F0048AC44 /* User+CoreDataClass.swift */,
 				DB334D952645CE2F0048AC44 /* User+CoreDataProperties.swift */,
+				DBCF4642264732D1008F0C6D /* LucidPlan.xcdatamodeld */,
+				DB7FCDEE264734EA00178EAA /* LucidPlan.xcdatamodeld */,
 				DB074B662643F0E800141639 /* Enemy+CoreDataClass.swift */,
 				DB074B672643F0E800141639 /* Enemy+CoreDataProperties.swift */,
 				DB074B682643F0E800141639 /* Character+CoreDataClass.swift */,
@@ -269,6 +279,7 @@
 		DB4DE9ED263311E1005F47D0 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				DB7FCDF82647384600178EAA /* GameNetworkManager.swift */,
 				DB4DE9EE2633120F005F47D0 /* GameManager.swift */,
 				DB4DE9F126331221005F47D0 /* CharacterManager.swift */,
 				DB7DB19626428779001F540F /* EnemyManager.swift */,
@@ -282,6 +293,7 @@
 		DB4DE9F4263441DB005F47D0 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				DB7FCDFB2647385C00178EAA /* Team */,
 				DB074B702644734300141639 /* Fight */,
 				DB4DE9F5263441F3005F47D0 /* CharacterView.swift */,
 				DB4DE9FF2639EE29005F47D0 /* ShopView.swift */,
@@ -307,6 +319,15 @@
 			path = "Event Synchronizers";
 			sourceTree = "<group>";
 		};
+		DB7FCDFB2647385C00178EAA /* Team */ = {
+			isa = PBXGroup;
+			children = (
+				DB7FCDFC2647385C00178EAA /* TeamView.swift */,
+			);
+			name = Team;
+			path = LucidPlan/Views/Game/Team;
+			sourceTree = SOURCE_ROOT;
+		};
 		DB881C042602B2F8000556FA = {
 			isa = PBXGroup;
 			children = (
@@ -331,11 +352,11 @@
 				DBC88BBC2611D5DD00F53820 /* Models */,
 				DB2E5D87260BD82500280AB0 /* Managers */,
 				DB881C252602B361000556FA /* Views */,
-				DB2E5D8D260BDA4F00280AB0 /* LucidPlan.xcdatamodeld */,
 				DB881C122602B2F9000556FA /* ContentView.swift */,
 				DB881C142602B2FE000556FA /* Assets.xcassets */,
 				DB881C192602B2FE000556FA /* Persistence.swift */,
 				DB881C1E2602B2FE000556FA /* Info.plist */,
+				DB7FCDF42647373000178EAA /* LucidPlan.xcdatamodeld */,
 				DB881C162602B2FE000556FA /* Preview Content */,
 			);
 			path = LucidPlan;
@@ -516,20 +537,23 @@
 				DBC88BCC2611ED0B00F53820 /* SingleMessageView.swift in Sources */,
 				DBC88BB62610ED4000F53820 /* AddTaskView.swift in Sources */,
 				DB415C2926317747006DE469 /* HabitsView.swift in Sources */,
-				DB2E5D8F260BDA4F00280AB0 /* LucidPlan.xcdatamodeld in Sources */,
 				DB7DB1972642877A001F540F /* EnemyManager.swift in Sources */,
 				DB334D882644959E0048AC44 /* Item.swift in Sources */,
 				DB0B54F5262E1D2E0068C66C /* Habit+CoreDataClass.swift in Sources */,
 				DB0B54E5262CBFBA0068C66C /* SingleTask.swift in Sources */,
 				DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */,
+				DB7FCDF92647384600178EAA /* GameNetworkManager.swift in Sources */,
 				DB7DB18B263DF8E2001F540F /* SettingsMenuView.swift in Sources */,
 				DBC88BBA2611B14500F53820 /* LoginView.swift in Sources */,
+				DBCF4644264732D1008F0C6D /* LucidPlan.xcdatamodeld in Sources */,
+				DB7FCDF62647373000178EAA /* LucidPlan.xcdatamodeld in Sources */,
 				DB881C322603E352000556FA /* ToDoView.swift in Sources */,
 				DB415C2C26317BE8006DE469 /* HabitsContainer.swift in Sources */,
 				DBC88BCF2611ED5B00F53820 /* MessageModel.swift in Sources */,
 				DB334D92264533E50048AC44 /* ShopManager.swift in Sources */,
 				DB074B6D2643F0E800141639 /* Character+CoreDataProperties.swift in Sources */,
 				DB2E5D89260BD88700280AB0 /* TaskViewModel.swift in Sources */,
+				DB7FCDF0264734EA00178EAA /* LucidPlan.xcdatamodeld in Sources */,
 				DB7DB19326415552001F540F /* CalendarEventManager.swift in Sources */,
 				DB334D972645CE2F0048AC44 /* User+CoreDataProperties.swift in Sources */,
 				DB881C352603EF01000556FA /* DeadlineView.swift in Sources */,
@@ -542,6 +566,7 @@
 				DB0B54EC262CC57F0068C66C /* ToDoContainerView.swift in Sources */,
 				DB2E5D94260BDCBB00280AB0 /* Task+CoreDataProperties.swift in Sources */,
 				DB0B54F6262E1D2E0068C66C /* Habit+CoreDataProperties.swift in Sources */,
+				DB7FCDFD2647385C00178EAA /* TeamView.swift in Sources */,
 				DB881C272602B3B4000556FA /* TasksView.swift in Sources */,
 				DBD07B752628A7C000E2B2B8 /* ToDoManager.swift in Sources */,
 				DB0B54E8262CC0410068C66C /* MainTasksView.swift in Sources */,
@@ -752,13 +777,35 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		DB2E5D8D260BDA4F00280AB0 /* LucidPlan.xcdatamodeld */ = {
+		DB7FCDEE264734EA00178EAA /* LucidPlan.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				DB2E5D8E260BDA4F00280AB0 /* LucidPlan.xcdatamodel */,
+				DB7FCDEF264734EA00178EAA /* LucidPlan.xcdatamodel */,
 			);
-			currentVersion = DB2E5D8E260BDA4F00280AB0 /* LucidPlan.xcdatamodel */;
+			currentVersion = DB7FCDEF264734EA00178EAA /* LucidPlan.xcdatamodel */;
+			name = LucidPlan.xcdatamodeld;
+			path = ../../LucidPlan.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		DB7FCDF42647373000178EAA /* LucidPlan.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DB7FCDF52647373000178EAA /* LucidPlan.xcdatamodel */,
+			);
+			currentVersion = DB7FCDF52647373000178EAA /* LucidPlan.xcdatamodel */;
 			path = LucidPlan.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		DBCF4642264732D1008F0C6D /* LucidPlan.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DBCF4643264732D1008F0C6D /* LucidPlan.xcdatamodel */,
+			);
+			currentVersion = DBCF4643264732D1008F0C6D /* LucidPlan.xcdatamodel */;
+			name = LucidPlan.xcdatamodeld;
+			path = ../../LucidPlan.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
