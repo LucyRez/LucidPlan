@@ -10,11 +10,13 @@ import SwiftUI
 struct CharacterView: View {
     
     @ObservedObject var characterManager: CharacterManager
+    @ObservedObject var userManager : UserManager
     var maxHealth : Int64 = 100
     var maxExp : Int64 = 1000
     
-    init(manager: CharacterManager){
-        characterManager = manager
+    init(characterManager: CharacterManager, userManager: UserManager){
+        self.characterManager = characterManager
+        self.userManager = userManager
     }
     
     func calculateHeight(for value: Int64, maxValue: Int64, height: CGFloat) -> CGFloat{
@@ -35,13 +37,13 @@ struct CharacterView: View {
                     ZStack(alignment: .bottom){
                         RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                             .fill(Color.blue)
-                            .frame(height: calculateHeight(for: characterManager.getExp(), maxValue: maxExp, height: geometry.frame(in: .global).height), alignment: .bottom)
+                            .frame(height: calculateHeight(for: userManager.getExp(), maxValue: maxExp, height: geometry.frame(in: .global).height), alignment: .bottom)
                             .zIndex(1)
                         
                       
                             RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                                 .fill(Color.white)
-                                .frame(height: calculateHeight(for: maxHealth, maxValue: maxHealth, height: geometry.frame(in: .global).height), alignment: .bottom)
+                                .frame(height: calculateHeight(for: maxExp, maxValue: maxExp, height: geometry.frame(in: .global).height), alignment: .bottom)
                                 .zIndex(0)
                     }
                 
@@ -66,9 +68,3 @@ struct CharacterView: View {
     }
 }
 
-
-struct CharacterView_Previews: PreviewProvider {
-    static var previews: some View {
-        CharacterView(manager: CharacterManager())
-    }
-}

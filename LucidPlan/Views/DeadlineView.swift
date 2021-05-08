@@ -10,14 +10,16 @@ import SwiftUI
 struct DeadlineView: View {
     @State var showSettings : Bool = false
     @ObservedObject var characterManager : CharacterManager
+    @ObservedObject var userManager : UserManager
     var fetchRequest : FetchRequest<Task>
     
     var tasks : FetchedResults<Task>{
         fetchRequest.wrappedValue
     }
     
-    init(characterManager: CharacterManager){
+    init(characterManager: CharacterManager, userManager: UserManager){
         self.characterManager = characterManager
+        self.userManager = userManager
         fetchRequest = FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "endDate", ascending: true)])
     }
     
@@ -26,7 +28,7 @@ struct DeadlineView: View {
             Color.purple.ignoresSafeArea()
             
             if showSettings{
-                SettingsMenuView(settingsShow: $showSettings)
+                SettingsMenuView(settingsShow: $showSettings, characterManager: characterManager, userManager: userManager)
             }
             
            
@@ -49,7 +51,7 @@ struct DeadlineView: View {
                     Spacer()
                 }
                 
-                CharacterView(manager: characterManager)
+                CharacterView(characterManager: characterManager, userManager: userManager)
                     .padding(.top)
                 
                 HStack{
@@ -178,8 +180,3 @@ struct SingleDeadlineView: View{
     }
 }
 
-struct DeadlineView_Previews: PreviewProvider {
-    static var previews: some View {
-        DeadlineView(characterManager: CharacterManager())
-    }
-}

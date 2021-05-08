@@ -11,7 +11,8 @@ struct ShopView: View {
     let items : [Item] = [Item(title: "Восстановитель здоровья", description: "Красная жидкость похожая на кровь?", price: 100, imageName: "sparkle", type: "potion"), Item(title: "Повреждающее зелье", description: "Капля этого зелья способна ранить кого угодно", price: 100, imageName: "sparkle", type: "potion"), Item(title: "Восстановитель энергии", description: "Эх, что-то спать захотелось...", price: 100, imageName: "sparkle", type: "potion")]
     
     @Environment(\.managedObjectContext) var context
-    @ObservedObject var shopManager = ShopManager()
+    @StateObject var shopManager = ShopManager()
+    @ObservedObject var userManager : UserManager
     @State var chosen : Item?
     
     var body: some View {
@@ -35,12 +36,14 @@ struct ShopView: View {
                         .font(.system(size: 18))
                     Spacer()
                     Button(action:{
-                        shopManager.writeData(context: context, boughtItem: chosen!)
+                        if chosen!.price <= userManager.getCoins(){
+                            userManager.addCoins(context: context, amount: Int64(0 - chosen!.price))
+                            shopManager.writeData(context: context, boughtItem: chosen!)}
                     },
                     label: {
                         Text("Buy")
                     })
-                    .disabled(chosen == nil)
+                    .disabled(chosen == nil || chosen!.price > userManager.getCoins())
                 }
                 .frame(height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             }
@@ -91,8 +94,3 @@ struct SingleShopItem: View{
     
 }
 
-struct ShopView_Previews: PreviewProvider {
-    static var previews: some View {
-        ShopView()
-    }
-}

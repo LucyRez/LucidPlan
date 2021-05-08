@@ -22,7 +22,7 @@ struct ToDoView: View {
             Color.white.ignoresSafeArea()
             
             if showSettings{
-                SettingsMenuView(settingsShow: $showSettings)
+                SettingsMenuView(settingsShow: $showSettings, characterManager: gameManager.characterManager, userManager: gameManager.userManager)
             }
             
             VStack{

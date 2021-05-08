@@ -18,10 +18,14 @@ struct EnemyView: View {
     @State var showEndView : Bool = false
     @State var playerWon : Bool = false
     
+    @Environment(\.managedObjectContext) var context
+    @ObservedObject var userManager : UserManager
+    
     var enemyDamage : Int64
     var enemyCritPercent : Int64
     
-    init(){
+    init(userManager: UserManager){
+        self.userManager = userManager
         enemyDamage = Int64.random(in: 8...10)
         enemyCritPercent = Int64.random(in: 2...4)
     }
@@ -30,8 +34,9 @@ struct EnemyView: View {
         if enemyHealth <= 0 && characterHealth > 0{
             withAnimation(.easeOut){
                 showEndView = true
-                
             }
+            userManager.addCoins(context: context, amount: 100)
+            userManager.addToExp(expPoints: 500, context: context)
             return true
         }else if characterHealth <= 0{
             withAnimation(.easeOut){
@@ -245,8 +250,4 @@ struct CharacterStats: View{
     }
 }
 
-struct EnemyView_Previews: PreviewProvider {
-    static var previews: some View {
-        EnemyView()
-    }
-}
+

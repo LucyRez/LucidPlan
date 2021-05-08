@@ -16,10 +16,8 @@ extension Character {
         return NSFetchRequest<Character>(entityName: "Character")
     }
 
-    @NSManaged public var exp: Int64
     @NSManaged public var health: Int64
     @NSManaged public var imageName: String?
-    @NSManaged public var level: Int64
     @NSManaged public var maxEnergy: Int64
     @NSManaged public var damage: Int64
     @NSManaged public var name: String?

@@ -41,9 +41,7 @@ class CharacterManager: ObservableObject{
                 let newCharacter = Character(context: context)
                 
                 // Default values for character
-                newCharacter.exp = 1
                 newCharacter.health = 100
-                newCharacter.level = 1
                 newCharacter.damage = 5
                 newCharacter.name = "Default"
                 newCharacter.maxEnergy = 100
@@ -78,30 +76,6 @@ class CharacterManager: ObservableObject{
         try! context.save()
     }
     
-    /**
-     Function for adding/taking  away exp  points.
-     
-     - parameter expPoints: Number of exp points being added/taken.
-
-     # Notes: #
-     1. If the points are being added the number must be positive, otherwise negative.
-     
-     */
-    func addToExp(expPoints: Int64, context: NSManagedObjectContext){
-        if character!.exp + expPoints > 1000 {
-            character!.level+=1
-            character!.exp = (character!.exp + expPoints) - 1000
-        }else{
-            character!.exp += expPoints
-            
-        }
-        try! context.save()
-    }
-    
-    // Function returns current amount of exp points
-    func getExp() -> Int64{
-        return character!.exp
-    }
     
     // Function returns current amount of health points
     func getHealth() -> Int64{

@@ -92,7 +92,7 @@ struct SingleHabitView: View {
             
             Button(action: {
                 habitManager.addPoints(context: context , habit: habit, numberOfPoints: 5)
-                gameManager.characterManager.addToExp(expPoints: 50, context: context)
+                gameManager.userManager.addToExp(expPoints: 50, context: context)
             }, label: {
                 ZStack{
                     RoundedRectangle(cornerRadius: 8)

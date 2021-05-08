@@ -13,6 +13,8 @@ struct TabBarView: View{
     @Environment(\.managedObjectContext) var context
     @StateObject var socketManager : SocketIOManager = SocketIOManager() // Создаём сокет-менеджер.
     @StateObject var gameManager = GameManager()
+    var nickname : String
+    
     let tabBarImages : [String] = ["calendar","clock", "note.text", "person.2"]
     @State var viewIndex : Int = 0
     var body: some View{
@@ -22,7 +24,7 @@ struct TabBarView: View{
                 case 0:
                     ScheduleView()
                 case 1:
-                    DeadlineView(characterManager: gameManager.characterManager)
+                    DeadlineView(characterManager: gameManager.characterManager, userManager: gameManager.userManager)
                 case 2:
                     ToDoView(gameManager: gameManager)
                 default:
@@ -50,7 +52,7 @@ struct TabBarView: View{
             .padding(.bottom)
         }
         .onAppear(perform: {
-            gameManager.initializeGameManager(context: context)
+            gameManager.initializeGameManager(context: context, nickname: nickname)
         })
     }
 }

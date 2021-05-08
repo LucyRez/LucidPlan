@@ -22,7 +22,7 @@ struct HabitsView: View {
             ZStack{
                 Color.white.ignoresSafeArea()
                 if showSettings{
-                    SettingsMenuView(settingsShow: $showSettings)
+                    SettingsMenuView(settingsShow: $showSettings, characterManager: gameManager.characterManager, userManager: gameManager.userManager)
                 }
                 ZStack{
                     Color.white.ignoresSafeArea()

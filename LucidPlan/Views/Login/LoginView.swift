@@ -6,28 +6,37 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct LoginView: View {
     
     @State var justOpened : Bool = false
     @State var nickname : String = ""
-    @State var saved : String?
+    var saved : String
     
-    func saveNickname(){
-        UserDefaults.standard.set(nickname, forKey: "nickname3")
+    init(context: NSManagedObjectContext){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        
+        do{
+            let fetchRequest = try context.fetch(fetchRequest) as! [User]
+            
+            if fetchRequest.count != 0 {
+                saved = fetchRequest.first!.nickname ?? ""
+                _nickname = State(initialValue: saved)
+            }else{
+                saved = ""
+            }
+        }catch {
+            fatalError("Failed to fetch categories: \(error)")
+        }
     }
-    
-    init() {
-        self.nickname = UserDefaults.standard.object(forKey: "nickname3") as? String ?? ""
-        self.saved = self.nickname
-    }
-    
+  
     var body: some View {
         NavigationView{
             VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 50){
                 // Не переходим в чат, пока не подтверждено имя пользователя.
                 NavigationLink(
-                    destination: TabBarView()
+                    destination: TabBarView(nickname: nickname)
                         .navigationBarHidden(true),
                    //     .navigationBarBackButtonHidden(true),
                     isActive: $justOpened)
@@ -42,7 +51,7 @@ struct LoginView: View {
                     .padding(.bottom, 50)
                 
                 
-                if(saved == ""){
+                if( saved == ""){
                     TextField("Write your nickname here...", text: $nickname)
                         .frame(width: 340, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .font(.system(size: 20))
@@ -59,7 +68,6 @@ struct LoginView: View {
                 
                 // Кнопка для входа в чат (не активна, когда ничего не ввели в строке с именем).
                 Button(action: {
-                    saveNickname()
                     justOpened.toggle()
                 },
                 label: {
@@ -78,16 +86,7 @@ struct LoginView: View {
            
          
         }
-        .onAppear(perform: {
-            self.nickname = UserDefaults.standard.object(forKey: "nickname") as? String ?? ""
-            self.saved = nickname
-        })
     }
     
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
-}

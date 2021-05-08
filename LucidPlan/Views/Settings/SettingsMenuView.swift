@@ -9,6 +9,9 @@ import SwiftUI
 
 struct SettingsMenuView: View {
     @Binding var settingsShow : Bool
+    @ObservedObject var characterManager : CharacterManager
+    @ObservedObject var userManager : UserManager
+    
     var body: some View {
         ZStack(alignment: .topTrailing){
             
@@ -28,10 +31,10 @@ struct SettingsMenuView: View {
             
             VStack(alignment:.leading){
                 
-                SettingsTopView()
+                SettingsTopView(userManager: userManager)
                 
                 NavigationLink(
-                    destination: FightView(),
+                    destination: FightView(characterManager: characterManager, userManager: userManager),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "gamecontroller")
@@ -47,7 +50,7 @@ struct SettingsMenuView: View {
                     })
                 
                 NavigationLink(
-                    destination: EnemyView(),
+                    destination: EnemyView(userManager: userManager),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "person.3")
@@ -81,7 +84,7 @@ struct SettingsMenuView: View {
                
                 
                 NavigationLink(
-                    destination: ShopView(),
+                    destination: ShopView( userManager: userManager),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "dollarsign.square")
@@ -113,6 +116,22 @@ struct SettingsMenuView: View {
                         .padding()
                     })
                 
+                NavigationLink(
+                    destination: CalendarImportView(),
+                    label: {
+                        HStack(spacing: 16){
+                            Image(systemName: "icloud.and.arrow.down")
+                                .frame(width: 24, height: 24)
+                            
+                            Text("Импорт календарей")
+                                .font(.system(size: 15, weight: .semibold))
+                            
+                            Spacer()
+                        }
+                        .foregroundColor(.white)
+                        .padding()
+                    })
+                
                 Spacer()
             }
             .navigationBarHidden(true)
@@ -122,6 +141,7 @@ struct SettingsMenuView: View {
 }
 
 struct SettingsTopView: View{
+    var userManager: UserManager
     var body: some View{
         VStack(alignment: .leading){
             Image(systemName: "sparkle")
@@ -130,7 +150,7 @@ struct SettingsTopView: View{
                 .foregroundColor(.yellow)
                 .padding(.bottom, 15)
             
-            Text("Lucy")
+            Text(userManager.user!.nickname ?? "")
                 .font(.system(size: 24, weight: .semibold))
             
         }

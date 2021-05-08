@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct FightView: View {
-    var level : Int = 1
-    var hp : Int = 75
-    var exp : Int = 450
-    var gold : Int = 100
+    @ObservedObject var characterManager : CharacterManager
+    @ObservedObject var userManager : UserManager
+  
     var image : UIImage = UIImage(systemName: "sparkle") ?? UIImage()
     
     var body: some View {
@@ -58,10 +57,10 @@ struct FightView: View {
                     .frame(width: UIScreen.main.bounds.width/1.1, height: UIScreen.main.bounds.height/3.4, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color(red: 120/255, green: 127/255, blue: 246/255))
                 VStack(alignment:.leading){
-                    Text("Lvl. \(level)")
-                    Text("Health \(hp) / 100")
-                    Text("Experience \(exp) / 1000")
-                    Text("Gold \(gold)")
+                    Text("Lvl. \(userManager.getLevel())")
+                    Text("Health \(characterManager.getHealth()) / 100")
+                    Text("Experience \(userManager.getExp()) / 1000")
+                    Text("Gold \(userManager.getCoins())")
                 }
                 .foregroundColor(.white)
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
@@ -134,8 +133,3 @@ struct BottomButtons: View{
     }
 }
 
-struct FightView_Previews: PreviewProvider {
-    static var previews: some View {
-        FightView()
-    }
-}

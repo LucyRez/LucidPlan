@@ -46,9 +46,9 @@ struct SingleToDoView: View{
     
     func updateGameStats(){
         if todo.isCompleted {
-            gameManager.characterManager.addToExp(expPoints: 50, context: context)
+            gameManager.userManager.addToExp(expPoints: 50, context: context)
         }else{
-            gameManager.characterManager.addToExp(expPoints: -50, context: context)
+            gameManager.userManager.addToExp(expPoints: -50, context: context)
         }
     }
 }
