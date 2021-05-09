@@ -18,7 +18,6 @@ final class GameNetworkManager: ObservableObject{
     private var manager = SocketManager(socketURL: URL(string: "ws://localhost:3000")!, config: [.log(true), .compress])
     var socket: SocketIOClient? = nil // Здесь будет храниться сокет клиента.
     
-    
     // Функция инициализирует вебсокет и устанавливает все ивенты.
     func setSocket(){
         self.socket = manager.defaultSocket
@@ -44,34 +43,80 @@ final class GameNetworkManager: ObservableObject{
     }
     
     // For creating new room
-    func sendCode(code : String){
-        socket?.emit("createRoom", code)
+    func sendCode(code : String, userManager: UserManager, hp: Int, imageName: String){
+        let userInfo = SubmittedUserInfo(groupId: code, nickname: userManager.user!.nickname!, level: Int(userManager.getLevel()),
+                                         points: 0, hp: hp, imageName: imageName)
+        // Кодируем объект в JSON.
+        guard let json = try? JSONEncoder().encode(userInfo),
+              let jsonString = String(data: json, encoding: .utf8)
+        else{
+            return
+        }
+        socket?.emit("createRoom", jsonString)
     }
     
+    
     // For checking room code
-    func checkCode(code : String){
-        socket?.emit("join", code)
+    func checkCode(code : String, userManager: UserManager, hp: Int, imageName: String){
+        let userInfo = SubmittedUserInfo(groupId: code, nickname: userManager.user!.nickname!, level: Int(userManager.getLevel()),
+                                         points: 0, hp: hp, imageName: imageName)
+        // Кодируем объект в JSON.
+        guard let json = try? JSONEncoder().encode(userInfo),
+              let jsonString = String(data: json, encoding: .utf8)
+        else{
+            return
+        }
+        socket?.emit("join", jsonString)
     }
+    
+    func askForGame(id: String){
+        socket?.emit("oldUser", id)
+    }
+    
+    // Получаем одно присланное сообщение.
+    func getGame(completionHandler: @escaping (ReceivedGameInfo) -> Void){
+        var game : ReceivedGameInfo?
+        
+        // Сервер должен прислать данные ивенту "getGame".
+        socket?.on("getGame"){data, ack in
+            
+            if let jsonData  = try? JSONSerialization.data(withJSONObject: data.first!, options: []){
+                do{
+                    let decoder = JSONDecoder()
+                                   
+                    game = try! decoder.decode(ReceivedGameInfo.self, from: jsonData) // Декодируем сообщение.
+                }
+            }
+            //Возвращаем полученное декодированное сообщение.
+            completionHandler(game!)
+        }
+    }
+    
+    // Получаем одно присланное сообщение.
+    func getCode(completionHandler: @escaping (ReceivedJoinInfo) -> Void){
+        var groupExist : ReceivedJoinInfo?
+        
+        // Сервер должен прислать данные ивенту "getGame".
+        socket?.on("getCode"){data, ack in
+            
+            if let jsonData  = try? JSONSerialization.data(withJSONObject: data.first!, options: []){
+                do{
+                    let decoder = JSONDecoder()
+                                   
+                    groupExist = try! decoder.decode(ReceivedJoinInfo.self, from: jsonData) // Декодируем сообщение.
+                }
+            }
+            //Возвращаем полученное декодированное сообщение.
+            completionHandler(groupExist!)
+        }
+    }
+
     
     // Функция осуществляет отсоединение от сервера.
     func disconnect(){
         socket?.disconnect()
     }
     
-    // Функция отправляет сообщение пользователя на сервер.
-    func sendMessage(text: String, user: String){
-        // Создаём объект сообщения.
-        let message = SubmittedMessage(message: text, nickname: user )
-        
-        // Кодируем объект в JSON.
-        guard let json = try? JSONEncoder().encode(message),
-              let jsonString = String(data: json, encoding: .utf8)
-        else{
-            return
-        }
-        // Отправляем на сервер строку в формате JSON, тригерим ивент "chatMessage".
-        socket?.emit("chatMessage", String(jsonString))
-    }
     
     // Функция осуществляет получение всей истории сообщений с базы данных на сервере.
     func getMessages(completionHandler: @escaping ([ReceivedMessage]) -> Void){

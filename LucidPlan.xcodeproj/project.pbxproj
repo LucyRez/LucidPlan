@@ -50,6 +50,9 @@
 		DB7FCDF62647373000178EAA /* LucidPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCDF42647373000178EAA /* LucidPlan.xcdatamodeld */; };
 		DB7FCDF92647384600178EAA /* GameNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCDF82647384600178EAA /* GameNetworkManager.swift */; };
 		DB7FCDFD2647385C00178EAA /* TeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCDFC2647385C00178EAA /* TeamView.swift */; };
+		DB7FCE012647EAB500178EAA /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCE002647EAB500178EAA /* UserInfo.swift */; };
+		DB7FCE042647F83A00178EAA /* GameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCE032647F83A00178EAA /* GameInfo.swift */; };
+		DB7FCE0726480F1100178EAA /* JoinInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCE0626480F1100178EAA /* JoinInfo.swift */; };
 		DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C102602B2F9000556FA /* LucidPlanApp.swift */; };
 		DB881C132602B2F9000556FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C122602B2F9000556FA /* ContentView.swift */; };
 		DB881C152602B2FE000556FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB881C142602B2FE000556FA /* Assets.xcassets */; };
@@ -120,6 +123,9 @@
 		DB7FCDF52647373000178EAA /* LucidPlan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LucidPlan.xcdatamodel; sourceTree = "<group>"; };
 		DB7FCDF82647384600178EAA /* GameNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameNetworkManager.swift; path = LucidPlan/Managers/Game/GameNetworkManager.swift; sourceTree = SOURCE_ROOT; };
 		DB7FCDFC2647385C00178EAA /* TeamView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamView.swift; sourceTree = "<group>"; };
+		DB7FCE002647EAB500178EAA /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		DB7FCE032647F83A00178EAA /* GameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfo.swift; sourceTree = "<group>"; };
+		DB7FCE0626480F1100178EAA /* JoinInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinInfo.swift; sourceTree = "<group>"; };
 		DB881C0D2602B2F9000556FA /* LucidPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LucidPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB881C102602B2F9000556FA /* LucidPlanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LucidPlanApp.swift; sourceTree = "<group>"; };
 		DB881C122602B2F9000556FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -272,6 +278,9 @@
 				DB4DEA08263A0373005F47D0 /* ShopItem+CoreDataClass.swift */,
 				DB4DEA09263A0373005F47D0 /* ShopItem+CoreDataProperties.swift */,
 				DB334D872644959E0048AC44 /* Item.swift */,
+				DB7FCE002647EAB500178EAA /* UserInfo.swift */,
+				DB7FCE032647F83A00178EAA /* GameInfo.swift */,
+				DB7FCE0626480F1100178EAA /* JoinInfo.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -533,6 +542,7 @@
 				DB074B6B2643F0E800141639 /* Enemy+CoreDataProperties.swift in Sources */,
 				DBC88BC52611EB7900F53820 /* SocketIOManager.swift in Sources */,
 				DB2E5D93260BDCBB00280AB0 /* Task+CoreDataClass.swift in Sources */,
+				DB7FCE0726480F1100178EAA /* JoinInfo.swift in Sources */,
 				DB881C132602B2F9000556FA /* ContentView.swift in Sources */,
 				DBC88BCC2611ED0B00F53820 /* SingleMessageView.swift in Sources */,
 				DBC88BB62610ED4000F53820 /* AddTaskView.swift in Sources */,
@@ -570,6 +580,7 @@
 				DB881C272602B3B4000556FA /* TasksView.swift in Sources */,
 				DBD07B752628A7C000E2B2B8 /* ToDoManager.swift in Sources */,
 				DB0B54E8262CC0410068C66C /* MainTasksView.swift in Sources */,
+				DB7FCE042647F83A00178EAA /* GameInfo.swift in Sources */,
 				DB4DEA0A263A0373005F47D0 /* ShopItem+CoreDataClass.swift in Sources */,
 				DBC88BBE2611D5F700F53820 /* Tag.swift in Sources */,
 				DB4DE9FD26398F9B005F47D0 /* FightView.swift in Sources */,
@@ -584,6 +595,7 @@
 				DB4DEA032639F700005F47D0 /* InventoryView.swift in Sources */,
 				DB7DB18F26408052001F540F /* CalendarImportView.swift in Sources */,
 				DB0B54F0262CC5CC0068C66C /* SingleToDoView.swift in Sources */,
+				DB7FCE012647EAB500178EAA /* UserInfo.swift in Sources */,
 				DB4DE9FA26349388005F47D0 /* CustomShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

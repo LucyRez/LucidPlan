@@ -3,105 +3,160 @@ const cors = require("cors"); // Allows communication with server from different
 const http = require("http").createServer(express);
 const io = require("socket.io")(http);
 
-var Game = require("./gameSchema");
 var Enemy = require("./enemySchema");
-var User = require("./userSchema");
 
-const {MongoClient} = require("mongodb");
-const client = new MongoClient("mongodb://localhost:27017/mydb", {native_parser: true});
+
+const { MongoClient } = require("mongodb");
+const client = new MongoClient("mongodb://localhost:27017/mydb", { native_parser: true });
+
+const enemyImages = ["blitz", "dreamon", "frosty", "corwus"];
+
 
 express.use(cors());
 
 var collection;
 
-io.on("connection", (socket) =>{
+io.on("connection", (socket) => {
 
-    socket.on("test", (mes) =>{
+    socket.on("test", (mes) => {
         console.log(mes);
     });
 
-    socket.on("join", async (groupId) => {
-        try{
-            let result = await collection.findOne({"_id" : groupId});
+    socket.on("join", async (userInfo) => {
+        try {
+            let infoParsed = JSON.parse(userInfo); // Parse into object
+            let result = await collection.findOne({ "_id": infoParsed["groupId"] });
             console.log("Trying to join");
-            if(!result){
-               // await collection.insertOne({"_id": groupId, messages:[]});
-               console.log("Failed to join");
-               socket.emit("joined", ""); // Return something else 'cause room doesn't exist.
-            }else{
-                socket.join(groupId);
-                socket.emit("joined", groupId); 
-                socket.activeRoom = groupId;
+            if (!result) {
+                // await collection.insertOne({"_id": groupId, messages:[]});
+                console.log("Failed to join");
+                socket.emit("joined", ""); // Return something else 'cause room doesn't exist.
+                socket.emit("getCode", {
+                    message: "Did not Join",
+                    success: false
+                });
+            } else {
+                socket.join(infoParsed["groupId"]);
+                socket.emit("joined", infoParsed["groupId"]);
+                socket.activeRoom = infoParsed["groupId"];
                 console.log("Joined");
+                await collection.updateOne({ "_id": socket.activeRoom }, {
+                    "$push": {
+                        "users": infoParsed
+                    }
+                });
+                let result = await collection.findOne({ "_id": socket.activeRoom });
+
+                socket.emit("getCode", {
+                    message: "Joined",
+                    success: true
+                });
+                socket.emit("getGame", result);
             }
-           
-        }catch(e){
+
+        } catch (e) {
             console.error(e);
         }
-       
+
     });
 
-    socket.on("createRoom", async (groupId) => {
-        try{
-            let result = await collection.findOne({"_id" : groupId});
+    socket.on("createRoom", async (userInfo) => {
+        try {
+            console.log(userInfo)
+            let infoParsed = JSON.parse(userInfo); // Parse into object
+            console.log(infoParsed);
+            let result = await collection.findOne({ "_id": infoParsed["groupId"] });
             console.log("Trying to create room")
             // If room with this id doesn't exist
-            if(!result){
-                await collection.insertOne({"_id": groupId, messages:[]});
-                socket.join(groupId);
-                socket.emit("roomCreated", groupId); 
-                socket.activeRoom = groupId;
-                console.log("Room was created");
+            if (!result) {
+                const random = Math.floor(Math.random() * enemyImages.length);
 
-                var enemy = new Enemy({
-                    imageName: String,
-                    health: Number,
-                    maxHealth: Number,
-                    damage: Number
+                const enemy = new Enemy({
+                    imageName: enemyImages[random],
+                    health: 100,
+                    maxHealth: 100,
+                    damage: 10
                 })
 
-                var user = new User
-
-                var game = new Game({
-
-
+                await collection.insertOne({
+                    "_id": infoParsed["groupId"],
+                    enemy: enemy,
+                    users: [infoParsed],
+                    messages: []
                 });
-            }else{
-                socket.emit("roomCreated", ""); // Return something else if room allready exists
+
+                socket.join(infoParsed["groupId"]);
+                socket.activeRoom = infoParsed["groupId"];
+
+                let result = await collection.findOne({ "_id": socket.activeRoom });
+
+                socket.emit("roomCreated", result);
+                console.log("Room was created");
+
+                socket.emit("getCode", {
+                    message: "Joined and created new",
+                    success: true
+                });
+                socket.emit("getGame", result);
+
+            } else {
+                socket.emit("roomCreated", ""); // Return something else if room allready exists.
+                socket.emit("getCode", {
+                    message: "Did not create",
+                    success: false
+                });
                 console.log("Room wasn't created")
             }
-            
-        }catch(e){
+
+        } catch (e) {
             console.error(e);
         }
     });
 
-    socket.on("message", (message) =>{ 
-        collection.updateOne({"_id": socket.activeRoom}, {
+    socket.on("oldUser", async (id) => {
+
+        try {
+            let result = await collection.findOne({ "_id": id });
+            if (result) {
+                socket.join(id);
+                socket.activeRoom = id;
+
+                let result = await collection.findOne({ "_id": socket.activeRoom });
+                socket.emit("getGame", result);
+            }
+
+        } catch (e) {
+            console.error(e);
+        }
+
+    });
+
+    socket.on("message", (message) => {
+        collection.updateOne({ "_id": socket.activeRoom }, {
             "$push": {
                 "messages": message
             }
         });
         io.to(socket.activeRoom).emit("message", message);
-    }); 
+    });
 
 });
 
 express.get("/messages", async (request, response) => {
-    try{
-        let result = await collection.findOne({"_id": request.query.room}); 
+    try {
+        let result = await collection.findOne({ "_id": request.query.room });
         response.send(result);
-    }catch(e){
-        response.status(500).send({message : e.message});
+    } catch (e) {
+        response.status(500).send({ message: e.message });
     }
 });
 
 http.listen(3000, async () => {
-    try{
+    try {
         await client.connect();
-        collection = client.db("lucidPlan").collection("groups"); 
+        collection = client.db("lucidPlan").collection("groups");
         console.log("Listening on port: %s", http.address().port);
-    }catch(e){
+    } catch (e) {
         console.error(e);
     }
 });

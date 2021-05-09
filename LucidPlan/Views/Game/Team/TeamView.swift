@@ -11,20 +11,35 @@ struct TeamView: View {
     @StateObject var socketManager = GameNetworkManager()
     @ObservedObject var userManager : UserManager
     @State var createRoom = false
+    @State var game : ReceivedGameInfo = ReceivedGameInfo(_id: "", enemy: ReceivedEnemyInfo(_id: "", damage: 0, health: 0, imageName: "", maxHealth: 0), messages: [], users: [])
+    
+    func getGame(){
+        
+        socketManager.getGame(completionHandler: { data in
+            game = data
+            print(game)
+        })
+        
+    }
+    
+    func askForGame(){
+        socketManager.askForGame(id: userManager.user!.groupId!)
+    }
+    
     var body: some View {
         ZStack{
            
             if userManager.user?.groupId == ""{
-                TeamCodeView(createRoom: $createRoom, socketManager: socketManager)
+                TeamCodeView(createRoom: $createRoom, userManager: userManager, socketManager: socketManager)
             }
-            
+            else{
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.4), .white]), startPoint: .top, endPoint: .center)
                 .ignoresSafeArea()
             
             VStack{
                 
                 HStack(alignment:.top, spacing: -50){
-                    TeamEnemyView()
+                    TeamEnemyView(game: $game)
                     NavigationLink(destination: Text("Messages View"),
                                    label: {
                                     Image(systemName: "message.fill")
@@ -39,9 +54,14 @@ struct TeamView: View {
             }
             .padding()
             .zIndex(0)
+            .onAppear(perform: getGame)
+            .onAppear(perform: askForGame)
+            
+        }
         }
         .navigationBarTitle("", displayMode: .inline)
         .onAppear(perform: socketManager.setSocket)
+        .onDisappear(perform: socketManager.disconnect)
         
         
     }
@@ -51,7 +71,20 @@ struct TeamCodeView: View {
     
     @State var code : String = ""
     @Binding var createRoom : Bool
+    @ObservedObject var userManager : UserManager
     @ObservedObject var socketManager: GameNetworkManager
+    
+    @State var id : String = ""
+
+    @Environment(\.managedObjectContext) var context
+    
+    func getCode(){
+        socketManager.getCode(completionHandler: {data in
+            if data.success{
+                userManager.setGroupId(context: context, id: code)
+            }
+        })
+    }
     
     var body: some View{
         VStack{
@@ -71,11 +104,13 @@ struct TeamCodeView: View {
             
             Button(action: {
                 if createRoom{
-                    socketManager.sendCode(code: code)
+                    id = code
+                    socketManager.sendCode(code: code, userManager: userManager, hp: 100, imageName: "sparkle")
                     // SET ID AND FETCH NEWLY CREATED ROOM
                     
                 }else{
-                    socketManager.checkCode(code: code)
+                    id = code
+                    socketManager.checkCode(code: code, userManager: userManager, hp: 100, imageName: "sparkle")
                 }
             }, label: {
                 ZStack{
@@ -111,10 +146,13 @@ struct TeamCodeView: View {
         }
         .background(Color.white.ignoresSafeArea())
         .zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
+        .onAppear(perform: getCode)
     }
 }
 
 struct TeamEnemyView: View{
+    
+    @Binding var game : ReceivedGameInfo
     
     // Function is used to calculate height of the health bar
     func calculateHeight(for value: Int64, maxValue: Int64, height: CGFloat) -> CGFloat{
@@ -129,7 +167,7 @@ struct TeamEnemyView: View{
                 RoundedRectangle(cornerRadius: 25)
                     .fill(Color.white)
                 
-                Image(systemName: "sparkle")
+                Image(game.enemy.imageName)
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(.yellow)
@@ -144,7 +182,7 @@ struct TeamEnemyView: View{
                 
                 RoundedRectangle(cornerRadius: 25)
                     .fill(Color.red)
-                    .frame(width:  calculateHeight(for: 65, maxValue: 100, height: UIScreen.main.bounds.width/1.6), height: 18)
+                    .frame(width:  calculateHeight(for: Int64(game.enemy.health), maxValue: Int64(game.enemy.maxHealth), height: UIScreen.main.bounds.width/1.6), height: 18)
                 
             }
             Spacer()
@@ -167,11 +205,9 @@ struct TeamEnemyView: View{
                     
                     ScrollView{
                         VStack(alignment:.leading){
-                            Text("Lucy")
-                                .padding()
-                            Text("Another Player")
-                                .padding()
-                            
+                            ForEach(game.users, id: \.self ){(user : ReceivedUserInfo) in
+                                Text(user.nickname)
+                            }
                         }
                         
                     }.zIndex(0.5)

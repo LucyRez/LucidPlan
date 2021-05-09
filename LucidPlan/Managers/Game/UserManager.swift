@@ -67,6 +67,8 @@ class UserManager: ObservableObject{
         return user!.level
     }
     
+    
+    
     /**
      Function for adding/taking  away exp  points.
      
@@ -90,6 +92,12 @@ class UserManager: ObservableObject{
     
     func addCoins(context: NSManagedObjectContext, amount: Int64){
         user!.coin+=amount
+        
+        try! context.save()
+    }
+    
+    func setGroupId(context: NSManagedObjectContext, id: String){
+        user!.groupId = id
         
         try! context.save()
     }
