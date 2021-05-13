@@ -52,7 +52,7 @@ struct SettingsMenuView: View {
                     })
                 
                 NavigationLink(
-                    destination: TeamView(userManager: userManager),
+                    destination: TeamView(userManager: userManager, characterManager: characterManager),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "person.3")

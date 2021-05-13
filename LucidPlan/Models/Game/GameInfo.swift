@@ -34,6 +34,7 @@ struct SubmittedEnemyInfo: Encodable{
 
 
 struct DamageInfo: Encodable{
+    let _id : String
     let user : String
     let damage : Int
 }

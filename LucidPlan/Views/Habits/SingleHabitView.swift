@@ -10,7 +10,7 @@ import SwiftUI
 struct SingleHabitView: View {
     @ObservedObject var habitManager : HabitManager
     @ObservedObject var gameManager : GameManager
-    @ObservedObject var gameNetwork = GameNetworkManager()
+    @StateObject var gameNetwork = GameNetworkManager()
     @Environment(\.managedObjectContext) var context
     @State var isEdited = false
     
@@ -83,6 +83,7 @@ struct SingleHabitView: View {
             Button(action: {
                 habitManager.addPoints(context: context , habit: habit, numberOfPoints: 5)
                 gameManager.userManager.addToExp(expPoints: 50, context: context)
+                gameNetwork.takeDamage(damage: DamageInfo(_id: gameManager.userManager.user!.groupId!, user: gameManager.userManager.user!.nickname!, damage: 10))
             }, label: {
                 ZStack{
                     RoundedRectangle(cornerRadius: 8)
@@ -102,7 +103,6 @@ struct SingleHabitView: View {
             Button(action: {
                 habitManager.addPoints(context: context, habit: habit, numberOfPoints: -5)
                 gameManager.characterManager.addToHealth(healthPoints: -10, context: context)
-                gameNetwork.takeDamage(damage: DamageInfo(user: gameManager.userManager.user!.nickname!, damage: 10))
                 
             }, label: {
                 ZStack{
@@ -122,7 +122,6 @@ struct SingleHabitView: View {
             .disabled(isEdited)
         }
         .onAppear(perform: gameNetwork.setSocket)
-        .onAppear(perform: askForGame)
         .onDisappear(perform: gameNetwork.disconnect)
         
         

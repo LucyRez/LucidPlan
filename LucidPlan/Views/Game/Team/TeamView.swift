@@ -10,40 +10,46 @@ import SwiftUI
 struct TeamView: View {
     @StateObject var socketManager = GameNetworkManager()
     @ObservedObject var userManager : UserManager
+    @ObservedObject var characterManager : CharacterManager
     
-    @State var createRoom = false
-
+    @State var roomCreated = false
+    @State var roomJoined = false
+    
     
     var body: some View {
         ZStack{
-           
-            if userManager.user?.groupId == ""{
-                TeamCodeView(createRoom: $createRoom, userManager: userManager, socketManager: socketManager)
+            
+            if !roomCreated && userManager.user?.groupId == ""{
+                TeamCodeView(wasCreated: $roomCreated, userManager: userManager, socketManager: socketManager)
             }
             else{
-            LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.4), .white]), startPoint: .top, endPoint: .center)
-                .ignoresSafeArea()
-            
-            VStack{
-                
-                HStack(alignment:.top, spacing: -50){
-                    TeamEnemyView(socketManager: socketManager, userManager: userManager)
-                    NavigationLink(destination: Text("Messages View"),
-                                   label: {
-                                    Image(systemName: "message.fill")
-                                        .foregroundColor(.blue)
-                                        .font(.title)
-
-                                   })
+                if roomJoined{
+                    LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.4), .white]), startPoint: .top, endPoint: .center)
+                        .ignoresSafeArea()
+                    
+                    VStack{
+                        
+                        HStack(alignment:.top, spacing: -50){
+                            TeamEnemyView(socketManager: socketManager, userManager: userManager )
+                            NavigationLink(destination: Text("Messages View"),
+                                           label: {
+                                            Image(systemName: "message.fill")
+                                                .foregroundColor(.blue)
+                                                .font(.title)
+                                            
+                                           })
+                        }
+                        
+                        Spacer()
+                        
+                    }
+                    .padding()
+                    .zIndex(0)
+                    
+                }else{
+                    DownloadGameView(userManager: userManager, socketManager: socketManager, roomJoined: $roomJoined)
                 }
-                
-                Spacer()
-                
             }
-            .padding()
-            .zIndex(0)
-            
-        }
         }
         .navigationBarTitle("", displayMode: .inline)
         .onAppear(perform: socketManager.setSocket)
@@ -52,21 +58,69 @@ struct TeamView: View {
     }
 }
 
+struct DownloadGameView : View{
+    @ObservedObject var userManager : UserManager
+    @ObservedObject var socketManager: GameNetworkManager
+    @Binding var roomJoined : Bool
+    
+    func getCode(){
+        socketManager.getCode(completionHandler: {data in
+            if data.success{
+                withAnimation(.spring()){
+                    roomJoined = true
+                    
+                }
+            }
+        })
+    }
+    
+    func oldUser(){
+        socketManager.askForGame(id: userManager.user!.groupId!)
+    }
+    
+    var body: some View{
+        VStack(spacing:20){
+            HStack{
+                Text("Код команды: ")
+                    .font(.title)
+                    .fontWeight(.semibold)
+                Text(userManager.user!.groupId!)
+                    .font(.title)
+            }
+            .padding()
+            
+            Button(action: {oldUser()}, label: {
+                Text("Войти")
+                    .font(.title)
+            })
+            .padding()
+            
+        }
+        .onAppear(perform: getCode)
+        
+    }
+}
+
 struct TeamCodeView: View {
     
     @State var code : String = ""
-    @Binding var createRoom : Bool
+    @State var createRoom : Bool = false
+    @Binding var wasCreated : Bool
     @ObservedObject var userManager : UserManager
     @ObservedObject var socketManager: GameNetworkManager
     
     @State var id : String = ""
-
+    
     @Environment(\.managedObjectContext) var context
     
     func getCode(){
         socketManager.getCode(completionHandler: {data in
             if data.success{
                 userManager.setGroupId(context: context, id: code)
+                withAnimation(.spring()){
+                    wasCreated = true
+                    
+                }
             }
         })
     }
@@ -76,11 +130,12 @@ struct TeamCodeView: View {
             Spacer()
             Text("Введите код команды")
                 .fontWeight(.semibold)
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .font(.title)
+            
             ZStack{
-                RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                RoundedRectangle(cornerRadius: 25)
                     .fill(Color.purple.opacity(0.2))
-                    .frame(width: UIScreen.main.bounds.width/1.1, height: UIScreen.main.bounds.height/10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width: UIScreen.main.bounds.width/1.1, height: UIScreen.main.bounds.height/10)
                 
                 TextField("Запишите код сюда...", text: $code)
                     
@@ -102,32 +157,29 @@ struct TeamCodeView: View {
                     RoundedRectangle(cornerRadius: 30)
                         .fill(Color.black.opacity(0.1))
                         .frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/15)
-                        
+                    
                     Text(createRoom ? "Создать" : "Войти")
-                    .font(.system(size: 20))
-                    .foregroundColor(.black)
+                        .font(.system(size: 20))
+                        .foregroundColor(.black)
                     
                 }
             })
             
             if !createRoom{
-            HStack{
-                Text("Нет команды?")
-                Button(action: {
-                    withAnimation(.spring()){
-                        createRoom = true
-                        
-                    }
-                }, label: {
-                    Text("Создать")
-                })
+                HStack{
+                    Text("Нет команды?")
+                    Button(action: {
+                        withAnimation(.spring()){
+                            createRoom = true
+                            
+                        }
+                    }, label: {
+                        Text("Создать")
+                    })
+                }
+                .padding()
             }
-            .padding()
-                
-            }
-            
             Spacer()
-            
         }
         .background(Color.white.ignoresSafeArea())
         .zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
@@ -140,19 +192,11 @@ struct TeamEnemyView: View{
     @State var game : ReceivedGameInfo = ReceivedGameInfo(_id: "", enemy: ReceivedEnemyInfo(_id: "", damage: 0, health: 0, imageName: "", maxHealth: 0), messages: [], users: [])
     @ObservedObject var userManager : UserManager
     
-    
-    func askForGame(){
-        socketManager.askForGame(id: userManager.user!.groupId!)
-    }
-    
     func getGame(){
-        
         socketManager.getGame(completionHandler: { data in
             game = data
             print(game)
-           
         })
-        
     }
     
     // Function is used to calculate height of the health bar
@@ -162,7 +206,7 @@ struct TeamEnemyView: View{
     
     var body: some View{
         
-       
+        
         VStack{
             ZStack{
                 RoundedRectangle(cornerRadius: 25)
@@ -216,18 +260,11 @@ struct TeamEnemyView: View{
                 
             }
         }
-        
         .onAppear(perform: getGame)
-        .onAppear(perform: askForGame)
         
         
     }
 }
 
-//struct TeamView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TeamView()
-//    }
-//}
 
 

@@ -121,7 +121,14 @@ io.on("connection", (socket) => {
                 socket.join(id);
                 socket.activeRoom = id;
 
+                console.log("old user joined")
+                socket.emit("getCode", {
+                    message: "Joined",
+                    success: true
+                });
+
                 let result = await collection.findOne({ "_id": socket.activeRoom });
+                console.log(result);
                 socket.emit("getGame", result);
             }
 
@@ -131,23 +138,47 @@ io.on("connection", (socket) => {
 
     });
 
-    socket.on("takeDamage", (damageInfo) => {
+    socket.on("takeDamage", async (damageInfo) => {
         console.log(damageInfo)
         let infoParsed = JSON.parse(damageInfo); // Parse into object
         console.log(infoParsed);
+        socket.activeRoom = infoParsed["_id"];
+
+        let enemy = await collection.findOne({ "_id": socket.activeRoom });
+        console.log(enemy);
+
+
         collection.updateOne({"_id": socket.activeRoom}, {
            "$set": {
-               "enemy.health": enemy.health-damageInfo["damage"]
+               "enemy.health": enemy.enemy.health - infoParsed["damage"]
            }
         });
 
-        let message = "Пользователь " + damageInfo["user"] + " " + "нанёс противнику " +
-        damageInfo["damage"] + " единиц урона."
+        let message = "Пользователь " + infoParsed["user"] + " " + "нанёс противнику " +
+        infoParsed["damage"] + " единиц урона."
         collection.updateOne({ "_id": socket.activeRoom }, {
             "$push": {
                 "messages": message
             }
         });
+
+        let oldEnemy = await collection.findOne({ "_id": socket.activeRoom });
+        if (oldEnemy.enemy.health < 0 ){
+            const random = Math.floor(Math.random() * enemyImages.length);
+
+            const newEnemy = new Enemy({
+                 imageName: enemyImages[random],
+                health: 100,
+                 maxHealth: 100,
+                 damage: 10
+            })
+
+            collection.updateOne({"_id": socket.activeRoom}, {
+                "$set": {
+                    "enemy": newEnemy
+                }
+            });
+        }
 
         io.to(socket.activeRoom).emit("message", message);
     });
