@@ -24,7 +24,10 @@ class CalendarEventManager: ObservableObject{
         
         allCalendars = store.calendars(for: .event)
         for cal in allCalendars{
-            calendarNames.append(cal.title)
+            if !calendarNames.contains(cal.title) {
+                calendarNames.append(cal.title)
+            }
+           
         }
     }
     

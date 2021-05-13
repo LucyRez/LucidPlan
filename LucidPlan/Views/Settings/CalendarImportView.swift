@@ -16,15 +16,18 @@ struct CalendarImportView: View {
     var body: some View {
         VStack{
             Toggle(isOn: $showCalendars.animation()){
-                Text("Синхронизировать с Календарём")
+                Text("Импорт Событий из Календаря")
                     .font(.system(size: 18))
             }
-            .onTapGesture(perform: eventManager.getCalendarTypes)
+            //.onTapGesture(perform: eventManager.getCalendarTypes)
             .padding()
             
             if showCalendars{
-                ForEach(eventManager.calendarNames, id: \.self){calendar in
-                    CalendarImportOption(calendars: $eventManager.selectedCalendars, title: calendar)
+                ScrollView{
+                    ForEach(eventManager.calendarNames, id: \.self){calendar in
+                        CalendarImportOption(calendars: $eventManager.selectedCalendars, title: calendar)
+                    }
+                    
                 }
                 .padding()
                 
@@ -37,6 +40,8 @@ struct CalendarImportView: View {
                         .font(.system(size: 20))
                         .foregroundColor(eventManager.imported ? .green : .blue)
                 })
+                .padding(30)
+                .onAppear(perform: eventManager.getCalendarTypes)
                 
             }
             
