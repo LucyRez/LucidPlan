@@ -43,7 +43,7 @@ struct EnemyView: View {
     
     func checkPotions() -> Bool{
         for item in inventoryItems {
-            if item.imageName == "heal" {
+            if item.imageName == "health" {
                 return true
             }
         }
@@ -92,7 +92,7 @@ struct EnemyView: View {
                 
                 Spacer()
                 
-                NavigationView{
+                
                     // Here is game menu for choosing action
                     ZStack{
                         HStack{
@@ -118,7 +118,7 @@ struct EnemyView: View {
                                         .foregroundColor(.orange)
                                 }
                             })
-                            .padding(25)
+                            .padding(20)
                             
                             Button(action: {
                                 characterEnergy -= 5
@@ -164,18 +164,17 @@ struct EnemyView: View {
                         
                         Rectangle()
                             .cornerRadius(radius: 25.0, corners: [.topLeft, .topRight])
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/4)
                             .foregroundColor(.white)
                             .zIndex(0)
                         
                     }
                     .padding()
-                    
-                }
                 
             }
             .opacity(showEndView ? 0.1 : 1)
             .background(showEndView ? Color.black : Color.clear)
-            .ignoresSafeArea()
+            
         }
     }
 }
