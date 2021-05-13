@@ -94,8 +94,8 @@ struct EnemyView: View {
                 
                 
                     // Here is game menu for choosing action
-                    ZStack{
-                        HStack{
+                ZStack(alignment:.top){
+                        HStack(alignment:.center){
                             Button(action: {
                                 characterEnergy-=2
                                 enemyHealth-=5
@@ -118,7 +118,7 @@ struct EnemyView: View {
                                         .foregroundColor(.orange)
                                 }
                             })
-                            .padding(20)
+                            .padding(.horizontal,20)
                             
                             Button(action: {
                                 characterEnergy -= 5
@@ -143,7 +143,7 @@ struct EnemyView: View {
                                     
                                 }
                             })
-                            .padding()
+                            .padding(.horizontal)
                             
                             Button(action: {
                                 if checkPotions(){
@@ -159,17 +159,17 @@ struct EnemyView: View {
                                         .foregroundColor(.red)
                                 }
                             })
-                            .padding()
+                            .padding(.horizontal)
                         }.zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                         
                         Rectangle()
                             .cornerRadius(radius: 25.0, corners: [.topLeft, .topRight])
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/4)
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/3)
                             .foregroundColor(.white)
                             .zIndex(0)
                         
                     }
-                    .padding()
+                    
                 
             }
             .opacity(showEndView ? 0.1 : 1)
