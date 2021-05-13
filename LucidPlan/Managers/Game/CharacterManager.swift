@@ -85,4 +85,9 @@ class CharacterManager: ObservableObject{
     func getImageName()->String{
         return character!.imageName ?? "sparkles"
     }
+    
+    func changeImage(name: String, context: NSManagedObjectContext){
+        character!.imageName = name
+        try! context.save()
+    }
 }

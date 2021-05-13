@@ -81,7 +81,6 @@ struct TopTaskView: View{
             })
             .sheet(isPresented: $model.active, content: {
                 AddTaskView(task: model)
-                
             })
             
             Spacer()

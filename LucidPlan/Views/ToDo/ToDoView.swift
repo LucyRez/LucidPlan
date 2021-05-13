@@ -11,10 +11,33 @@ struct ToDoView: View {
     @State var showSettings : Bool = false
     @StateObject var todoManager = ToDoManager()
     @ObservedObject var gameManager : GameManager
+    @State var tags : Set<String> = []
+    @State var tagsNames : [String] = []
+    //@State var filter = ""
+    
+    var fetchRequest : FetchRequest<ToDo>
+    
+    
+    var todos : FetchedResults<ToDo>{
+        fetchRequest.wrappedValue
+    }
     
     init(gameManager: GameManager){
         self.gameManager = gameManager
+        fetchRequest = FetchRequest(entity: ToDo.entity(), sortDescriptors: [])
     }
+    
+    func getTags(){
+        for todo in todos {
+            for tag in todo.tags ?? [] {
+                if !tags.contains(tag) {
+                    tags.insert(tag)
+                    tagsNames.append(tag)
+                }
+            }
+        }
+    }
+    
     
     var body: some View {
         
@@ -57,16 +80,36 @@ struct ToDoView: View {
                     
                     Spacer()
                     
-                    Button(action: {
+                    Menu{
+                        Button(action: {todoManager.tag = ""},
+                               label: {
+                                HStack{
+                                    Text("Без тега")
+                                }
+                                
+                               })
                         
-                    },
+                        ForEach(tagsNames, id: \.self){tag in
+                            Button(action: {todoManager.tag = tag},
+                                   label: {
+                                    HStack{
+                                        Text(tag)
+                                    }
+                                    
+                                   })
+                        }
+                       
+                        
+            
+                    }
                     label: {
                         Text("Filter")
                             .font(.system(size: 25))
-                    })
-                    .padding()
+                            .padding()
+                    }
+                    .onAppear(perform: getTags)
                     
-                    
+                   
                     
                 }
                 

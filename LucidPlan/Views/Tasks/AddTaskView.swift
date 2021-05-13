@@ -39,8 +39,12 @@ struct AddTaskView: View {
             
             AddTagView(model: task)
             
-            Divider()
-                .padding(.horizontal)
+            Toggle(isOn: $task.isDeadline, label: {
+                Text("Дедлайн")
+                    .font(.system(size: 18))
+            })
+            .padding(.horizontal)
+            
             
             HStack{
                 Text("When")
@@ -117,7 +121,6 @@ struct AddTaskView: View {
             
             
         }
-        .padding()
         .onDisappear(perform: {
             task.task = nil
             task.note = ""
@@ -189,7 +192,7 @@ struct AddTagView: View{
                     .font(.system(size: 25))
                     .padding(.horizontal)
                 
-                 Spacer()
+                Spacer()
                 
                 ForEach(addedTags, id: \.self){tag in
                     Text(tag)
@@ -198,25 +201,27 @@ struct AddTagView: View{
                         .background(Capsule().stroke(Color.black, lineWidth: 1))
                 }
             }
-        
-        HStack{
-            TextField("Write a tag here", text: $tagString)
-                .padding()
-                .frame(width: 350, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .background(Color.white)
-                .cornerRadius(10)
-                .padding(5)
-            Button(action: {
-                task.addTag(tag: tagString)
-                addedTags.append(tagString)
-                tagString = ""
-            }, label: {
-                Image(systemName: "plus.circle")
-                    .foregroundColor(.green)
-                    .font(.system(size: 28))
-                
-            })
-        }
+            
+            HStack{
+                TextField("Write a tag here", text: $tagString)
+                    .padding()
+                    .frame(width: UIScreen.main.bounds.width-60, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .padding(5)
+                Button(action: {
+                    if  !tagString.isEmpty && addedTags.count < 3{
+                        task.addTag(tag: tagString)
+                        addedTags.append(tagString)
+                        tagString = ""
+                    }
+                }, label: {
+                    Image(systemName: "plus.circle")
+                        .foregroundColor(.green)
+                        .font(.system(size: 28))
+                    
+                })
+            }
         }
         
     }

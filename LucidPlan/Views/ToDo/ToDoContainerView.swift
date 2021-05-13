@@ -14,6 +14,7 @@ struct ToDoContainer: View{
     @ObservedObject var todoManager : ToDoManager
     @ObservedObject var gameManager : GameManager
     
+    
     var fetchRequest : FetchRequest<ToDo>
     
     var todos : FetchedResults<ToDo>{
@@ -25,17 +26,32 @@ struct ToDoContainer: View{
         self.todoManager = todoManager
         self.gameManager = gameManager
         fetchRequest = FetchRequest(entity: ToDo.entity(), sortDescriptors: [], predicate:  NSPredicate(format: "type == %i", filter))
+        
     }
     
+    
+    
     var body: some View{
-       
+        
         NavigationView{
             List{
-                ForEach(todos){todo in
-                    HStack{
-                        SingleToDoView(todo: todo, todoManager: todoManager, gameManager: gameManager)
-                        Spacer()
+                ForEach(todos){(todo:ToDo) in
+                    
+                    if todoManager.tag != "" && ((todo.tags!.contains(todoManager.tag))) {
+                        HStack{
+                            SingleToDoView(todo: todo, todoManager: todoManager, gameManager: gameManager)
+                            
+                            
+                            Spacer()}
+                        
+                    }else if todoManager.tag == ""{
+                        HStack{
+                            SingleToDoView(todo: todo, todoManager: todoManager, gameManager: gameManager)
+                            Spacer()
+                            
+                        }
                     }
+                    
                 }
                 .onDelete(perform: { indexSet in
                     for index in indexSet{
@@ -50,12 +66,14 @@ struct ToDoContainer: View{
             .toolbar(content: {
                 EditButton()
             })
-           
+            
         }
         .sheet(isPresented: $todoManager.active, content: {
             AddToDo(todo: todoManager)
         })
-        }
+        .onAppear()
         
+    }
+    
     
 }

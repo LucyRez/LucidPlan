@@ -27,6 +27,8 @@ class ToDoManager : ObservableObject, TaskManager{
     // 2 represents monthly to-do
     @Published var filter : Int = 0
     
+    @Published var tag = ""
+    
     @Published var title : String = ""
     @Published var isCompleted : Bool = false
     @Published var tags : [String] = []

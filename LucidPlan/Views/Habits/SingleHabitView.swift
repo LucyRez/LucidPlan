@@ -10,6 +10,7 @@ import SwiftUI
 struct SingleHabitView: View {
     @ObservedObject var habitManager : HabitManager
     @ObservedObject var gameManager : GameManager
+    @ObservedObject var gameNetwork = GameNetworkManager()
     @Environment(\.managedObjectContext) var context
     @State var isEdited = false
     
@@ -19,6 +20,10 @@ struct SingleHabitView: View {
         self.habitManager = habitManager
         self.gameManager = gameManager
         self.habit = habit
+    }
+    
+    func askForGame(){
+        gameNetwork.askForGame(id: gameManager.userManager.user!.groupId!)
     }
     
     var body: some View {
@@ -46,7 +51,7 @@ struct SingleHabitView: View {
                         Text(habit.title ?? "")
                             .font(.system(size: 20))
                         
-                        Text(" \(habit.points)")
+                       // Text(" \(habit.points)")
                     }
                     .foregroundColor(.black)
                    
@@ -74,21 +79,6 @@ struct SingleHabitView: View {
                 
             }
             .contentShape(RoundedRectangle(cornerRadius: 5))
-//            .contextMenu(ContextMenu(menuItems: {
-//                Button(action: {
-//                    habitManager.editData(habit: habit)
-//                    isEdited.toggle()
-//
-//                }, label: {
-//                    Text("Edit")
-//                })
-//
-//                Button(action: {
-//                    habitManager.delete(context: context, habit: habit)
-//                }, label: {
-//                    Text("Delete")
-//                })
-//            }))
             
             Button(action: {
                 habitManager.addPoints(context: context , habit: habit, numberOfPoints: 5)
@@ -112,6 +102,7 @@ struct SingleHabitView: View {
             Button(action: {
                 habitManager.addPoints(context: context, habit: habit, numberOfPoints: -5)
                 gameManager.characterManager.addToHealth(healthPoints: -10, context: context)
+                gameNetwork.takeDamage(damage: DamageInfo(user: gameManager.userManager.user!.nickname!, damage: 10))
                 
             }, label: {
                 ZStack{
@@ -130,6 +121,9 @@ struct SingleHabitView: View {
             })
             .disabled(isEdited)
         }
+        .onAppear(perform: gameNetwork.setSocket)
+        .onAppear(perform: askForGame)
+        .onDisappear(perform: gameNetwork.disconnect)
         
         
     }

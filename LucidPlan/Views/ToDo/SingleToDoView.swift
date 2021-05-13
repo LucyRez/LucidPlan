@@ -23,6 +23,7 @@ struct SingleToDoView: View{
     
 
     var body: some View{
+        VStack(alignment:.trailing){
         HStack(spacing:20){
             Image(systemName: todo.isCompleted ? "checkmark.circle.fill" : "circle")
             
@@ -30,6 +31,14 @@ struct SingleToDoView: View{
                 .font(.system(size: 22))
                 .strikethrough(todo.isCompleted , color: Color.black)
             Spacer()
+        }
+            ForEach(todo.tags ?? [], id: \.self){tag in
+                Text(tag)
+                    .foregroundColor(.purple)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal)
+                    .background(Capsule().stroke(Color.purple, lineWidth: 1))
+            }
         }
         .padding(.trailing)
         .padding(.vertical)
@@ -52,3 +61,5 @@ struct SingleToDoView: View{
         }
     }
 }
+
+

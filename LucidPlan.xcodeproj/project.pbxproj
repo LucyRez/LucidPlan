@@ -21,8 +21,6 @@
 		DB0B54F6262E1D2E0068C66C /* Habit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B54F4262E1D2E0068C66C /* Habit+CoreDataProperties.swift */; };
 		DB0B54FB262E1D580068C66C /* HabitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0B54FA262E1D580068C66C /* HabitManager.swift */; };
 		DB2E5D89260BD88700280AB0 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D88260BD88700280AB0 /* TaskViewModel.swift */; };
-		DB2E5D93260BDCBB00280AB0 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */; };
-		DB2E5D94260BDCBB00280AB0 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */; };
 		DB334D882644959E0048AC44 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB334D872644959E0048AC44 /* Item.swift */; };
 		DB334D8E264533500048AC44 /* InventoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB334D8D264533500048AC44 /* InventoryManager.swift */; };
 		DB334D92264533E50048AC44 /* ShopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB334D91264533E50048AC44 /* ShopManager.swift */; };
@@ -53,6 +51,8 @@
 		DB7FCE012647EAB500178EAA /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCE002647EAB500178EAA /* UserInfo.swift */; };
 		DB7FCE042647F83A00178EAA /* GameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCE032647F83A00178EAA /* GameInfo.swift */; };
 		DB7FCE0726480F1100178EAA /* JoinInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCE0626480F1100178EAA /* JoinInfo.swift */; };
+		DB7FCE0E264C883500178EAA /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCE0C264C883500178EAA /* Task+CoreDataClass.swift */; };
+		DB7FCE0F264C883500178EAA /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7FCE0D264C883500178EAA /* Task+CoreDataProperties.swift */; };
 		DB881C112602B2F9000556FA /* LucidPlanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C102602B2F9000556FA /* LucidPlanApp.swift */; };
 		DB881C132602B2F9000556FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB881C122602B2F9000556FA /* ContentView.swift */; };
 		DB881C152602B2FE000556FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB881C142602B2FE000556FA /* Assets.xcassets */; };
@@ -94,8 +94,6 @@
 		DB0B54F4262E1D2E0068C66C /* Habit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Habit+CoreDataProperties.swift"; path = "LucidPlan/Models/Habit/Habit+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DB0B54FA262E1D580068C66C /* HabitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitManager.swift; sourceTree = "<group>"; };
 		DB2E5D88260BD88700280AB0 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
-		DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Task+CoreDataClass.swift"; path = "LucidPlan/Models/Task/Task+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Task+CoreDataProperties.swift"; path = "LucidPlan/Models/Task/Task+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DB334D872644959E0048AC44 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		DB334D8D264533500048AC44 /* InventoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryManager.swift; sourceTree = "<group>"; };
 		DB334D91264533E50048AC44 /* ShopManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopManager.swift; sourceTree = "<group>"; };
@@ -126,6 +124,8 @@
 		DB7FCE002647EAB500178EAA /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		DB7FCE032647F83A00178EAA /* GameInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfo.swift; sourceTree = "<group>"; };
 		DB7FCE0626480F1100178EAA /* JoinInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinInfo.swift; sourceTree = "<group>"; };
+		DB7FCE0C264C883500178EAA /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		DB7FCE0D264C883500178EAA /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DB881C0D2602B2F9000556FA /* LucidPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LucidPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB881C102602B2F9000556FA /* LucidPlanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LucidPlanApp.swift; sourceTree = "<group>"; };
 		DB881C122602B2F9000556FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -258,8 +258,8 @@
 		DB415C3326330E3D006DE469 /* Task */ = {
 			isa = PBXGroup;
 			children = (
-				DB2E5D92260BDCBB00280AB0 /* Task+CoreDataProperties.swift */,
-				DB2E5D91260BDCBB00280AB0 /* Task+CoreDataClass.swift */,
+				DB7FCE0C264C883500178EAA /* Task+CoreDataClass.swift */,
+				DB7FCE0D264C883500178EAA /* Task+CoreDataProperties.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -541,7 +541,6 @@
 				DB334D962645CE2F0048AC44 /* User+CoreDataClass.swift in Sources */,
 				DB074B6B2643F0E800141639 /* Enemy+CoreDataProperties.swift in Sources */,
 				DBC88BC52611EB7900F53820 /* SocketIOManager.swift in Sources */,
-				DB2E5D93260BDCBB00280AB0 /* Task+CoreDataClass.swift in Sources */,
 				DB7FCE0726480F1100178EAA /* JoinInfo.swift in Sources */,
 				DB881C132602B2F9000556FA /* ContentView.swift in Sources */,
 				DBC88BCC2611ED0B00F53820 /* SingleMessageView.swift in Sources */,
@@ -556,6 +555,7 @@
 				DB7DB18B263DF8E2001F540F /* SettingsMenuView.swift in Sources */,
 				DBC88BBA2611B14500F53820 /* LoginView.swift in Sources */,
 				DBCF4644264732D1008F0C6D /* LucidPlan.xcdatamodeld in Sources */,
+				DB7FCE0F264C883500178EAA /* Task+CoreDataProperties.swift in Sources */,
 				DB7FCDF62647373000178EAA /* LucidPlan.xcdatamodeld in Sources */,
 				DB881C322603E352000556FA /* ToDoView.swift in Sources */,
 				DB415C2C26317BE8006DE469 /* HabitsContainer.swift in Sources */,
@@ -574,8 +574,8 @@
 				DB074B6C2643F0E800141639 /* Character+CoreDataClass.swift in Sources */,
 				DB334D9B2645D0E50048AC44 /* UserManager.swift in Sources */,
 				DB0B54EC262CC57F0068C66C /* ToDoContainerView.swift in Sources */,
-				DB2E5D94260BDCBB00280AB0 /* Task+CoreDataProperties.swift in Sources */,
 				DB0B54F6262E1D2E0068C66C /* Habit+CoreDataProperties.swift in Sources */,
+				DB7FCE0E264C883500178EAA /* Task+CoreDataClass.swift in Sources */,
 				DB7FCDFD2647385C00178EAA /* TeamView.swift in Sources */,
 				DB881C272602B3B4000556FA /* TasksView.swift in Sources */,
 				DBD07B752628A7C000E2B2B8 /* ToDoManager.swift in Sources */,

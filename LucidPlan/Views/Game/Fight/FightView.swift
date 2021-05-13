@@ -11,7 +11,6 @@ struct FightView: View {
     @ObservedObject var characterManager : CharacterManager
     @ObservedObject var userManager : UserManager
   
-    var image : UIImage = UIImage(systemName: "sparkle") ?? UIImage()
     
     var body: some View {
         HStack{
@@ -25,30 +24,29 @@ struct FightView: View {
                         .frame(width: 250, height: 250, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .padding()
                     
-                    Image(systemName: "sparkle")
+                    Image(characterManager.getImageName())
                         .resizable()
+                        .scaledToFit()
                         .frame(width: 200, height: 200)
                         .foregroundColor(.yellow)
                 }
                 
             
-                
-                Button(action: {
-                    // TODO: FIGHT MENU
-                },
-                label: {
-                    ZStack(alignment: .trailing){
-                        RoundedRectangle(cornerRadius: 15)
-                            .frame(width: 130, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .foregroundColor(Color(red: 120/255, green: 127/255, blue: 246/255))
-                        
-                        Text("Fight")
-                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                            .bold()
-                            .foregroundColor(.white)
-                            .padding()
-                    }
+                NavigationLink(destination: EnemyView(userManager: userManager, characterManager: characterManager),
+                               label: {
+                                ZStack(alignment: .trailing){
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .frame(width: 130, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                        .foregroundColor(Color(red: 120/255, green: 127/255, blue: 246/255))
+                                    
+                                    Text("Fight")
+                                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                                        .bold()
+                                        .foregroundColor(.white)
+                                        .padding()
+                                }
                 })
+                
             }
             
             ZStack{
@@ -57,19 +55,36 @@ struct FightView: View {
                     .frame(width: UIScreen.main.bounds.width/1.1, height: UIScreen.main.bounds.height/3.4, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color(red: 120/255, green: 127/255, blue: 246/255))
                 VStack(alignment:.leading){
-                    Text("Lvl. \(userManager.getLevel())")
-                    Text("Health \(characterManager.getHealth()) / 100")
-                    Text("Experience \(userManager.getExp()) / 1000")
-                    Text("Gold \(userManager.getCoins())")
+                    HStack{
+                        Text("Lvl.")
+                        Spacer()
+                        Text("\(userManager.getLevel())")
+                    }
+                    HStack{
+                        Text("Health")
+                        Spacer()
+                        Text("\(characterManager.getHealth()) / 100")
+                    }
+                    HStack{
+                        Text("Experience")
+                        Spacer()
+                        Text("\(userManager.getExp()) / 1000")
+                    }
+                    HStack{
+                        Text("Gold")
+                        Spacer()
+                        Text("\(userManager.getCoins())")
+                    }
                 }
                 .foregroundColor(.white)
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                .padding()
                 
             }
             .padding()
             
             
-            BottomButtons()
+            BottomButtons(characterManager: characterManager, userManager: userManager)
             Spacer()
              
             
@@ -84,51 +99,58 @@ struct FightView: View {
 }
 
 struct BottomButtons: View{
+    
+    @ObservedObject var characterManager : CharacterManager
+    @ObservedObject var userManager : UserManager
+    
     var body: some View{
         HStack(spacing:20){
-            Button(action: {
-                
-            },
-            label: {
-                Image(systemName: "sparkle")
-                    .resizable()
-                    .frame(width: 40, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(.black)
-                    .padding(.leading, 2)
-                    .padding(.top, 9)
-                    .padding(.bottom, 9)
-                
-                
-                Text("INVENTORY")
-                    .bold()
-                    .font(.system(size: 17))
-                    .foregroundColor(.black)
-                    .padding(.trailing,2)
-            })
-            .background(Color(red: 255/255, green: 204/255, blue: 77/255))
+            
+            NavigationLink(destination:
+                Inventory(characterManager: characterManager)
+             , label: {
+                HStack{
+                    Image(systemName: "sparkle")
+                        .resizable()
+                        .frame(width: 40, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(.black)
+                        .padding(.leading, 2)
+                        .padding(.top, 9)
+                        .padding(.bottom, 9)
+                    
+                    
+                    Text("INVENTORY")
+                        .bold()
+                        .font(.system(size: 17))
+                        .foregroundColor(.black)
+                        .padding(.trailing,2)
+                }
+            }).background(Color(red: 255/255, green: 204/255, blue: 77/255))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             
-            Button(action: {
-                // TODO: SHOP VIEW
-            },
-            label: {
+            
+            NavigationLink(destination: ShopView(userManager: userManager), label:{
+                HStack{
                 Image(systemName: "sparkle")
-                    .resizable()
-                    .frame(width: 40, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(.black)
-                    .padding(.leading)
-                    .padding(.top, 9)
-                    .padding(.bottom, 9)
-                
-                
-                Text("SHOP")
-                    .bold()
-                    .font(.system(size: 20))
-                    .foregroundColor(.black)
-                    .padding(.trailing)
-            })
-            .background(Color(red: 255/255, green: 204/255, blue: 77/255))
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+                .resizable()
+                .frame(width: 40, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .foregroundColor(.black)
+                .padding(.leading)
+                .padding(.top, 9)
+                .padding(.bottom, 9)
+            
+            
+            Text("SHOP")
+                .bold()
+                .font(.system(size: 20))
+                .foregroundColor(.black)
+                .padding(.trailing)
+                    
+                }
+        })
+        .background(Color(red: 255/255, green: 204/255, blue: 77/255))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        
         }
     }
 }

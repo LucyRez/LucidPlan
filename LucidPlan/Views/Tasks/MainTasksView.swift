@@ -49,7 +49,7 @@ struct ScheduleView: View{
                 // In this HStack are 2 buttons to change the layout
                 HStack(spacing: -34){
                     Button(action: {
-                        changeRepresentation.toggle()
+                        changeRepresentation = true
                     },
                     label: {
                         Text("Неделя")
@@ -65,7 +65,7 @@ struct ScheduleView: View{
                     
                     
                     Button(action: {
-                        changeRepresentation.toggle()
+                        changeRepresentation = false
                     },
                     label: {
                         Text("Месяц")

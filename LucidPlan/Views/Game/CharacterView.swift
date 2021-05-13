@@ -25,10 +25,10 @@ struct CharacterView: View {
     
     var body: some View {
         HStack(alignment: .bottom){
-            Image(systemName: (characterManager.getImageName()))
+            Image((characterManager.getImageName()))
                 .resizable()
-                .frame(width: 220, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .foregroundColor(.yellow)
+                .scaledToFit()
+                .frame(width: 240, height: 280, alignment: .leading)
                
             
             

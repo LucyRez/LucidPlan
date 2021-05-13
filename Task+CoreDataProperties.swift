@@ -2,7 +2,7 @@
 //  Task+CoreDataProperties.swift
 //  LucidPlan
 //
-//  Created by Ludmila Rezunic on 24.03.2021.
+//  Created by Ludmila Rezunic on 13.05.2021.
 //
 //
 
@@ -16,12 +16,13 @@ extension Task {
         return NSFetchRequest<Task>(entityName: "Task")
     }
 
-    @NSManaged public var title: String?
+    @NSManaged public var endDate: Date?
     @NSManaged public var note: String?
     @NSManaged public var startDate: Date?
-    @NSManaged public var endDate: Date?
-    @NSManaged public var tags: [String]?
     @NSManaged public var status: String?
+    @NSManaged public var tags: [String]?
+    @NSManaged public var title: String?
+    @NSManaged public var isDeadline: Bool
 
 }
 

@@ -40,6 +40,20 @@ final class GameNetworkManager: ObservableObject{
            print(data)
         }
         
+        socket?.on("message"){data, ack in
+            print(data)
+        }
+        
+    }
+    
+    func takeDamage(damage: DamageInfo){
+        let tookDamage = damage
+        guard let json = try? JSONEncoder().encode(tookDamage),
+              let jsonString = String(data: json, encoding: .utf8)
+        else{
+            return
+        }
+        socket?.emit("takeDamage", jsonString);
     }
     
     // For creating new room

@@ -28,6 +28,7 @@
     </entity>
     <entity name="Task" representedClassName="Task" syncable="YES">
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isDeadline" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="status" optional="YES" attributeType="String"/>
@@ -55,7 +56,7 @@
         <element name="Enemy" positionX="-54" positionY="54" width="128" height="119"/>
         <element name="Habit" positionX="-63" positionY="45" width="128" height="74"/>
         <element name="ShopItem" positionX="-63" positionY="45" width="128" height="89"/>
-        <element name="Task" positionX="-63" positionY="-9" width="128" height="119"/>
+        <element name="Task" positionX="-63" positionY="-9" width="128" height="134"/>
         <element name="ToDo" positionX="-63" positionY="36" width="128" height="89"/>
         <element name="User" positionX="-54" positionY="72" width="128" height="149"/>
     </elements>

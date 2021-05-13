@@ -10,21 +10,9 @@ import SwiftUI
 struct TeamView: View {
     @StateObject var socketManager = GameNetworkManager()
     @ObservedObject var userManager : UserManager
+    
     @State var createRoom = false
-    @State var game : ReceivedGameInfo = ReceivedGameInfo(_id: "", enemy: ReceivedEnemyInfo(_id: "", damage: 0, health: 0, imageName: "", maxHealth: 0), messages: [], users: [])
-    
-    func getGame(){
-        
-        socketManager.getGame(completionHandler: { data in
-            game = data
-            print(game)
-        })
-        
-    }
-    
-    func askForGame(){
-        socketManager.askForGame(id: userManager.user!.groupId!)
-    }
+
     
     var body: some View {
         ZStack{
@@ -39,13 +27,13 @@ struct TeamView: View {
             VStack{
                 
                 HStack(alignment:.top, spacing: -50){
-                    TeamEnemyView(game: $game)
+                    TeamEnemyView(socketManager: socketManager, userManager: userManager)
                     NavigationLink(destination: Text("Messages View"),
                                    label: {
                                     Image(systemName: "message.fill")
                                         .foregroundColor(.blue)
                                         .font(.title)
-                                    
+
                                    })
                 }
                 
@@ -54,15 +42,12 @@ struct TeamView: View {
             }
             .padding()
             .zIndex(0)
-            .onAppear(perform: getGame)
-            .onAppear(perform: askForGame)
             
         }
         }
         .navigationBarTitle("", displayMode: .inline)
         .onAppear(perform: socketManager.setSocket)
         .onDisappear(perform: socketManager.disconnect)
-        
         
     }
 }
@@ -151,8 +136,24 @@ struct TeamCodeView: View {
 }
 
 struct TeamEnemyView: View{
+    @ObservedObject var socketManager : GameNetworkManager
+    @State var game : ReceivedGameInfo = ReceivedGameInfo(_id: "", enemy: ReceivedEnemyInfo(_id: "", damage: 0, health: 0, imageName: "", maxHealth: 0), messages: [], users: [])
+    @ObservedObject var userManager : UserManager
     
-    @Binding var game : ReceivedGameInfo
+    
+    func askForGame(){
+        socketManager.askForGame(id: userManager.user!.groupId!)
+    }
+    
+    func getGame(){
+        
+        socketManager.getGame(completionHandler: { data in
+            game = data
+            print(game)
+           
+        })
+        
+    }
     
     // Function is used to calculate height of the health bar
     func calculateHeight(for value: Int64, maxValue: Int64, height: CGFloat) -> CGFloat{
@@ -161,7 +162,7 @@ struct TeamEnemyView: View{
     
     var body: some View{
         
-        
+       
         VStack{
             ZStack{
                 RoundedRectangle(cornerRadius: 25)
@@ -215,6 +216,11 @@ struct TeamEnemyView: View{
                 
             }
         }
+        
+        .onAppear(perform: getGame)
+        .onAppear(perform: askForGame)
+        
+        
     }
 }
 

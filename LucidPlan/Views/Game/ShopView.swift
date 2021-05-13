@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShopView: View {
-    let items : [Item] = [Item(title: "Восстановитель здоровья", description: "Красная жидкость похожая на кровь?", price: 100, imageName: "sparkle", type: "potion"), Item(title: "Повреждающее зелье", description: "Капля этого зелья способна ранить кого угодно", price: 100, imageName: "sparkle", type: "potion"), Item(title: "Восстановитель энергии", description: "Эх, что-то спать захотелось...", price: 100, imageName: "sparkle", type: "potion")]
+    let items : [Item] = [Item(title: "Зелье здоровья", description: "Восстанавливает всё здоровье во время битвы", price: 100, imageName: "health", type: "potion"), Item(title: "Ядовитое зелье", description: "Наносит 50 очков урона любому противнику", price: 100, imageName: "harm", type: "potion"), Item(title: "Зелье энергии", description: "Восстанавливает всю энергию", price: 100, imageName: "energy", type: "potion"), Item(title: "Robin", description: "Персонаж с удвоенной атакой", price: 2000, imageName: "robin" , type: "character")]
     
     @Environment(\.managedObjectContext) var context
     @StateObject var shopManager = ShopManager()
@@ -24,15 +24,16 @@ struct ShopView: View {
                         .frame(width: 150, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .padding()
                     
-                    Image(systemName: chosen?.imageName ?? items[0].imageName)
+                    Image(chosen?.imageName ?? "")
                         .resizable()
+                        .scaledToFit()
                         .frame(width: 150, height: 150)
                         .foregroundColor(.yellow)
                 }
                 Spacer()
                 
                 VStack{
-                    Text(chosen?.description ?? "Choose an item")
+                    Text(chosen?.description ?? "Выберите товар")
                         .font(.system(size: 18))
                     Spacer()
                     Button(action:{

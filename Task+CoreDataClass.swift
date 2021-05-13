@@ -2,7 +2,7 @@
 //  Task+CoreDataClass.swift
 //  LucidPlan
 //
-//  Created by Ludmila Rezunic on 24.03.2021.
+//  Created by Ludmila Rezunic on 13.05.2021.
 //
 //
 

@@ -12,6 +12,8 @@ struct SettingsMenuView: View {
     @ObservedObject var characterManager : CharacterManager
     @ObservedObject var userManager : UserManager
     
+ 
+    
     var body: some View {
         ZStack(alignment: .topTrailing){
             
@@ -50,7 +52,7 @@ struct SettingsMenuView: View {
                     })
                 
                 NavigationLink(
-                    destination: TeamView( userManager: userManager),
+                    destination: TeamView(userManager: userManager),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "person.3")
@@ -67,7 +69,7 @@ struct SettingsMenuView: View {
                 
                 
                 NavigationLink(
-                    destination: Inventory(),
+                    destination: Inventory(characterManager: characterManager),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "person.fill.viewfinder")
@@ -120,7 +122,7 @@ struct SettingsMenuView: View {
                 Spacer()
             }
             .navigationBarHidden(true)
-            
+           
         }
     }
 }

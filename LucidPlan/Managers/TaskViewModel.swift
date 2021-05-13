@@ -27,6 +27,7 @@ class TaskViewModel : ObservableObject, TaskManager{
     @Published var endDate : Date = Date() + 60*60
     @Published var status : String = ""
     @Published var tags : [String] = []
+    @Published var isDeadline : Bool = false
     
     // Function for writing data to CoreData
     func writeData(context: NSManagedObjectContext){
@@ -39,6 +40,7 @@ class TaskViewModel : ObservableObject, TaskManager{
             task.endDate = endDate
             task.status = status
             task.tags = tags
+            task.isDeadline = isDeadline
             
             try? context.save() // Trying to save current context.
             
@@ -51,6 +53,7 @@ class TaskViewModel : ObservableObject, TaskManager{
             endDate = startDate + 60*60
             status = ""
             tags = []
+            isDeadline = false
             
             return
         }
@@ -63,6 +66,7 @@ class TaskViewModel : ObservableObject, TaskManager{
         newTask.endDate = endDate
         newTask.status = status
         newTask.tags = tags
+        newTask.isDeadline = isDeadline
         
         try! context.save() // Trying to save current context.
         
@@ -75,6 +79,7 @@ class TaskViewModel : ObservableObject, TaskManager{
         endDate = startDate + 60*60
         status = ""
         tags = []
+        isDeadline = false
         
         return
     }
@@ -91,6 +96,7 @@ class TaskViewModel : ObservableObject, TaskManager{
         self.endDate = task.endDate!
         self.status = task.status!
         self.tags = task.tags!
+        self.isDeadline = task.isDeadline
         
         active = true // Edit view will be called.
     }
@@ -98,5 +104,11 @@ class TaskViewModel : ObservableObject, TaskManager{
     // Function for adding tags to task which is edited
     func addTag(tag: String){
         tags.append(tag)
+    }
+    
+    // Function to delete to-do from CoreData
+    func delete(context: NSManagedObjectContext, task: Task){
+        context.delete(task)
+        try! context.save()
     }
 }

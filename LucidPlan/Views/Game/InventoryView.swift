@@ -8,22 +8,28 @@
 import SwiftUI
 
 struct Inventory : View{
+    @Environment(\.managedObjectContext) var context
+    @ObservedObject var characterManager : CharacterManager
+    
     var fetchRequest : FetchRequest<ShopItem>
     
     var inventoryItems : FetchedResults<ShopItem>{
         fetchRequest.wrappedValue
     }
     
-    init(){
+    init(characterManager: CharacterManager){
         fetchRequest = FetchRequest(entity: ShopItem.entity(), sortDescriptors: [])
+        self.characterManager = characterManager
     }
     
     var body: some View{
-        InventoryView(items: inventoryItems, count: inventoryItems.count)
+        InventoryView(items: inventoryItems, count: inventoryItems.count, characterManager: characterManager)
+        
     }
 }
 
 struct InventoryView: View {
+    @ObservedObject var characterManager : CharacterManager
     @ObservedObject var inventory = InventoryManager()
     @Environment(\.managedObjectContext) var context
     @State var chosen : ShopItem?
@@ -36,9 +42,10 @@ struct InventoryView: View {
     
     var inventoryItems : FetchedResults<ShopItem>
     
-    init(items: FetchedResults<ShopItem>, count: Int){
+    init(items: FetchedResults<ShopItem>, count: Int, characterManager: CharacterManager){
         inventoryItems = items
         _countItems = State(initialValue: count)
+        self.characterManager = characterManager
     }
     
     var body: some View {
@@ -52,23 +59,27 @@ struct InventoryView: View {
                         .frame(width: 200, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .padding()
                     
-                    Image(systemName: "sparkle")
+                    Image(chosen?.imageName ?? "")
                         .resizable()
+                        .scaledToFit()
                         .frame(width: 200, height: 200)
                         .foregroundColor(.yellow)
                 }
                 
                 VStack{
-                    Text(chosen?.title ?? "Choose an item")
+                    Text(chosen?.title ?? "Выберите предмет")
                     Button(action: {
-                        countItems-=1
-                        inventory.delete(context: context, item: chosen!)
+                        if chosen?.type == "character"{
+                            characterManager.changeImage(name: chosen?.imageName ?? "sparkle", context: context)
+                            countItems-=1
+                            inventory.delete(context: context, item: chosen!)
+                        }
                     },
                     label: {
                         Text("Equip")
                             .font(.title)
                     })
-                    .disabled(chosen == nil)
+                    .disabled(chosen == nil || chosen?.type != "character")
                     .padding()
                     
                 }
@@ -86,7 +97,10 @@ struct InventoryView: View {
                             RoundedRectangle(cornerRadius: 5)
                                 .foregroundColor(Color(red: 226/255, green: 162/255, blue: 1/255))
                                 .frame(width: UIScreen.main.bounds.width/4.5, height:  UIScreen.main.bounds.width/4.5, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            Text(item.title ?? "default")
+                            
+                            Image(item.imageName ?? "")
+                                .resizable()
+                                .scaledToFit()
                                 .onTapGesture {
                                     chosen = item
                                 }

@@ -131,6 +131,27 @@ io.on("connection", (socket) => {
 
     });
 
+    socket.on("takeDamage", (damageInfo) => {
+        console.log(damageInfo)
+        let infoParsed = JSON.parse(damageInfo); // Parse into object
+        console.log(infoParsed);
+        collection.updateOne({"_id": socket.activeRoom}, {
+           "$set": {
+               "enemy.health": enemy.health-damageInfo["damage"]
+           }
+        });
+
+        let message = "Пользователь " + damageInfo["user"] + " " + "нанёс противнику " +
+        damageInfo["damage"] + " единиц урона."
+        collection.updateOne({ "_id": socket.activeRoom }, {
+            "$push": {
+                "messages": message
+            }
+        });
+
+        io.to(socket.activeRoom).emit("message", message);
+    });
+
     socket.on("message", (message) => {
         collection.updateOne({ "_id": socket.activeRoom }, {
             "$push": {

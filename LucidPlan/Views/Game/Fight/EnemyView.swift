@@ -20,14 +20,35 @@ struct EnemyView: View {
     
     @Environment(\.managedObjectContext) var context
     @ObservedObject var userManager : UserManager
+    @ObservedObject var characterManager : CharacterManager
+    
+    var images: [String] = ["blitz", "dreamon", "frosty", "corwus"]
     
     var enemyDamage : Int64
     var enemyCritPercent : Int64
     
-    init(userManager: UserManager){
+    var fetchRequest : FetchRequest<ShopItem>
+    
+    var inventoryItems : FetchedResults<ShopItem>{
+        fetchRequest.wrappedValue
+    }
+    
+    init(userManager: UserManager, characterManager : CharacterManager){
+        fetchRequest = FetchRequest(entity: ShopItem.entity(), sortDescriptors: [])
         self.userManager = userManager
         enemyDamage = Int64.random(in: 8...10)
         enemyCritPercent = Int64.random(in: 2...4)
+        self.characterManager = characterManager
+    }
+    
+    func checkPotions() -> Bool{
+        for item in inventoryItems {
+            if item.imageName == "heal" {
+                return true
+            }
+        }
+        
+        return false
     }
     
     func checkWinner() -> Bool{
@@ -61,77 +82,95 @@ struct EnemyView: View {
                 // Here is enemy view
                 HStack(alignment:.top){
                     Spacer()
-                    EnemyStats(health: $enemyHealth, maxHealth:enemyHealth,imageName: "blitz")
+                    EnemyStats(health: $enemyHealth, maxHealth:enemyHealth,imageName: images[Int.random(in: 0...3)])
                         .padding()
                 }
                 
                 CharacterStats(health: $characterHealth, maxHealth: characterHealth, energy: $characterEnergy,
-                               maxEnergy: characterEnergy)
+                               maxEnergy: characterEnergy, image: characterManager.getImageName())
                     .padding()
                 
                 Spacer()
                 
-                // Here is game menu for choosing action
-                ZStack{
-                    HStack{
-                        Button(action: {
-                            characterEnergy-=2
-                            enemyHealth-=5
-                            if enemyHealth > 0{
-                                let rand = Int.random(in: 0...100)
-                                if rand <= enemyCritPercent {
-                                    characterHealth -= enemyDamage*2
-                                }else{
-                                    characterHealth -= enemyDamage
+                NavigationView{
+                    // Here is game menu for choosing action
+                    ZStack{
+                        HStack{
+                            Button(action: {
+                                characterEnergy-=2
+                                enemyHealth-=5
+                                if enemyHealth > 0{
+                                    let rand = Int.random(in: 0...100)
+                                    if rand <= enemyCritPercent {
+                                        characterHealth -= enemyDamage*2
+                                    }else{
+                                        characterHealth -= enemyDamage
+                                    }
                                 }
-                            }
-                            playerWon = checkWinner()
-                        },
-                        label: {
-                            Image(systemName: "flame")
-                                .accentColor(.orange)
-                                .font(.system(size: 40))
-                        })
-                        .padding(25)
-                        
-                        Button(action: {
-                            characterEnergy -= 5
-                            enemyHealth-=10
-                            if enemyHealth > 0{
-                                let rand = Int.random(in: 0...100)
-                                if rand <= enemyCritPercent {
-                                    characterHealth -= enemyDamage*2
-                                }else{
-                                    characterHealth -= enemyDamage
+                                playerWon = checkWinner()
+                            },
+                            label: {
+                                VStack{
+                                    Image(systemName: "flame")
+                                        .accentColor(.orange)
+                                        .font(.system(size: 40))
+                                    Text("Обычная атака")
+                                        .foregroundColor(.orange)
                                 }
-                            }
-                            playerWon = checkWinner()
-                        },
-                        label: {
-                            Image(systemName: "sparkles")
-                                .accentColor(.yellow)
-                                .font(.system(size: 40))
-                        })
-                        .padding()
+                            })
+                            .padding(25)
+                            
+                            Button(action: {
+                                characterEnergy -= 5
+                                enemyHealth-=10
+                                if enemyHealth > 0{
+                                    let rand = Int.random(in: 0...100)
+                                    if rand <= enemyCritPercent {
+                                        characterHealth -= enemyDamage*2
+                                    }else{
+                                        characterHealth -= enemyDamage
+                                    }
+                                }
+                                playerWon = checkWinner()
+                            },
+                            label: {
+                                VStack{
+                                    Image(systemName: "sparkles")
+                                        .accentColor(.yellow)
+                                        .font(.system(size: 40))
+                                    Text("Особая атака")
+                                        .foregroundColor(.yellow)
+                                    
+                                }
+                            })
+                            .padding()
+                            
+                            Button(action: {
+                                if checkPotions(){
+                                    characterHealth = 100
+                                }
+                            },
+                            label: {
+                                VStack{
+                                    Image(systemName: "heart")
+                                        .accentColor(.red)
+                                        .font(.system(size: 40))
+                                    Text("Восстановить здоровье")
+                                        .foregroundColor(.red)
+                                }
+                            })
+                            .padding()
+                        }.zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                         
-                        Button(action: {
-                            // TODO: CHOOSE HEAL OPTION
-                        },
-                        label: {
-                            Image(systemName: "heart")
-                                .accentColor(.red)
-                                .font(.system(size: 40))
-                        })
-                        .padding()
-                    }.zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
-                    
-                    Rectangle()
-                        .cornerRadius(radius: 25.0, corners: [.topLeft, .topRight])
-                        .foregroundColor(.white)
-                        .zIndex(0)
+                        Rectangle()
+                            .cornerRadius(radius: 25.0, corners: [.topLeft, .topRight])
+                            .foregroundColor(.white)
+                            .zIndex(0)
+                        
+                    }
+                    .padding()
                     
                 }
-                .padding()
                 
             }
             .opacity(showEndView ? 0.1 : 1)
@@ -194,7 +233,8 @@ struct CharacterStats: View{
     @State var maxHealth : Int64
     @Binding var energy : Int64
     @State var maxEnergy : Int64
-  
+    var image : String
+    
     func calculateHeight(for value: Int64, maxValue: Int64, height: CGFloat) -> CGFloat{
         return (CGFloat(value)/CGFloat(maxValue)) * height
     }
@@ -207,8 +247,9 @@ struct CharacterStats: View{
                     RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                         .fill(Color.white)
                         .frame(width: UIScreen.main.bounds.width/2 , height: UIScreen.main.bounds.width/2)
-                    Image(systemName: "sparkle")
+                    Image(image)
                         .resizable()
+                        .scaledToFit()
                         .foregroundColor(.yellow)
                         .frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.width/2)
                     

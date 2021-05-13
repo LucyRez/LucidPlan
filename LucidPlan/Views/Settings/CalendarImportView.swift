@@ -19,6 +19,7 @@ struct CalendarImportView: View {
                 Text("Синхронизировать с Календарём")
                     .font(.system(size: 18))
             }
+            .onTapGesture(perform: eventManager.getCalendarTypes)
             .padding()
             
             if showCalendars{
@@ -42,6 +43,7 @@ struct CalendarImportView: View {
             Spacer()
         }
         .onAppear(perform: eventManager.getCalendarTypes)
+        
     }
 }
 

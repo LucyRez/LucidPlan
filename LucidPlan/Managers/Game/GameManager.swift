@@ -18,6 +18,7 @@ import CoreData
 class GameManager: ObservableObject{
     
     var characterManager = CharacterManager() // Manager for controlling a character
+   
     var userManager = UserManager()
     
     /**
@@ -28,6 +29,7 @@ class GameManager: ObservableObject{
     func initializeGameManager(context: NSManagedObjectContext, nickname : String){
         characterManager.initializeCharacter(context: context)
         userManager.initializeUser(context: context, nickname: nickname)
+        
     }
 
 }

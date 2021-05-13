@@ -39,6 +39,10 @@ struct SingleTaskView: View{
         self.status = task.status!
     }
     
+    let layout = [GridItem(.flexible()),
+                  GridItem(.flexible()),
+                  GridItem(.flexible())]
+    
     var body: some View{
         HStack(alignment:.top, spacing:30){
             // Show start time and end time
@@ -94,18 +98,18 @@ struct SingleTaskView: View{
                     .foregroundColor(.white)
                     
                     // Show tags
-                    HStack{
+                    LazyVGrid(columns: layout, spacing: 2){
                         ForEach(tags, id: \.self){tag in
                             Text(tag)
-                                .foregroundColor(.gray)
+                                .foregroundColor(.white)
                                 .padding(.vertical, 8)
                                 .padding(.horizontal)
-                                .background(Capsule().stroke(Color.gray, lineWidth: 1))
+                                .background(Capsule().stroke(Color.white, lineWidth: 1))
                         }
-                        .padding(.leading,5)
                         
                         Spacer()
                     }
+                    .padding()
                 }
             }
         }

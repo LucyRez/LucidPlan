@@ -15,7 +15,8 @@ struct TabBarView: View{
     @StateObject var gameManager = GameManager()
     var nickname : String
     
-    let tabBarImages : [String] = ["calendar","clock", "note.text", "person.2"]
+    let tabBarImages : [String] = ["calendar","clock", "note.text", "face.smiling.fill"]
+    let tabBarLabels : [String] = ["Календарь", "Дедлайны", "Задачи", "Привычки"]
     @State var viewIndex : Int = 0
     var body: some View{
         VStack{
@@ -24,12 +25,13 @@ struct TabBarView: View{
                 case 0:
                     ScheduleView()
                 case 1:
-                    DeadlineView(characterManager: gameManager.characterManager, userManager: gameManager.userManager)
+                    DeadlineViewWrapper(characterManager: gameManager.characterManager, userManager: gameManager.userManager)
                 case 2:
                     ToDoView(gameManager: gameManager)
                 default:
                     //ChatScreen(socketManager: socketManager)
                     HabitsView(gameManager: gameManager)
+                    
                 }
                 
             }
@@ -41,9 +43,16 @@ struct TabBarView: View{
                         viewIndex = number
                     }, label: {
                         Spacer()
-                        Image(systemName: tabBarImages[number])
-                            .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(.black).opacity(viewIndex == number ? 1 : 0.3)
+                        VStack{
+                            Image(systemName: tabBarImages[number])
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundColor(.black).opacity(viewIndex == number ? 1 : 0.3)
+                            
+                            Text(tabBarLabels[number])
+                                .font(.system(size: 14))
+                                .foregroundColor(.black).opacity(viewIndex == number ? 1 : 0.3)
+                                
+                        }
                         Spacer()
                     })
                     
