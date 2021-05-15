@@ -21,23 +21,25 @@ struct AddTaskView: View {
     var body: some View{
         
         VStack{
-            Text("\(task.task != nil ? "Update" : "Create New") Task")
+            Text("\(task.task != nil ? "Изменить " : "Создать ") событие")
                 .font(.title)
                 .fontWeight(.semibold)
                 .foregroundColor(.black)
                 .padding()
             
-            TextField("Enter the title", text: $task.title)
+            TextField("Введите название... ", text: $task.title)
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 .padding()
             
-            
-            TextEditor(text:$task.note )
-                .background(Color.white)
+            TextField("Место для заметок...", text: $task.note)
+                .font(.system(size: 18))
                 .cornerRadius(20)
-                .padding(.horizontal,10)
+                .padding(15)
+                .background(Color.gray.opacity(0.1))
+                
             
             AddTagView(model: task)
+                .padding(.vertical)
             
             Toggle(isOn: $task.isDeadline, label: {
                 Text("Дедлайн")
@@ -47,7 +49,7 @@ struct AddTaskView: View {
             
             
             HStack{
-                Text("When")
+                Text("Когда")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(.black)
@@ -58,8 +60,8 @@ struct AddTaskView: View {
             .padding()
             
             HStack{
-                Text("Start Time ")
-                    .font(.title)
+                Text("Начало:")
+                    .font(.system(size: 20))
                     .foregroundColor(.black)
                 
                 Spacer()
@@ -68,12 +70,12 @@ struct AddTaskView: View {
                     .labelsHidden()
                     .accentColor(.black)
             }
-            .padding()
+            .padding(.horizontal)
             
             
             HStack{
-                Text("End Time")
-                    .font(.title)
+                Text("Конец:")
+                    .font(.system(size: 20))
                     .foregroundColor(.black)
                 
                 Spacer()
@@ -82,11 +84,11 @@ struct AddTaskView: View {
                     .labelsHidden()
                     .accentColor(.black)
             }
-            .padding()
+            .padding(.horizontal)
             
             HStack{
-                DateButton(task: task, title: "Today")
-                DateButton(task: task, title: "Tomorrow")
+                DateButton(task: task, title: "Сегодня")
+                DateButton(task: task, title: "Завтра")
                 Spacer()
             }
             .padding()
@@ -98,7 +100,7 @@ struct AddTaskView: View {
             }, label: {
                 Label(
                     title: {
-                        Text("\(task.task == nil ? "Add Task" : "Edit Task")")
+                        Text("\(task.task == nil ? "Добавить событие" : "Изменить событие")")
                             .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                             .foregroundColor(.white)
                         
@@ -111,7 +113,7 @@ struct AddTaskView: View {
                     .frame(width: UIScreen.main.bounds.width-30)
                     .padding(.vertical)
                     .background(
-                        LinearGradient(gradient: .init(colors: [Color(red: 121/255, green: 220/255, blue: 199/255), Color(red: 168/255, green: 226/255, blue: 201/255)]), startPoint: .leading, endPoint: .trailing)
+                        LinearGradient(gradient: .init(colors: [Color(red: 255/255, green: 173/255, blue: 173/255), Color(red: 255/255, green: 214/255, blue: 165/255)]), startPoint: .leading, endPoint: .trailing)
                     )
                     .cornerRadius(8)
             })
@@ -121,6 +123,7 @@ struct AddTaskView: View {
             
             
         }
+        .padding()
         .onDisappear(perform: {
             task.task = nil
             task.note = ""
@@ -138,17 +141,17 @@ struct DateButton: View{
     
     func checkDate() -> String{
         if Calendar.current.isDateInToday(task.startDate) {
-            return "Today"
+            return "Сегодня"
         }else if Calendar.current.isDateInTomorrow(task.startDate){
-            return "Tomorrow"
+            return "Завтра"
         }
-        return "Other"
+        return "Другое"
     }
     
     func updateStartDate(){
-        if title == "Today"{
+        if title == "Сегодня"{
             task.startDate = Date()
-        }else if title == "Tomorrow"{
+        }else if title == "Завтра"{
             task.startDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
         }else{
             
@@ -166,7 +169,7 @@ struct DateButton: View{
                 .padding()
                 .background(
                     checkDate() == title ?
-                        LinearGradient(gradient: .init(colors: [Color(red: 121/255, green: 220/255, blue: 199/255), Color(red: 168/255, green: 226/255, blue: 201/255)]), startPoint: .leading, endPoint: .trailing)
+                        LinearGradient(gradient: .init(colors: [Color(red: 255/255, green: 173/255, blue: 173/255),  Color(red: 255/255, green: 214/255, blue: 165/255)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                         :  LinearGradient(gradient: .init(colors: [Color(.white)]), startPoint: .leading, endPoint: .trailing)
                 )
                 .cornerRadius(6)
@@ -188,8 +191,8 @@ struct AddTagView: View{
     var body: some View{
         VStack{
             HStack{
-                Text("Added Tags: ")
-                    .font(.system(size: 25))
+                Text("Добавленные теги: ")
+                    .font(.system(size: 20))
                     .padding(.horizontal)
                 
                 Spacer()
@@ -203,9 +206,10 @@ struct AddTagView: View{
             }
             
             HStack{
-                TextField("Write a tag here", text: $tagString)
+                TextField("Введите название тега...", text: $tagString)
+                    .font(.system(size: 18))
                     .padding()
-                    .frame(width: UIScreen.main.bounds.width-60, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .background(Color.white)
                     .cornerRadius(10)
                     .padding(5)
@@ -221,6 +225,7 @@ struct AddTagView: View{
                         .font(.system(size: 28))
                     
                 })
+                .padding(.horizontal)
             }
         }
         

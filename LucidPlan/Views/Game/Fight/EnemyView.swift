@@ -57,7 +57,7 @@ struct EnemyView: View {
                 showEndView = true
             }
             userManager.addCoins(context: context, amount: 100)
-            userManager.addToExp(expPoints: 500, context: context)
+            userManager.addToExp(expPoints: 200, context: context)
             return true
         }else if characterHealth <= 0{
             withAnimation(.easeOut){

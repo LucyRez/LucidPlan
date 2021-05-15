@@ -65,7 +65,11 @@ struct ToDoContainer: View{
             }
             .toolbar(content: {
                 EditButton()
+                    .font(.system(size: 20))
+                    
             })
+            .foregroundColor(Color(red: 120/255, green: 127/255, blue: 246/255))
+            .padding(.horizontal)
             
         }
         .sheet(isPresented: $todoManager.active, content: {

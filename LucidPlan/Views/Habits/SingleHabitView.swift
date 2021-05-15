@@ -38,20 +38,28 @@ struct SingleHabitView: View {
                             isEdited.toggle()
                             
                         }, label: {
-                            Text("Edit")
+                            Text("Редактировать")
                         })
                         
                         Button(action: {
                             habitManager.delete(context: context, habit: habit)
                         }, label: {
-                            Text("Delete")
+                            Text("Удалить")
                         })
                     }
                     label: {
+                        HStack{
                         Text(habit.title ?? "")
                             .font(.system(size: 20))
+                            
+                        Spacer()
                         
-                       // Text(" \(habit.points)")
+                         Text(" \(habit.points)")
+                            .font(.system(size: 20))
+                            .foregroundColor(.purple)
+                            .padding(.trailing)
+                            
+                        }
                     }
                     .foregroundColor(.black)
                    
@@ -83,7 +91,8 @@ struct SingleHabitView: View {
             Button(action: {
                 habitManager.addPoints(context: context , habit: habit, numberOfPoints: 5)
                 gameManager.userManager.addToExp(expPoints: 50, context: context)
-                gameNetwork.takeDamage(damage: DamageInfo(_id: gameManager.userManager.user!.groupId!, user: gameManager.userManager.user!.nickname!, damage: 10))
+                gameNetwork.takeDamage(damage: DamageInfo(_id: gameManager.userManager.user!.groupId!, damage: 10, message:
+                                                            SubmittedMessage(message: "Пользователь \(gameManager.userManager.user!.nickname!) закрепил привычку, нанося противнику 10 ед. урона", nickname: "System")))
             }, label: {
                 ZStack{
                     RoundedRectangle(cornerRadius: 8)

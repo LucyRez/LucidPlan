@@ -34,12 +34,12 @@ struct FightView: View {
             
                 NavigationLink(destination: EnemyView(userManager: userManager, characterManager: characterManager),
                                label: {
-                                ZStack(alignment: .trailing){
+                                ZStack{
                                     RoundedRectangle(cornerRadius: 15)
                                         .frame(width: 130, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                         .foregroundColor(Color(red: 120/255, green: 127/255, blue: 246/255))
                                     
-                                    Text("Fight")
+                                    Text("В бой!")
                                         .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                                         .bold()
                                         .foregroundColor(.white)
@@ -56,22 +56,26 @@ struct FightView: View {
                     .foregroundColor(Color(red: 120/255, green: 127/255, blue: 246/255))
                 VStack(alignment:.leading){
                     HStack{
-                        Text("Lvl.")
+                        Text("Уровень:")
+                            .fontWeight(.semibold)
                         Spacer()
                         Text("\(userManager.getLevel())")
                     }
                     HStack{
-                        Text("Health")
+                        Text("Здоровье:")
+                            .fontWeight(.semibold)
                         Spacer()
                         Text("\(characterManager.getHealth()) / 100")
                     }
                     HStack{
-                        Text("Experience")
+                        Text("Опыт:")
+                            .fontWeight(.semibold)
                         Spacer()
                         Text("\(userManager.getExp()) / 1000")
                     }
                     HStack{
-                        Text("Gold")
+                        Text("Золото:")
+                            .fontWeight(.semibold)
                         Spacer()
                         Text("\(userManager.getCoins())")
                     }

@@ -11,7 +11,6 @@ import SwiftUI
 
 struct TabBarView: View{
     @Environment(\.managedObjectContext) var context
-    @StateObject var socketManager : SocketIOManager = SocketIOManager() // Создаём сокет-менеджер.
     @StateObject var gameManager = GameManager()
     var nickname : String
     

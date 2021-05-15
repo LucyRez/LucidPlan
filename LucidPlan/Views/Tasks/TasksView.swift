@@ -76,7 +76,9 @@ struct TopTaskView: View{
                 model.active.toggle()
             },
             label: {
-                Image(systemName: "plus.circle.fill").accentColor(Color( red: 17/255, green: 141/255, blue: 211/255))
+                Image(systemName: "plus.circle.fill")
+                    .accentColor(Color( red: 255/255, green: 173/255, blue: 173/255))
+                    //.accentColor(Color( red: 17/255, green: 141/255, blue: 211/255))
                     .font(.system(size: 40))
             })
             .sheet(isPresented: $model.active, content: {
@@ -137,12 +139,14 @@ struct DateView: View{
             
             if (numberOfDays(between: Calendar.current.startOfDay(for: date), and: Calendar.current.startOfDay(for: Date()))==0) && !isSelected{
             RoundedRectangle(cornerRadius: 20.0)
-                .stroke(Color(red: 26/255, green: 231/255, blue: 202/255), lineWidth: 3)
+                .stroke(Color(red: 155/255, green: 246/255, blue: 255/255), lineWidth: 3)
+               // .stroke(Color(red: 26/255, green: 231/255, blue: 202/255), lineWidth: 3)
                 .padding(1)
                 
             }else if isSelected{
                 RoundedRectangle(cornerRadius: 20.0)
-                .fill(Color(red: 26/255, green: 231/255, blue: 202/255))
+                    .fill(Color(red: 160/255, green: 196/255, blue: 255/255))
+               // .fill(Color(red: 26/255, green: 231/255, blue: 202/255))
             }else{
                 RoundedRectangle(cornerRadius: 20.0)
                     .fill(Color.white)

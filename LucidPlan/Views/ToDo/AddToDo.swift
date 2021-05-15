@@ -20,13 +20,13 @@ struct AddToDo: View {
     var body: some View{
         
         VStack{
-            Text("\(todoManager.todo != nil ? "Update" : "Create New") ToDo")
+            Text("\(todoManager.todo != nil ? "Редактировать" : "Создать") задачу")
                 .font(.title)
                 .fontWeight(.semibold)
                 .foregroundColor(.black)
                 .padding()
             
-            TextField("Enter the title", text: $todoManager.title)
+            TextField("Введите название...", text: $todoManager.title)
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 .padding()
             
@@ -36,9 +36,9 @@ struct AddToDo: View {
                 .padding(.horizontal)
             
             HStack{
-                TypeToDoButton(text: "Day", manager: todoManager)
-                TypeToDoButton(text: "Week", manager: todoManager)
-                TypeToDoButton(text: "Month", manager: todoManager)
+                TypeToDoButton(text: "День", manager: todoManager)
+                TypeToDoButton(text: "Неделя", manager: todoManager)
+                TypeToDoButton(text: "Месяц", manager: todoManager)
             }
             
             Button(action: {
@@ -47,7 +47,7 @@ struct AddToDo: View {
             }, label: {
                 Label(
                     title: {
-                        Text("\(todoManager.todo == nil ? "Add ToDo" : "Edit ToDo")")
+                        Text("\(todoManager.todo == nil ? "Добавить задачу" : "Изменить задачу")")
                             .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                             .foregroundColor(.white)
                         
@@ -91,11 +91,11 @@ struct TypeToDoButton: View{
     
     func getType()->Int{
         switch(text){
-        case "Day":
+        case "День":
             return 0
-        case "Week":
+        case "Неделя":
             return 1
-        case "Month":
+        case "Месяц":
             return 2
         default:
             return 0

@@ -17,6 +17,7 @@ struct DeadlineViewWrapper : View{
     }
 }
 struct DeadlineView: View {
+    @StateObject var gameNetwork = GameNetworkManager()
     @ObservedObject var model : TaskViewModel = TaskViewModel() // Task manager
     @State var showSettings : Bool = false
     @ObservedObject var characterManager : CharacterManager
@@ -31,15 +32,16 @@ struct DeadlineView: View {
         fetchRequest.wrappedValue
     }
     
+    
     init(characterManager: CharacterManager, userManager: UserManager, showEnded : Binding<Bool>){
         self.characterManager = characterManager
         if showEnded.wrappedValue {
             self.userManager = userManager
-            fetchRequest = FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "endDate", ascending: true)], predicate:
+            fetchRequest = FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "endDate", ascending: false)], predicate:
                                             NSPredicate(format: "isDeadline = %d && endDate < %@ ",true, Date() as NSDate))
         }else{
             self.userManager = userManager
-            fetchRequest = FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "endDate", ascending: true)], predicate:
+            fetchRequest = FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "endDate", ascending: false)], predicate:
                                             NSPredicate(format: "isDeadline = %d && endDate >= %@ ",true, Date() as NSDate))
             
         }
@@ -97,8 +99,8 @@ struct DeadlineView: View {
                         })
                     }
                     label: {
-                        Text("Filter")
-                            .font(.system(size: 30))
+                        Text("Фильтр")
+                            .font(.system(size: 25))
                             .foregroundColor(.white)
                             .padding()
                     }
@@ -111,8 +113,8 @@ struct DeadlineView: View {
                         model.active.toggle()
                     },
                     label: {
-                        Text("Add")
-                            .font(.system(size: 30))
+                        Text("Добавить")
+                            .font(.system(size: 25))
                             .foregroundColor(.white)
                     })
                     .sheet(isPresented: $model.active, content: {
@@ -134,7 +136,9 @@ struct DeadlineView: View {
                                 Menu{
                                     Button(action: {
                                         model.delete(context: context, task: task)
-                                        characterManager.addToHealth(healthPoints: 20, context: context)
+                                        userManager.addToExp(expPoints: 20, context: context)
+                                        gameNetwork.takeDamage(damage: DamageInfo(_id: userManager.user!.groupId!, damage: 15, message:
+                                                                                    SubmittedMessage(message: "Пользователь \(userManager.user!.nickname!) не просрочил дедлайн и нанёс ротивнику 15 ед. урона", nickname: "System")))
                                     },
                                     label: {
                                         HStack{
@@ -181,6 +185,8 @@ struct DeadlineView: View {
                 }
             }
         }
+        .onAppear(perform: gameNetwork.setSocket)
+        .onDisappear(perform: gameNetwork.disconnect)
     }
     
     struct SingleDeadlineView: View{
@@ -199,7 +205,7 @@ struct DeadlineView: View {
                 day = "\(endDay.day!).0\(endDay.month!)"
             }
             
-            let number = Calendar.current.dateComponents([.day], from: Date() , to: task.endDate!)
+            let number = Calendar.current.dateComponents([.day], from: Date() , to: task.startDate!)
             difference = number.day!
             
             self.endTime = end

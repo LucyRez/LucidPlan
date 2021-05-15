@@ -11,7 +11,6 @@ import Foundation
 struct ReceivedGameInfo : Decodable, Equatable, Hashable{
     let _id : String
     let enemy : ReceivedEnemyInfo
-    let messages : [String]
     let users : [ReceivedUserInfo]
 }
 
@@ -35,6 +34,6 @@ struct SubmittedEnemyInfo: Encodable{
 
 struct DamageInfo: Encodable{
     let _id : String
-    let user : String
     let damage : Int
+    let message : SubmittedMessage
 }

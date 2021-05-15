@@ -59,7 +59,7 @@ final class GameNetworkManager: ObservableObject{
     // For creating new room
     func sendCode(code : String, userManager: UserManager, hp: Int, imageName: String){
         let userInfo = SubmittedUserInfo(groupId: code, nickname: userManager.user!.nickname!, level: Int(userManager.getLevel()),
-                                         points: 0, hp: hp, imageName: imageName)
+                                         points: Int(userManager.getExp()), hp: hp, imageName: imageName)
         // Кодируем объект в JSON.
         guard let json = try? JSONEncoder().encode(userInfo),
               let jsonString = String(data: json, encoding: .utf8)
@@ -73,7 +73,7 @@ final class GameNetworkManager: ObservableObject{
     // For checking room code
     func checkCode(code : String, userManager: UserManager, hp: Int, imageName: String){
         let userInfo = SubmittedUserInfo(groupId: code, nickname: userManager.user!.nickname!, level: Int(userManager.getLevel()),
-                                         points: 0, hp: hp, imageName: imageName)
+                                         points: Int(userManager.getExp()), hp: hp, imageName: imageName)
         // Кодируем объект в JSON.
         guard let json = try? JSONEncoder().encode(userInfo),
               let jsonString = String(data: json, encoding: .utf8)

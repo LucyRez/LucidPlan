@@ -22,11 +22,27 @@ struct SingleTaskView: View{
     var status : String
     var model : TaskViewModel // Task manager
     var task : Task // Current task
+    var passed : Bool
     @Environment(\.managedObjectContext) var context // Current context
     
     init(task: Task, model: TaskViewModel){
         let startTime = Calendar.current.dateComponents([.hour, .minute], from: task.startDate!)
         let endTime = Calendar.current.dateComponents([.hour, .minute], from: task.endDate!)
+        let now = Calendar.current.dateComponents([.hour, .minute], from: Date())
+        if endTime.minute! < now.minute!{
+            if endTime.hour! <= now.hour!{
+                passed = true
+            }else{
+                passed = false
+            }
+        }else {
+            if endTime.hour! < now.hour!{
+                passed = true
+            }else{
+                passed = false
+            }
+        }
+        
         let start = "\(startTime.hour!) : \(startTime.minute!)"
         let end = "\(endTime.hour!) : \(endTime.minute!)"
         self.model = model
@@ -54,15 +70,17 @@ struct SingleTaskView: View{
             
             ZStack(alignment:.topLeading){
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color( red: 77/255, green: 197/255, blue: 145/255))
+                    .fill(!passed ? Color( red: 157/255, green: 214/255, blue: 146/255) : Color.gray.opacity(0.2))
                     .frame(width: .infinity, height: 150)
                 
                 VStack{
-                    HStack{
+                    HStack(alignment: .top){
                         Text(title)
                             .bold()
+                            .shadow(radius: 0.1)
                             .font(.system(size: 20))
                             .padding()
+                            .foregroundColor(passed ? Color.black.opacity(0.3) : .white)
                         
                         Spacer()
                         

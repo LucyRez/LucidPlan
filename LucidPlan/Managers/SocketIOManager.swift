@@ -12,18 +12,17 @@ import SocketIO
  Этот класс реализует взаимодействие с сервером, используя вебсокеты.
  - returns: socket io manager
  */
-final class SocketIOManager: ObservableObject{
-    
-    @Published var notJustOpened : Bool = false // Подключение уже было установлено.
-    @Published var nickname : String = UserDefaults.standard.object(forKey: "nickname") as? String ?? "" // Имя пользователя-клиента.
+final class ChatManager: ObservableObject{
     
     // Сокет-менеджер слушает определённый порт на локальном сервере.
-    private var manager = SocketManager(socketURL: URL(string: "ws://localhost:3000")!, config: [.log(true), .compress])
+    private var manager = SocketManager(socketURL: URL(string: "ws://localhost:4000")!, config: [.log(true), .compress])
     var socket: SocketIOClient? = nil // Здесь будет храниться сокет клиента.
+    @Published var id : String = ""
     
     
     // Функция инициализирует вебсокет и устанавливает все ивенты.
-    func setSocket(){
+    func setSocket(id: String){
+        self.id = id
         self.socket = manager.defaultSocket
         socket?.connect() // Подключаемся к серверу.
         setSocketEvents() // Устанавливаем ивенты.
@@ -33,7 +32,7 @@ final class SocketIOManager: ObservableObject{
     func setSocketEvents(){
         socket?.on(clientEvent: .connect){ (data,ack) in
             print("Connected")
-            self.socket?.emit("Server Event", "Hi NODEJS server!") // Отправляем сообщение с кастомным ивентом на сервер.
+            self.socket?.emit("getMessages", self.id) // Отправляем сообщение с кастомным ивентом на сервер.
         }
     }
     

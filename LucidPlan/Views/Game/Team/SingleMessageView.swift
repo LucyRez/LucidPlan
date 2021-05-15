@@ -23,33 +23,33 @@ struct SingleMessageView: View {
     }
     
     var body: some View{
-        VStack{
-            HStack{
+        VStack(alignment:.center){
+            HStack(alignment:.center){
                 // Располагаем сообщение по правому краю, если отправитель - текущий пользователь.
-                if(isCurrentUser){
+                if(isCurrentUser || nickname == "System"){
                     Spacer()
                 }
                 
-                VStack{
+                VStack(alignment:.center){
                     // Для других пользователей устанавливаем их имена над текстом сообщений.
-                    if(!isCurrentUser){
+                    if(!isCurrentUser && nickname != "System"){
                         HStack{
                             Text(nickname)
                                 .font(.system(size: 13))
                                 .bold()
                                 .offset(y:5)
-                            Spacer()
-                            
+                                Spacer()
                         }
                     }
                     
                     // Цвет и расположение текста сообщения меняется в зависимости от статуса пользователя.
-                    HStack{
+                    HStack(alignment:.center){
+                        
                         Text(text)
                             .padding(10)
-                            .foregroundColor(isCurrentUser ? Color.white : Color.black)
-                            .background(isCurrentUser ? Color.blue : Color.gray)
-                            .cornerRadius(10)
+                            .foregroundColor(isCurrentUser || nickname == "System" ? Color.white : Color.black)
+                            .background(isCurrentUser ? Color.blue : nickname == "System" ? Color.green.opacity(0.7) : Color.gray)
+                            .cornerRadius(15)
                             .lineLimit(nil)
                         
                         if(!isCurrentUser){Spacer()}
@@ -64,13 +64,13 @@ struct SingleMessageView: View {
             
             // Отдельный стэк для того, чтобы расположить время отправки сообщения.
             HStack{
-                if(!isCurrentUser){
+                if(!isCurrentUser && nickname != "System"){
                     Text(date, style: .time)
                         .foregroundColor(.gray)
                         .font(.system(size: 12))
                     Spacer()
                     
-                }else{
+                }else if nickname != "System"{
                     Spacer()
                     Text(date, style: .time)
                         .foregroundColor(.gray)

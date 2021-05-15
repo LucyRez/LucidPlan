@@ -21,7 +21,7 @@ struct ShopView: View {
                 ZStack{
                     RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                         .foregroundColor(.white)
-                        .frame(width: 150, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(width: 120, height: 120, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .padding()
                     
                     Image(chosen?.imageName ?? "")
@@ -32,17 +32,19 @@ struct ShopView: View {
                 }
                 Spacer()
                 
-                VStack{
+                VStack(spacing: 30){
                     Text(chosen?.description ?? "Выберите товар")
                         .font(.system(size: 18))
-                    Spacer()
+                   
                     Button(action:{
                         if chosen!.price <= userManager.getCoins(){
                             userManager.addCoins(context: context, amount: Int64(0 - chosen!.price))
                             shopManager.writeData(context: context, boughtItem: chosen!)}
                     },
                     label: {
-                        Text("Buy")
+                        Text("Купить")
+                            .fontWeight(.semibold)
+                            .font(.system(size: 20))
                     })
                     .disabled(chosen == nil || chosen!.price > userManager.getCoins())
                 }

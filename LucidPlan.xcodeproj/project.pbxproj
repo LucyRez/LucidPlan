@@ -331,6 +331,8 @@
 		DB7FCDFB2647385C00178EAA /* Team */ = {
 			isa = PBXGroup;
 			children = (
+				DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */,
+				DBC88BC12611EB2C00F53820 /* ChatScreen.swift */,
 				DB7FCDFC2647385C00178EAA /* TeamView.swift */,
 			);
 			name = Team;
@@ -389,8 +391,6 @@
 				DB0B54DE262CBEBA0068C66C /* Login */,
 				DB0B54DC262CBB230068C66C /* Tasks */,
 				DB881C342603EF01000556FA /* DeadlineView.swift */,
-				DBC88BC12611EB2C00F53820 /* ChatScreen.swift */,
-				DBC88BCB2611ED0B00F53820 /* SingleMessageView.swift */,
 				DB881C102602B2F9000556FA /* LucidPlanApp.swift */,
 				DB4DE9F926349388005F47D0 /* CustomShape.swift */,
 			);

@@ -56,18 +56,20 @@ struct InventoryView: View {
                 ZStack{
                     RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
                         .foregroundColor(.white)
-                        .frame(width: 200, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(width: 150, height: 150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .padding()
                     
                     Image(chosen?.imageName ?? "")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 200, height: 200)
+                        .frame(width: 120, height: 120)
                         .foregroundColor(.yellow)
                 }
                 
                 VStack{
                     Text(chosen?.title ?? "Выберите предмет")
+                        .font(.system(size: 18))
+                        
                     Button(action: {
                         if chosen?.type == "character"{
                             characterManager.changeImage(name: chosen?.imageName ?? "sparkle", context: context)
@@ -76,8 +78,9 @@ struct InventoryView: View {
                         }
                     },
                     label: {
-                        Text("Equip")
-                            .font(.title)
+                        Text("Активировать")
+                            .font(.system(size: 20))
+                            .fontWeight(.semibold)
                     })
                     .disabled(chosen == nil || chosen?.type != "character")
                     .padding()

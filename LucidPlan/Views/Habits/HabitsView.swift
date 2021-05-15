@@ -54,7 +54,7 @@ struct HabitsView: View {
                         
                         HStack{
                             ZStack{
-                                TextField("Add new habit...", text: $habitManager.titleForBinding)
+                                TextField("Добавить привычку...", text: $habitManager.titleForBinding)
                                     .font(.system(size: 20))
                                     .padding(.leading).zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                                 

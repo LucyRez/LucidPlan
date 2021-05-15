@@ -1,3 +1,4 @@
+var mergeJSON = require("merge-json") ; // Библиотека для того, чтобы мерджить JSON-ы
 const express = require("express")();
 const cors = require("cors"); // Allows communication with server from different port.
 const http = require("http").createServer(express);
@@ -45,7 +46,7 @@ io.on("connection", (socket) => {
                         "users": infoParsed
                     }
                 });
-                let result = await collection.findOne({ "_id": socket.activeRoom });
+                let result = await collection.findOne({ "_id": socket.activeRoom }, {messages: 0});
 
                 socket.emit("getCode", {
                     message: "Joined",
@@ -88,7 +89,7 @@ io.on("connection", (socket) => {
                 socket.join(infoParsed["groupId"]);
                 socket.activeRoom = infoParsed["groupId"];
 
-                let result = await collection.findOne({ "_id": socket.activeRoom });
+                let result = await collection.findOne({ "_id": socket.activeRoom }, {messages: 0});
 
                 socket.emit("roomCreated", result);
                 console.log("Room was created");
@@ -127,7 +128,7 @@ io.on("connection", (socket) => {
                     success: true
                 });
 
-                let result = await collection.findOne({ "_id": socket.activeRoom });
+                let result = await collection.findOne({ "_id": socket.activeRoom }, {messages: 0});
                 console.log(result);
                 socket.emit("getGame", result);
             }
@@ -143,6 +144,7 @@ io.on("connection", (socket) => {
         let infoParsed = JSON.parse(damageInfo); // Parse into object
         console.log(infoParsed);
         socket.activeRoom = infoParsed["_id"];
+        socket.join(infoParsed["_id"]);
 
         let enemy = await collection.findOne({ "_id": socket.activeRoom });
         console.log(enemy);
@@ -154,13 +156,23 @@ io.on("connection", (socket) => {
            }
         });
 
-        let message = "Пользователь " + infoParsed["user"] + " " + "нанёс противнику " +
-        infoParsed["damage"] + " единиц урона."
+        let clientMessage = infoParsed["message"]; // Парсим объект от клиента и получаем JSON
+  
+        var dateTime = JSON.stringify({date:(new Date()).toISOString()});
+        var dateJSON = JSON.parse(dateTime); // Получаем JSON с текущим временем
+    
+        var resMessage = mergeJSON.merge(clientMessage,dateJSON); // Объединяем JSON с сообщением от клиента с временем
+        console.log(resMessage);
+
         collection.updateOne({ "_id": socket.activeRoom }, {
             "$push": {
-                "messages": message
+                "messages": resMessage
             }
         });
+
+
+        let result = await collection.findOne({ "_id": socket.activeRoom });
+        io.to(socket.activeRoom).emit("getGame", result);
 
         let oldEnemy = await collection.findOne({ "_id": socket.activeRoom });
         if (oldEnemy.enemy.health < 0 ){
@@ -180,18 +192,7 @@ io.on("connection", (socket) => {
             });
         }
 
-        io.to(socket.activeRoom).emit("message", message);
     });
-
-    socket.on("message", (message) => {
-        collection.updateOne({ "_id": socket.activeRoom }, {
-            "$push": {
-                "messages": message
-            }
-        });
-        io.to(socket.activeRoom).emit("message", message);
-    });
-
 });
 
 express.get("/messages", async (request, response) => {

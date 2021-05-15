@@ -9,14 +9,15 @@ import SwiftUI
 
 struct ChatScreen: View {
     @State private var message = "" // Сообщение из текстового поля.
-    private var manager : SocketIOManager // socket io менеджер.
+    @ObservedObject var userManager : UserManager
+    private var manager : ChatManager
     
     // Массив полученных сообщений.
     @State private var messages: [ReceivedMessage] = []
     
     // Функция подключает чат к вебсокетам при запуске чата.
     func onAppear(){
-        manager.setSocket()
+        manager.setSocket(id: userManager.user!.groupId!)
     }
     
     // Функция отключает приложение от сервера при закрытии.
@@ -27,7 +28,7 @@ struct ChatScreen: View {
     // Функция инициализирует отправку сообщения на сервер.
     private func onSend(){
         if !message.isEmpty {
-            manager.sendMessage(text: message, user: manager.nickname)
+            manager.sendMessage(text: message, user: userManager.user!.nickname!)
             message = ""
         }
     }
@@ -46,8 +47,9 @@ struct ChatScreen: View {
     }
     
     // Инициализатор для текущего экрана.
-    init(socketManager : SocketIOManager) {
-        self.manager = socketManager // Сокет-менеджер полученный от стартового экрана.
+    init(userManager: UserManager, chatManager: ChatManager) {
+        self.userManager = userManager
+        self.manager = chatManager
     }
     
     var body: some View {
@@ -59,7 +61,7 @@ struct ChatScreen: View {
                         
                         ForEach(messages, id: \.id){mes in
                             HStack{
-                                SingleMessageView(text: mes.message, nickname: mes.nickname, date: mes.date, isCurrentUser: (mes.nickname == manager.nickname))
+                                SingleMessageView(text: mes.message, nickname: mes.nickname, date: mes.date, isCurrentUser: (mes.nickname == userManager.user!.nickname))
                                 
                             }.id(mes.id)
                             

@@ -9,12 +9,15 @@ import SwiftUI
 
 struct TeamView: View {
     @StateObject var socketManager = GameNetworkManager()
+    @StateObject var manager = ChatManager()
+  
     @ObservedObject var userManager : UserManager
     @ObservedObject var characterManager : CharacterManager
     
     @State var roomCreated = false
     @State var roomJoined = false
     
+
     
     var body: some View {
         ZStack{
@@ -31,7 +34,7 @@ struct TeamView: View {
                         
                         HStack(alignment:.top, spacing: -50){
                             TeamEnemyView(socketManager: socketManager, userManager: userManager )
-                            NavigationLink(destination: Text("Messages View"),
+                            NavigationLink(destination: ChatScreen(userManager: userManager, chatManager: manager),
                                            label: {
                                             Image(systemName: "message.fill")
                                                 .foregroundColor(.blue)
@@ -54,6 +57,7 @@ struct TeamView: View {
         .navigationBarTitle("", displayMode: .inline)
         .onAppear(perform: socketManager.setSocket)
         .onDisappear(perform: socketManager.disconnect)
+        
         
     }
 }
@@ -189,7 +193,7 @@ struct TeamCodeView: View {
 
 struct TeamEnemyView: View{
     @ObservedObject var socketManager : GameNetworkManager
-    @State var game : ReceivedGameInfo = ReceivedGameInfo(_id: "", enemy: ReceivedEnemyInfo(_id: "", damage: 0, health: 0, imageName: "", maxHealth: 0), messages: [], users: [])
+    @State var game : ReceivedGameInfo = ReceivedGameInfo(_id: "", enemy: ReceivedEnemyInfo(_id: "", damage: 0, health: 0, imageName: "", maxHealth: 0), users: [])
     @ObservedObject var userManager : UserManager
     
     func getGame(){
@@ -248,10 +252,14 @@ struct TeamEnemyView: View{
                             .font(.system(size: 40))
                     }
                     
+                    
+                    
                     ScrollView{
                         VStack(alignment:.leading){
-                            ForEach(game.users, id: \.self ){(user : ReceivedUserInfo) in
-                                Text(user.nickname)
+                            ForEach(game.users.sorted{
+                                $0.level > $1.level
+                            }, id: \.self ){(user : ReceivedUserInfo) in
+                                PlayerRepresentation(nickname: user.nickname, score: user.points, health: user.hp, level: user.level)
                             }
                         }
                         
@@ -263,6 +271,32 @@ struct TeamEnemyView: View{
         .onAppear(perform: getGame)
         
         
+    }
+    
+}
+
+struct PlayerRepresentation: View{
+    var nickname : String
+    var score : Int
+    var health : Int
+    var level : Int
+    
+    var body: some View{
+        HStack(spacing: 40){
+            Text(nickname)
+                .fontWeight(.semibold)
+                .font(.system(size: 20))
+            
+            Text("\(level) ур.")
+                .font(.system(size: 20))
+            
+            Text("\(score)")
+                .font(.system(size: 20))
+            
+            Text("\(health) ❤️")
+                .font(.system(size: 20))
+        }
+        .padding()
     }
 }
 

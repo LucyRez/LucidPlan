@@ -33,6 +33,10 @@ struct LoginView: View {
   
     var body: some View {
         NavigationView{
+           
+            HStack{
+                Spacer()
+                
             VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 50){
                 // Не переходим в чат, пока не подтверждено имя пользователя.
                 NavigationLink(
@@ -48,21 +52,24 @@ struct LoginView: View {
                 Text("LUCID \nPLAN.")
                     .bold()
                     .font(.system(size: 60))
+                    .foregroundColor(Color.black.opacity(0.8))
+                    //.shadow(radius: 2)
                     .padding(.bottom, 50)
                 
                 
                 if( saved == ""){
-                    TextField("Write your nickname here...", text: $nickname)
+                    TextField("Введите своё имя...", text: $nickname)
                         .frame(width: 340, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .font(.system(size: 20))
                         .padding()
-                        .background(Color.gray.opacity(0.5))
+                        .background(Color.white.opacity(0.5))
                         .clipShape(RoundedRectangle(cornerRadius: 50))
                         .padding(20)
                     
                 }else{
-                    Text("Welcome, \(nickname)!")
+                    Text("Добро пожаловать, \(nickname)!")
                         .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(Color.black.opacity(0.7))
                         .padding(20)
                 }
                 
@@ -71,18 +78,26 @@ struct LoginView: View {
                     justOpened.toggle()
                 },
                 label: {
-                    Text("Enter")
+                    Text("Войти")
+                        .foregroundColor(Color.black.opacity(0.7))
                         .font(.system(size: 25))
                         .padding()
                         .frame(width: 200, height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .background(Color.gray.opacity(0.2))
+                        .background(Color.white.opacity(1))
                         .clipShape(RoundedRectangle(cornerRadius: 50))
+                        .shadow(radius: 5)
                     
                 }).disabled(nickname.isEmpty)
+               
                 
                 Spacer()
                 
             }
+                Spacer()
+                
+            }
+            .background(LinearGradient(gradient: Gradient(colors: [Color(red: 255/255, green: 214/255, blue: 165/255), Color(red: 202/255, green: 255/255, blue: 191/255)]), startPoint: .topLeading, endPoint: .bottomTrailing).ignoresSafeArea())
+            
            
          
         }

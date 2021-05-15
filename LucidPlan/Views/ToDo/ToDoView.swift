@@ -61,6 +61,7 @@ struct ToDoView: View {
                         Text("...")
                             .bold()
                             .font(.system(size: 50))
+                            .foregroundColor(.blue)
                     })
                     .padding(.horizontal)
                     
@@ -70,13 +71,14 @@ struct ToDoView: View {
                 HStack{
                     
                     Button(action: {todoManager.active.toggle()}, label: {
-                        Text("Add")
+                        Image(systemName: "plus")
                             .font(.system(size: 25))
+                            .accentColor(.blue)
                     })
                     .sheet(isPresented: $todoManager.active, content: {
                         AddToDo(todo: todoManager)
                     })
-                    .padding()
+                    .padding(.horizontal)
                     
                     Spacer()
                     
@@ -103,9 +105,12 @@ struct ToDoView: View {
             
                     }
                     label: {
-                        Text("Filter")
+                        Text("Фильтр")
                             .font(.system(size: 25))
-                            .padding()
+                            .foregroundColor(.blue)
+                            .padding(.horizontal)
+                            .padding(.bottom, 10)
+                        
                     }
                     .onAppear(perform: getTags)
                     
@@ -154,7 +159,7 @@ struct TopToDoView: View{
                         .padding(.vertical, 11)
                         .padding(.leading, 15)
                         .padding(.trailing, 15)
-                        .background(Color.blue)
+                        .background(Color(red: 120/255, green: 127/255, blue: 246/255))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .font(.system(size: 18))
                 }).zIndex(1)
@@ -168,7 +173,7 @@ struct TopToDoView: View{
                         .foregroundColor(.white)
                         .padding(.vertical, 11)
                         .padding(.horizontal, 18)
-                        .background(Color(red: 56/255, green: 159/255, blue: 255/255))
+                        .background(Color(red: 120/255, green: 127/255, blue: 246/255).opacity(0.75))
                         .font(.system(size: 18))
                 }).zIndex(1)
                 
@@ -183,7 +188,7 @@ struct TopToDoView: View{
                         .padding(.vertical, 11)
                         .padding(.leading, 20)
                         .padding(.trailing, 15)
-                        .background(Color.blue)
+                        .background(Color(red: 120/255, green: 127/255, blue: 246/255))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .font(.system(size: 18))
                 }).zIndex(0)
