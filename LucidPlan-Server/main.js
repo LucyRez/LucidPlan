@@ -8,7 +8,7 @@ var Enemy = require("./enemySchema");
 
 
 const { MongoClient } = require("mongodb");
-const client = new MongoClient("mongodb://localhost:27017/mydb", { native_parser: true });
+const client = new MongoClient("mongodb+srv://LucyR:gnJA65u9e6bLUm4@cluster0.wxoao.mongodb.net/lucidPlan?retryWrites=true&w=majority");
 
 const enemyImages = ["blitz", "dreamon", "frosty", "corwus"];
 

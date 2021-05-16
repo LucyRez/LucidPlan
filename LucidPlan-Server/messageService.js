@@ -1,24 +1,30 @@
 var mergeJSON = require("merge-json") ; // Библиотека для того, чтобы мерджить JSON-ы
-
+const cors = require("cors");
 var app = require('express')(); 
 var http = require('http').createServer(app);
 var io = require('socket.io')(http); // Подключаем к серверу функционал вебсокетов
 
 const { MongoClient } = require("mongodb");
-const client = new MongoClient("mongodb://localhost:27017/mydb", { native_parser: true });
+const client = new MongoClient("mongodb+srv://LucyR:gnJA65u9e6bLUm4@cluster0.wxoao.mongodb.net/lucidPlan?retryWrites=true&w=majority");
 
 var collection;
+app.use(cors());
 
 io.on("connection", async (socket) => {
 
     socket.on("getMessages", async (id) => {
         let result = await collection.findOne({ "_id": id});
+        if (result != null) {
         let messages = result.messages;
         socket.activeRoom = id;
         socket.join(socket.activeRoom);
 
         console.log(messages);
         socket.emit("messageHistory", messages);
+        }else{
+            socket.activeRoom = id;
+            socket.join(socket.activeRoom);
+        }
     });
 
      // Сервер получает сообщение от клиента
