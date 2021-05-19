@@ -69,7 +69,7 @@ struct SettingsMenuView: View {
                 
                 
                 NavigationLink(
-                    destination: Inventory(characterManager: characterManager),
+                    destination: Inventory(characterManager: characterManager, userManager: userManager),
                     label: {
                         HStack(spacing: 16){
                             Image(systemName: "person.fill.viewfinder")

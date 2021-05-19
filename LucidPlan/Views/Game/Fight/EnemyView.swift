@@ -17,6 +17,7 @@ struct EnemyView: View {
     
     @State var showEndView : Bool = false
     @State var playerWon : Bool = false
+    @Binding var canFight : Bool
     
     @Environment(\.managedObjectContext) var context
     @ObservedObject var userManager : UserManager
@@ -33,12 +34,13 @@ struct EnemyView: View {
         fetchRequest.wrappedValue
     }
     
-    init(userManager: UserManager, characterManager : CharacterManager){
+    init(userManager: UserManager, characterManager : CharacterManager, canFight: Binding<Bool>){
         fetchRequest = FetchRequest(entity: ShopItem.entity(), sortDescriptors: [])
         self.userManager = userManager
         enemyDamage = Int64.random(in: 8...10)
         enemyCritPercent = Int64.random(in: 2...4)
         self.characterManager = characterManager
+        self._canFight = canFight
     }
     
     func checkPotions() -> Bool{
@@ -56,7 +58,8 @@ struct EnemyView: View {
             withAnimation(.easeOut){
                 showEndView = true
             }
-            userManager.addCoins(context: context, amount: 100)
+            userManager.addEnergy(context: context, amount: -30)
+            userManager.addCoins(context: context, amount: 50)
             userManager.addToExp(expPoints: 200, context: context)
             return true
         }else if characterHealth <= 0{
@@ -64,37 +67,47 @@ struct EnemyView: View {
                 showEndView = true
                 
             }
+            userManager.addEnergy(context: context, amount: -30)
             return false
         }
         return false
     }
     
+    func disableFight(){
+        if userManager.getEnergy() < 30{
+            canFight = false
+        }
+    }
+    
     var body: some View {
-        ZStack{
-            Color.blue.opacity(0.2).ignoresSafeArea()
-            if showEndView{
-                EndGameView(win: playerWon)
-                    .zIndex(1.0)
-            }
-            
-            VStack{
-                
-                // Here is enemy view
-                HStack(alignment:.top){
-                    Spacer()
-                    EnemyStats(health: $enemyHealth, maxHealth:enemyHealth,imageName: images[Int.random(in: 0...3)])
-                        .padding()
+        if userManager.getEnergy() < 30 && playerWon == false{
+            Text("Недостаточно энергии для боя")
+        }else{
+            ZStack{
+                Color.blue.opacity(0.2).ignoresSafeArea()
+                if showEndView{
+                    EndGameView(win: playerWon)
+                        .zIndex(1.0)
                 }
                 
-                CharacterStats(health: $characterHealth, maxHealth: characterHealth, energy: $characterEnergy,
-                               maxEnergy: characterEnergy, image: characterManager.getImageName())
-                    .padding()
-                
-                Spacer()
-                
-                
+                VStack{
+                    
+                    // Here is enemy view
+                    HStack(alignment:.top){
+                        Spacer()
+                        EnemyStats(health: $enemyHealth, maxHealth:enemyHealth,imageName: images[Int.random(in: 0...3)])
+                            .padding()
+                    }
+                    
+                    CharacterStats(health: $characterHealth, maxHealth: characterHealth, energy: $characterEnergy,
+                                   maxEnergy: characterEnergy, image: characterManager.getImageName())
+                        .padding()
+                    
+                    Spacer()
+                    
+                    
                     // Here is game menu for choosing action
-                ZStack(alignment:.top){
+                    ZStack(alignment:.top){
                         HStack(alignment:.center){
                             Button(action: {
                                 characterEnergy-=2
@@ -115,6 +128,7 @@ struct EnemyView: View {
                                         .accentColor(.orange)
                                         .font(.system(size: 40))
                                     Text("Обычная атака")
+                                        .multilineTextAlignment(.center)
                                         .foregroundColor(.orange)
                                 }
                             })
@@ -139,6 +153,7 @@ struct EnemyView: View {
                                         .accentColor(.yellow)
                                         .font(.system(size: 40))
                                     Text("Особая атака")
+                                        .multilineTextAlignment(.center)
                                         .foregroundColor(.yellow)
                                     
                                 }
@@ -156,6 +171,7 @@ struct EnemyView: View {
                                         .accentColor(.red)
                                         .font(.system(size: 40))
                                     Text("Восстановить здоровье")
+                                        .multilineTextAlignment(.center)
                                         .foregroundColor(.red)
                                 }
                             })
@@ -164,17 +180,19 @@ struct EnemyView: View {
                         
                         Rectangle()
                             .cornerRadius(radius: 25.0, corners: [.topLeft, .topRight])
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/3)
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/4)
                             .foregroundColor(.white)
                             .zIndex(0)
                         
                     }
                     
+                    
+                }
+                .opacity(showEndView ? 0.1 : 1)
+                .background(showEndView ? Color.black : Color.clear)
                 
             }
-            .opacity(showEndView ? 0.1 : 1)
-            .background(showEndView ? Color.black : Color.clear)
-            
+            .onDisappear(perform: disableFight)
         }
     }
 }
@@ -205,7 +223,7 @@ struct EnemyStats:View{
                 Rectangle()
                     .fill(Color.red)
                     .frame(width:  calculateHeight(for: health, maxValue: maxHealth, height: UIScreen.main.bounds.width/2), height: 18)
-                    .cornerRadius(radius: 25, corners: [.bottomRight, .topRight])
+                    .cornerRadius(radius: 25, corners: health == maxHealth ? [.bottomRight, .bottomLeft, .topRight, .topLeft]:[.bottomRight, .topRight])
             }
             .padding(.top, 15)
             .padding(.bottom,10)

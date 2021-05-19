@@ -23,7 +23,7 @@ struct EndGameView: View {
                 
                 VStack{
                     HStack{
-                        Text(win ? "100" : "")
+                        Text(win ? "50" : "")
                         if win{
                         Image(systemName: "dollarsign.circle.fill")
                             .foregroundColor(.yellow)
@@ -34,7 +34,7 @@ struct EndGameView: View {
                     
                     HStack{
                         if win{
-                        Text("500")
+                        Text("200")
                         Image(systemName: "lightbulb.fill")
                             .foregroundColor(.orange)
                             

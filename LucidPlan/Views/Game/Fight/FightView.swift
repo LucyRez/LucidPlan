@@ -10,8 +10,8 @@ import SwiftUI
 struct FightView: View {
     @ObservedObject var characterManager : CharacterManager
     @ObservedObject var userManager : UserManager
-  
-    
+    @State var canFight : Bool = true
+
     var body: some View {
         HStack{
             Spacer()
@@ -32,7 +32,7 @@ struct FightView: View {
                 }
                 
             
-                NavigationLink(destination: EnemyView(userManager: userManager, characterManager: characterManager),
+                NavigationLink(destination: EnemyView(userManager: userManager, characterManager: characterManager, canFight: $canFight),
                                label: {
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 15)
@@ -46,6 +46,8 @@ struct FightView: View {
                                         .padding()
                                 }
                 })
+                    .disabled(userManager.getEnergy() < 30 || !canFight)
+                    .opacity(userManager.getEnergy() < 30 ? 0.6 : 1)
                 
             }
             
@@ -72,6 +74,12 @@ struct FightView: View {
                             .fontWeight(.semibold)
                         Spacer()
                         Text("\(userManager.getExp()) / 1000")
+                    }
+                    HStack{
+                        Text("Энергия:")
+                            .fontWeight(.semibold)
+                        Spacer()
+                        Text("\(userManager.getEnergy()) / 100")
                     }
                     HStack{
                         Text("Золото:")
@@ -111,7 +119,7 @@ struct BottomButtons: View{
         HStack(spacing:20){
             
             NavigationLink(destination:
-                Inventory(characterManager: characterManager)
+                Inventory(characterManager: characterManager, userManager: userManager)
              , label: {
                 HStack{
                     Image(systemName: "sparkle")

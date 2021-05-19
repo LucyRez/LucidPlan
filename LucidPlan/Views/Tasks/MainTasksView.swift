@@ -19,6 +19,9 @@ struct ScheduleView: View{
     @State var currentDate : Date = Calendar.current.startOfDay(for: Date()) // Today's date
     @State var changeRepresentation : Bool = true // Shows if we want to change the layout (scroll view or calendar)
     
+    var monthDateFormatter = DateFormatter()
+    var yearDateFormatter = DateFormatter()
+    
     var rows = [ GridItem()]
     
     // TODO: THINK OF HOW WE CAN DYNAMICALLY UPDATE THESE DATES
@@ -38,6 +41,41 @@ struct ScheduleView: View{
         dateArray = dates
     }
     
+    func changeMonthLocaleName(name: String)-> String{
+        switch name {
+        case "января":
+            return "Январь"
+        case "февраля":
+            return "Февраль"
+        case "марта":
+            return "Март"
+        case "апреля":
+            return "Апрель"
+        case "мая":
+            return "Май"
+        case "июня":
+            return "Июнь"
+        case "июля":
+            return "Июль"
+        case "августа":
+            return "Август"
+        case "сентября":
+            return "Сентябрь"
+        case "ноября":
+            return "Ноябрь"
+        case "октября":
+            return "Октябрь"
+        default:
+            return "Декабрь"
+        }
+    }
+    
+    init(){
+        monthDateFormatter.dateFormat = "MMMM"
+        monthDateFormatter.locale = Locale(identifier: "ru")
+        yearDateFormatter.dateFormat = "yyyy"
+        yearDateFormatter.locale = Locale(identifier: "ru")
+    }
    
     
     var body: some View{
@@ -103,7 +141,7 @@ struct ScheduleView: View{
                         .onAppear(perform: updateDateArray) // We are updating the dates
                         .onAppear(perform: {
                             DispatchQueue.main.async {
-                                val.scrollTo(dateArray[(dateArray.endIndex)/2-1], anchor: .bottom) // Auto scroll to the middle
+                                val.scrollTo(dateArray[(dateArray.endIndex)/2-2], anchor: .bottom) // Auto scroll to the middle
                             }
                         })
                         .onChange(of: currentDate, perform: { value in
@@ -119,6 +157,10 @@ struct ScheduleView: View{
                     .padding()
                 }
                 .frame(width: UIScreen.main.bounds.width, height: 100)
+                
+                Text("\(changeMonthLocaleName(name: monthDateFormatter.string(from: currentDate))), \(yearDateFormatter.string(from: currentDate))")
+                    .font(.system(size: 18))
+                    .opacity(0.3)
                 
             }else{
                 

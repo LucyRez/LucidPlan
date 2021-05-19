@@ -24,6 +24,7 @@ extension User {
     @NSManaged public var id: UUID?
     @NSManaged public var admin: Bool
     @NSManaged public var nickname: String?
+    @NSManaged public var energy: Int64
 }
 
 extension User : Identifiable {

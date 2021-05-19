@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShopView: View {
-    let items : [Item] = [Item(title: "Зелье здоровья", description: "Восстанавливает всё здоровье во время битвы", price: 100, imageName: "health", type: "potion"), Item(title: "Ядовитое зелье", description: "Наносит 50 очков урона любому противнику", price: 100, imageName: "harm", type: "potion"), Item(title: "Зелье энергии", description: "Восстанавливает всю энергию", price: 100, imageName: "energy", type: "potion"), Item(title: "Robin", description: "Персонаж с удвоенной атакой", price: 2000, imageName: "robin" , type: "character")]
+    let items : [Item] = [Item(title: "Зелье здоровья", description: "Восстанавливает всё здоровье во время битвы", price: 40, imageName: "health", type: "potion"), Item(title: "Ядовитое зелье", description: "Наносит 50 очков урона любому противнику", price: 40, imageName: "harm", type: "potion"), Item(title: "Зелье энергии", description: "Восстанавливает всю энергию", price: 150, imageName: "energy", type: "potion"), Item(title: "Robin", description: "Персонаж с удвоенной атакой", price: 1000, imageName: "robin" , type: "character")]
     
     @Environment(\.managedObjectContext) var context
     @StateObject var shopManager = ShopManager()

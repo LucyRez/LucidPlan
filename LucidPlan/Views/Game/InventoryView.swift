@@ -10,20 +10,23 @@ import SwiftUI
 struct Inventory : View{
     @Environment(\.managedObjectContext) var context
     @ObservedObject var characterManager : CharacterManager
+    @ObservedObject var userManager : UserManager
     
+   
     var fetchRequest : FetchRequest<ShopItem>
     
     var inventoryItems : FetchedResults<ShopItem>{
         fetchRequest.wrappedValue
     }
     
-    init(characterManager: CharacterManager){
+    init(characterManager: CharacterManager, userManager: UserManager){
         fetchRequest = FetchRequest(entity: ShopItem.entity(), sortDescriptors: [])
         self.characterManager = characterManager
+        self.userManager = userManager
     }
     
     var body: some View{
-        InventoryView(items: inventoryItems, count: inventoryItems.count, characterManager: characterManager)
+        InventoryView(items: inventoryItems, count: inventoryItems.count, characterManager: characterManager, userManager: userManager)
         
     }
 }
@@ -31,6 +34,8 @@ struct Inventory : View{
 struct InventoryView: View {
     @ObservedObject var characterManager : CharacterManager
     @ObservedObject var inventory = InventoryManager()
+    @ObservedObject var userManager : UserManager
+    
     @Environment(\.managedObjectContext) var context
     @State var chosen : ShopItem?
     @State var countItems : Int
@@ -42,10 +47,11 @@ struct InventoryView: View {
     
     var inventoryItems : FetchedResults<ShopItem>
     
-    init(items: FetchedResults<ShopItem>, count: Int, characterManager: CharacterManager){
+    init(items: FetchedResults<ShopItem>, count: Int, characterManager: CharacterManager, userManager: UserManager){
         inventoryItems = items
         _countItems = State(initialValue: count)
         self.characterManager = characterManager
+        self.userManager = userManager
     }
     
     var body: some View {
@@ -73,7 +79,10 @@ struct InventoryView: View {
                     Button(action: {
                         if chosen?.type == "character"{
                             characterManager.changeImage(name: chosen?.imageName ?? "sparkle", context: context)
-                            countItems-=1
+                            countItems-=2
+                            inventory.delete(context: context, item: chosen!)
+                        }else if chosen?.imageName == "energy"{
+                            userManager.addEnergy(context: context, amount: 100)
                             inventory.delete(context: context, item: chosen!)
                         }
                     },
@@ -82,7 +91,7 @@ struct InventoryView: View {
                             .font(.system(size: 20))
                             .fontWeight(.semibold)
                     })
-                    .disabled(chosen == nil || chosen?.type != "character")
+                    .disabled(chosen == nil || chosen?.type != "character" && chosen?.imageName != "energy")
                     .padding()
                     
                 }

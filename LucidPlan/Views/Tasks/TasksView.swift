@@ -35,7 +35,7 @@ struct TasksView: View {
             Rectangle()
                 .frame(width: .infinity, height: 1)
                 .foregroundColor(.gray)
-                .padding()
+                .padding(.bottom)
             
             HStack(spacing:40){
                 Text("Время")

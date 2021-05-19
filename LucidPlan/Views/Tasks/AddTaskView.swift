@@ -19,8 +19,7 @@ struct AddTaskView: View {
     }
     
     var body: some View{
-        
-        VStack{
+        ScrollView{
             Text("\(task.task != nil ? "Изменить " : "Создать ") событие")
                 .font(.title)
                 .fontWeight(.semibold)

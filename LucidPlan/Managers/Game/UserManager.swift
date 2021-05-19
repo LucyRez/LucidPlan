@@ -43,6 +43,7 @@ class UserManager: ObservableObject{
                 newUser.groupId = ""
                 newUser.groupPoints = 0
                 newUser.id = UUID()
+                newUser.energy = 100
                 newUser.nickname = nickname
                 
                 user = newUser
@@ -67,7 +68,9 @@ class UserManager: ObservableObject{
         return user!.level
     }
     
-    
+    func getEnergy()-> Int64{
+        return user!.energy
+    }
     
     /**
      Function for adding/taking  away exp  points.
@@ -81,6 +84,7 @@ class UserManager: ObservableObject{
     func addToExp(expPoints: Int64, context: NSManagedObjectContext){
         if user!.exp + expPoints > 1000 {
             user!.level+=1
+            user!.energy = 100
             user!.exp = (user!.exp + expPoints) - 1000
         }else{
             user!.exp += expPoints
@@ -94,6 +98,18 @@ class UserManager: ObservableObject{
         user!.coin+=amount
         
         try! context.save()
+    }
+    
+    func addEnergy(context: NSManagedObjectContext, amount: Int64){
+        if amount < 0 {
+            if user!.energy <= -amount {
+                user!.energy = 0
+            }else{
+                user!.energy+=amount
+            }
+        }else{
+            user!.energy = 100
+        }
     }
     
     func setGroupId(context: NSManagedObjectContext, id: String){
